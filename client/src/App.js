@@ -1,8 +1,14 @@
-import "./App.css";
+import classes from "./App.module.css";
 import axios from "axios";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Hero from "./components/Hero/Hero";
 
 function App() {
+  const dark = useSelector((state) => state.DarkMode.isDarkMode);
+
   const fetchApi = () => {
     axios
       .get("/api")
@@ -10,13 +16,13 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  useEffect(fetchApi, []);
+  // useEffect(fetchApi, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>My portal</h1>
-      </header>
+    <div className={dark ? `${classes.darkApp}` : `${classes.lightApp}`}>
+      <Header dark={dark} />
+      <Hero />
+      <Footer />
     </div>
   );
 }

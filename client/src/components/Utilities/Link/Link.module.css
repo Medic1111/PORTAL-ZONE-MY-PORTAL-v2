@@ -1,0 +1,13 @@
+.dark,
+.link {
+  cursor: pointer;
+  text-decoration: underline;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #713077;
+}
+.dark:hover,
+.link:hover {
+  color: #58445b;
+  transition: 0.2s;
+}

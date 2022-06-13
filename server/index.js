@@ -20,9 +20,59 @@ mongoose.connect(`${process.env.DB_URI}`, (err) =>
   err ? console.log(err) : console.log("Connected to DB")
 );
 
-app.get("/api", (req, res) => {
+// MAP OUT JSON FOR DB
+
+app.get("/api/teacher/json", (req, res) => {
   console.log("get request in");
-  res.json({ message: "Server here" });
+  res.json({
+    name: "The mentor",
+    credentials: { username: "teacher", password: "xxxx" },
+    role: "teacher",
+    classes: [
+      {
+        name: "math",
+        key: "Secret",
+        assignments: ["assignment one", "assignment two"],
+        roster: [
+          {
+            student: {
+              studentId: "yuhki",
+              name: "student one",
+              currentGrade: "a",
+              pending: [],
+              graded: [],
+              messages: [],
+            },
+          },
+        ],
+      },
+    ],
+  });
+});
+
+app.get("/api/student/json", (req, res) => {
+  console.log("get request in");
+  res.json({
+    name: "The student",
+
+    credentials: {
+      username: "student",
+      password: "xxxx",
+      studentId: "blahblah",
+    },
+    role: "student",
+    classes: [
+      {
+        name: "math",
+        key: "Secret",
+        teacher: {
+          name: "yuhki",
+          email: "student@one.com",
+          messages: [],
+        },
+      },
+    ],
+  });
 });
 
 app.get("*", (req, res) => {
