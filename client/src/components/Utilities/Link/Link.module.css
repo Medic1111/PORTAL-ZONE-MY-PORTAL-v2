@@ -4,12 +4,12 @@
   text-decoration: underline;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: rgb(188, 149, 49);
+  color: #713077;
 }
 .dark:hover,
 .link:hover {
   color: #58445b;
-  color: #713077;
+  color: rgb(188, 149, 49);
 
   transition: 0.2s;
 }

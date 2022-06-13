@@ -63,9 +63,10 @@
 @media (max-width: 798px) {
   .div {
     flex-direction: column;
-    gap: 3em;
-    border-radius: 5px 5px 0 0;
+    gap: 0;
+    border-radius: 5px 5px 5px 5px;
   }
+
   .txtBox,
   .btnBox {
     width: 100%;
@@ -77,5 +78,8 @@
   .btnBox {
     border-radius: 0 0 5px 5px;
     font-size: 1.3em;
+  }
+  .h2 {
+    color: #6f5d70da;
   }
 }
