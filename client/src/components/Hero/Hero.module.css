@@ -13,9 +13,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 5px 0 0 5px;
 }
 .txtBox {
+  border-radius: 5px 0 0 5px;
   width: 50%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,6 +44,7 @@
 }
 
 .btnBox {
+  border-radius: 0 5px 5px 0;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -59,10 +63,18 @@
   .div {
     flex-direction: column;
     gap: 3em;
+    border-radius: 5px 5px 0 0;
   }
   .txtBox,
   .btnBox {
     width: 100%;
     height: 50%;
+  }
+  .txtBox {
+    border-radius: 5px 5px 0 0;
+  }
+  .btnBox {
+    border-radius: 0 0 5px 5px;
+    font-size: 1.3em;
   }
 }
