@@ -20,69 +20,80 @@ mongoose.connect(`${process.env.DB_URI}`, (err) =>
   err ? console.log(err) : console.log("Connected to DB")
 );
 
-// MAP OUT JSON FOR DB
+// TEACHER SCHEMA
 
-app.get("/api/teacher/json", (req, res) => {
-  console.log("get request in");
-  res.json({
-    name: "The mentor",
-    credentials: { username: "teacher", password: "xxxx" },
-    role: "teacher",
-    classes: [
-      {
-        name: "math",
-        key: "Secret",
-        assignments: ["assignment one", "assignment two"],
-        roster: [
-          {
-            student: {
-              studentId: "yuhki",
-              name: "student one",
-              currentGrade: "a",
-              pending: [],
-              graded: [],
-              messages: [],
-            },
-          },
-        ],
-      },
-    ],
+const teacherSchema = new mongoose.Schema({
+  fName: String,
+  lName: String,
+  email: String,
+  password: String,
+  role: String,
+  classes: Array,
+});
+
+const Teacher = new mongoose.model("Teacher", teacherSchema);
+
+// STUDENT SCHEMA
+
+const studentSchema = new mongoose.Schema({
+  fName: String,
+  lName: String,
+  email: String,
+  password: String,
+  role: String,
+  classes: Array,
+});
+
+const Student = new mongoose.model("Student", studentSchema);
+
+//
+app.post("/api/register/student", async (req, res) => {
+  const { fName, lName, email, password } = req.body;
+
+  const hash = await bcrypt.hash(password, saltRounds);
+
+  const newStudentInfo = new Student({
+    fName,
+    lName,
+    email,
+    password: hash,
+    role: "Student",
+    classes: [],
   });
+
+  newStudentInfo.save((err) =>
+    err
+      ? res.status(500).json({ message: "Could not register student" })
+      : res.status(200).json({ message: "Successfully Registered Student" })
+  );
 });
 
-app.get("/api/student/json", (req, res) => {
-  console.log("get request in");
-  res.json({
-    name: "The student",
+app.post("/api/register/teacher", async (req, res) => {
+  const { fName, lName, email, password } = req.body;
+  const hash = await bcrypt.hash(password, saltRounds);
 
-    credentials: {
-      username: "student",
-      password: "xxxx",
-      studentId: "blahblah",
-    },
-    role: "student",
-    classes: [
-      {
-        name: "math",
-        key: "Secret",
-        teacher: {
-          name: "yuhki",
-          email: "student@one.com",
-          messages: [],
-        },
-      },
-    ],
+  Teacher.find({ email: email }, (err, doc) => {
+    if (err) {
+      res.status(500).json({ message: "Something went wrong on the server" });
+    } else if (doc.length > 0) {
+      res.status(409).json({ message: "already registered" });
+    } else {
+      const newTeacherInfo = new Teacher({
+        fName,
+        lName,
+        email,
+        password: hash,
+        role: "Mentor",
+        classes: [],
+      });
+
+      newTeacherInfo.save((err, doc) =>
+        err
+          ? res.status(500).json({ message: "Could not register the teacher" })
+          : res.status(200).json({ message: "Successfully Registered Teacher" })
+      );
+    }
   });
-});
-
-app.post("/api/register/student", (req, res) => {
-  console.log(req.body);
-  res.status(200).json({ message: "You reached the student route" });
-});
-
-app.post("/api/register/teacher", (req, res) => {
-  console.log(req.body);
-  res.status(200).json({ message: "You reached the teacher route" });
 });
 
 app.get("*", (req, res) => {

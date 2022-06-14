@@ -1,6 +1,4 @@
-import classes from "./CredentialsForm.module.css";
 import { useSelector } from "react-redux";
-import Button from "../Utilities/Button/Button";
 import Register from "../Register/Register";
 
 const RegisterModal = () => {

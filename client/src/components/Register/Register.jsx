@@ -8,6 +8,13 @@ import axios from "axios";
 const Register = ({ isTeacher }) => {
   const dispatch = useDispatch();
 
+  const [fNnameInvalid, setFNameInvalid] = useState(false);
+  const [lNameInvalid, setLNameInvalid] = useState(false);
+  const [emailInvalid, setEmailInvalid] = useState(false);
+  const [passwordInvalid, setPasswordInvalid] = useState(false);
+  const [alreadyRegistered, setAlreadyRegistered] = useState(false);
+  const [serverErr, setServerErr] = useState(false);
+
   const [userInfo, setUserInfo] = useState({
     fName: "",
     lName: "",
@@ -16,22 +23,61 @@ const Register = ({ isTeacher }) => {
   });
 
   const inputChangeHandler = (event) => {
+    setEmailInvalid(false);
+    setFNameInvalid(false);
+    setPasswordInvalid(false);
+    setLNameInvalid(false);
     const { name, value } = event.target;
     setUserInfo((prev) => {
       return { ...prev, [name]: value };
     });
   };
 
-  const registerHandler = (event) => {
+  const registerHandler = async (event) => {
+    event.preventDefault();
     let url;
     isTeacher
       ? (url = "/api/register/teacher")
       : (url = "/api/register/student");
-    event.preventDefault();
-    axios
-      .post(url, userInfo)
-      .then((serverRes) => console.log(serverRes))
-      .catch((err) => console.log(err));
+
+    if (
+      userInfo.fName.length > 0 &&
+      userInfo.lName.length > 0 &&
+      userInfo.email.includes("@") &&
+      userInfo.email.length > 7 &&
+      userInfo.password.length >= 6
+    ) {
+      await axios
+        .post(url, userInfo)
+        .then((serverRes) => {
+          if (serverRes.status === 200) {
+            setAlreadyRegistered(false);
+            setServerErr(false);
+            // AUTO LOGIN: SHOW MAIN PAGE
+          }
+        })
+        .catch((err) => {
+          console.log(err.response.status);
+          if (err.response.status === 409) {
+            setAlreadyRegistered(true);
+          } else {
+            setServerErr(true);
+          }
+        });
+
+      setUserInfo({
+        fName: "",
+        lName: "",
+        email: "",
+        password: "",
+      });
+    } else {
+      userInfo.fName.length <= 0 && setFNameInvalid(true);
+      userInfo.lName.length <= 0 && setLNameInvalid(true);
+      !userInfo.email.includes("@") && setEmailInvalid(true);
+      userInfo.email.length <= 7 && setEmailInvalid(true);
+      userInfo.password.length < 6 && setPasswordInvalid(true);
+    }
   };
 
   const closeModalHandler = (event) => {
@@ -53,6 +99,7 @@ const Register = ({ isTeacher }) => {
           type="text"
           placeholder="First name"
         />
+        {fNnameInvalid && <p>Please fill out all fields</p>}
         <input
           onChange={inputChangeHandler}
           value={userInfo.lName}
@@ -61,6 +108,8 @@ const Register = ({ isTeacher }) => {
           type="text"
           placeholder="Last name"
         />
+        {lNameInvalid && <p>Please fill out all fields</p>}
+
         <input
           onChange={inputChangeHandler}
           value={userInfo.email}
@@ -69,6 +118,8 @@ const Register = ({ isTeacher }) => {
           type="email"
           placeholder="Email"
         />
+        {emailInvalid && <p>Please enter a valid Email</p>}
+
         <input
           onChange={inputChangeHandler}
           value={userInfo.password}
@@ -77,7 +128,12 @@ const Register = ({ isTeacher }) => {
           type="password"
           placeholder="Create password"
         />
+        {passwordInvalid && <p>Password must be at least 6 characters long</p>}
+
         <div className={classes.btnBox}>
+          {alreadyRegistered && <p>USER ALREADY REGISTERED, PLEASE LOG IN</p>}
+          {serverErr && <p>Something went wrong, please try again!</p>}
+
           <Button innerTxt={"Register"} clickMe={registerHandler} />
           <Button innerTxt={"Return"} clickMe={closeModalHandler} />
         </div>
