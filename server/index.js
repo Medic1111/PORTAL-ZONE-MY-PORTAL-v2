@@ -75,6 +75,16 @@ app.get("/api/student/json", (req, res) => {
   });
 });
 
+app.post("/api/register/student", (req, res) => {
+  console.log(req.body);
+  res.status(200).json({ message: "You reached the student route" });
+});
+
+app.post("/api/register/teacher", (req, res) => {
+  console.log(req.body);
+  res.status(200).json({ message: "You reached the teacher route" });
+});
+
 app.get("*", (req, res) => {
   res.sendFile(
     express.static(resolve(__dirname, "../client/build", "index.html"))
