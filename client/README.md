@@ -15,7 +15,9 @@ background-color: #1cb3cd;
 - Reusable BTN
 - Reusable LINK
 - Reusable PORTAL
+- One Modal for Login and Register Forms
 - Register FORM
+- Login FORM
 
   [COMPONENTS_MAP]:
 
@@ -23,6 +25,7 @@ background-color: #1cb3cd;
 
 - Header
 - Hero
+- Modal via portal conditionally with ctx
 - Footer
 
 [2]: HEADER

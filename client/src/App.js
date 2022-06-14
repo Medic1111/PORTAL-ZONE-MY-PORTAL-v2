@@ -9,6 +9,7 @@ import RegisterModal from "./modals/RegisterModal/RegisterModal";
 
 function App() {
   const dark = useSelector((state) => state.DarkMode.isDarkMode);
+  const toggleLogReg = useSelector((state) => state.LogRegModal.isModal);
 
   const fetchApi = () => {
     axios
@@ -22,7 +23,7 @@ function App() {
   return (
     <div className={dark ? `${classes.darkApp}` : `${classes.lightApp}`}>
       <Header dark={dark} />
-      <RegisterModal dark={dark} />
+      {toggleLogReg && <RegisterModal dark={dark} />}
       <Hero />
       <Footer />
     </div>
