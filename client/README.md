@@ -1,3 +1,7 @@
+background-color: #f7f7f73d;
+background-color: #b01ccd7e;
+background-color: #1cb3cd;
+
 # FEATURES:
 
 [1]-[DARK_LIGHT_MODE]:
@@ -10,8 +14,9 @@
 
 - Reusable BTN
 - Reusable LINK
+- Register FORM
 
-[COMPONENTS_MAP]:
+  [COMPONENTS_MAP]:
 
 [1]: APP
 
@@ -24,3 +29,7 @@
 - Link
 
 [3]: FOOTER
+[4]: HERO
+
+- Link
+- Button

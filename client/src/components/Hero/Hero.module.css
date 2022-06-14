@@ -83,8 +83,15 @@
   }
   .h2 {
     color: #6f5d70da;
+    color: #7d6b7eda;
   }
   .identifierP {
     color: #6f5d70da;
+    color: #7d6b7eda;
+  }
+  .mainP {
+    text-align: center;
+    margin-top: 2vh;
+    max-width: 95%;
   }
 }
