@@ -13,7 +13,7 @@ const RegisterModal = ({ dark }) => {
     <Portal>
       <article className={dark ? `${classes.dark}` : `${classes.light}`}>
         <Header />
-        <CredentialsForm />
+        <CredentialsForm dark={dark} />
         <Footer />
       </article>
     </Portal>

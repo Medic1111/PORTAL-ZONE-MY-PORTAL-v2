@@ -1,8 +1,10 @@
 import classes from "./Register.module.css";
 import Button from "../Utilities/Button/Button";
+import Loading from "../Utilities/Loading/Loading";
 import { useDispatch } from "react-redux";
 import { toggleLogRegModalActions } from "../../features/toggleLogRegModal";
 import { useState } from "react";
+
 import axios from "axios";
 
 const Register = ({ isTeacher }) => {
@@ -14,6 +16,7 @@ const Register = ({ isTeacher }) => {
   const [passwordInvalid, setPasswordInvalid] = useState(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
   const [serverErr, setServerErr] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
     fName: "",
@@ -33,8 +36,10 @@ const Register = ({ isTeacher }) => {
     });
   };
 
-  const registerHandler = async (event) => {
+  const registerHandler = (event) => {
     event.preventDefault();
+    setIsLoading(true);
+
     let url;
     isTeacher
       ? (url = "/api/register/teacher")
@@ -47,17 +52,19 @@ const Register = ({ isTeacher }) => {
       userInfo.email.length > 7 &&
       userInfo.password.length >= 6
     ) {
-      await axios
+      axios
         .post(url, userInfo)
         .then((serverRes) => {
+          setIsLoading(false);
           if (serverRes.status === 200) {
             setAlreadyRegistered(false);
             setServerErr(false);
+
             // AUTO LOGIN: SHOW MAIN PAGE
           }
         })
         .catch((err) => {
-          console.log(err.response.status);
+          setIsLoading(false);
           if (err.response.status === 409) {
             setAlreadyRegistered(true);
           } else {
@@ -72,6 +79,8 @@ const Register = ({ isTeacher }) => {
         password: "",
       });
     } else {
+      setIsLoading(false);
+
       userInfo.fName.length <= 0 && setFNameInvalid(true);
       userInfo.lName.length <= 0 && setLNameInvalid(true);
       !userInfo.email.includes("@") && setEmailInvalid(true);
@@ -84,62 +93,75 @@ const Register = ({ isTeacher }) => {
     event.preventDefault();
     dispatch(toggleLogRegModalActions.setIsModal());
   };
+  {
+    if (!isLoading) {
+      return (
+        <div className={classes.div}>
+          <form className={classes.form}>
+            <h2 className={classes.h2}>
+              Register as a {isTeacher ? "Mentor" : "Learner"}
+            </h2>
+            <input
+              onChange={inputChangeHandler}
+              value={userInfo.fName}
+              name="fName"
+              className={classes.input}
+              type="text"
+              placeholder="First name"
+            />
+            {fNnameInvalid && <p>Please fill out all fields</p>}
+            <input
+              onChange={inputChangeHandler}
+              value={userInfo.lName}
+              name="lName"
+              className={classes.input}
+              type="text"
+              placeholder="Last name"
+            />
+            {lNameInvalid && <p>Please fill out all fields</p>}
 
-  return (
-    <div className={classes.div}>
-      <form className={classes.form}>
-        <h2 className={classes.h2}>
-          Register as a {isTeacher ? "Mentor" : "Learner"}
-        </h2>
-        <input
-          onChange={inputChangeHandler}
-          value={userInfo.fName}
-          name="fName"
-          className={classes.input}
-          type="text"
-          placeholder="First name"
-        />
-        {fNnameInvalid && <p>Please fill out all fields</p>}
-        <input
-          onChange={inputChangeHandler}
-          value={userInfo.lName}
-          name="lName"
-          className={classes.input}
-          type="text"
-          placeholder="Last name"
-        />
-        {lNameInvalid && <p>Please fill out all fields</p>}
+            <input
+              onChange={inputChangeHandler}
+              value={userInfo.email}
+              name="email"
+              className={classes.input}
+              type="email"
+              placeholder="Email"
+            />
+            {emailInvalid && <p>Please enter a valid Email</p>}
 
-        <input
-          onChange={inputChangeHandler}
-          value={userInfo.email}
-          name="email"
-          className={classes.input}
-          type="email"
-          placeholder="Email"
-        />
-        {emailInvalid && <p>Please enter a valid Email</p>}
+            <input
+              onChange={inputChangeHandler}
+              value={userInfo.password}
+              name="password"
+              className={classes.input}
+              type="password"
+              placeholder="Create password"
+            />
+            {passwordInvalid && (
+              <p>Password must be at least 6 characters long</p>
+            )}
 
-        <input
-          onChange={inputChangeHandler}
-          value={userInfo.password}
-          name="password"
-          className={classes.input}
-          type="password"
-          placeholder="Create password"
-        />
-        {passwordInvalid && <p>Password must be at least 6 characters long</p>}
+            <div className={classes.btnBox}>
+              {alreadyRegistered && (
+                <p>USER ALREADY REGISTERED, PLEASE LOG IN</p>
+              )}
+              {serverErr && <p>Something went wrong, please try again!</p>}
 
-        <div className={classes.btnBox}>
-          {alreadyRegistered && <p>USER ALREADY REGISTERED, PLEASE LOG IN</p>}
-          {serverErr && <p>Something went wrong, please try again!</p>}
-
-          <Button innerTxt={"Register"} clickMe={registerHandler} />
-          <Button innerTxt={"Return"} clickMe={closeModalHandler} />
+              <Button innerTxt={"Register"} clickMe={registerHandler} />
+              <Button innerTxt={"Return"} clickMe={closeModalHandler} />
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
-  );
+      );
+    } else {
+      return (
+        <div className={classes.div}>
+          <Loading />
+        </div>
+      );
+    }
+  }
 };
 
 export default Register;
