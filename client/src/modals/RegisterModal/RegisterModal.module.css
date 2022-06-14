@@ -1,0 +1,11 @@
+.dark,
+.light {
+  height: 100%;
+  width: 100%;
+}
+.dark {
+  background-color: rgb(28, 24, 28);
+}
+.light {
+  background-color: #f7f7f7;
+}

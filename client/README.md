@@ -14,6 +14,7 @@ background-color: #1cb3cd;
 
 - Reusable BTN
 - Reusable LINK
+- Reusable PORTAL
 - Register FORM
 
   [COMPONENTS_MAP]:
