@@ -16,7 +16,7 @@ background-color: #1cb3cd;
 - Reusable LINK
 - Reusable PORTAL
 - One Modal for Login and Register Forms
-- Register FORM
+- Dynamic Register FORM
 - Login FORM
 
   [COMPONENTS_MAP]:
@@ -37,3 +37,19 @@ background-color: #1cb3cd;
 
 - Link
 - Button
+
+[5]: REGISTER_MODAL
+
+- Renders CredentialsForm
+
+[6]: CREDENTIALS_FORM
+
+- Renders register if, else login
+- Determiners if its a teacher or student
+- Passes that info as props to the register and login dynamic forms
+
+[7]: REGISTER_FORM
+
+- Assess if its a teacher or student
+- Registers accordingly
+- Cancels register process and toggle modal back to root

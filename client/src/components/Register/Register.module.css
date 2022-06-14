@@ -14,7 +14,6 @@
   height: 80%;
   gap: 1em;
   background-color: #84708626;
-
   color: #7d6b7eda;
   border-radius: 2px;
 }
@@ -36,6 +35,7 @@
   font-size: 1.7em;
   letter-spacing: 0.7px;
   color: #7d6b7eda;
+  border-radius: 0 3px 3px 0;
 }
 
 .btnBox {
