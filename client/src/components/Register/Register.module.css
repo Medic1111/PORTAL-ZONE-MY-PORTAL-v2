@@ -46,3 +46,8 @@
   gap: 1em;
   margin-top: 5vh;
 }
+
+.serverErr {
+  font-size: 1.7em;
+  color: rgb(150, 119, 150);
+}

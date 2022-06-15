@@ -144,9 +144,15 @@ const Register = ({ isTeacher }) => {
 
             <div className={classes.btnBox}>
               {alreadyRegistered && (
-                <p>USER ALREADY REGISTERED, PLEASE LOG IN</p>
+                <p className={classes.serverErr}>
+                  USER ALREADY REGISTERED, PLEASE LOG IN
+                </p>
               )}
-              {serverErr && <p>Something went wrong, please try again!</p>}
+              {serverErr && (
+                <p className={classes.serverErr}>
+                  Something went wrong, please try again!
+                </p>
+              )}
 
               <Button innerTxt={"Register"} clickMe={registerHandler} />
               <Button innerTxt={"Return"} clickMe={closeModalHandler} />

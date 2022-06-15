@@ -59,20 +59,27 @@ app.post("/api/register/student", async (req, res) => {
 
   const hash = await bcrypt.hash(password, saltRounds);
 
-  const newStudentInfo = new Student({
-    fName,
-    lName,
-    email,
-    password: hash,
-    role: "Student",
-    classes: [],
+  Student.find({ email: email }, (err, docs) => {
+    if (err) {
+      res.status(500).json({ message: "Something went wrong on the server" });
+    } else if (docs.length > 0) {
+      res.status(409).json({ message: "already registered" });
+    } else {
+      const newStudentInfo = new Student({
+        fName,
+        lName,
+        email,
+        password: hash,
+        role: "Student",
+        classes: [],
+      });
+      newStudentInfo.save((err) =>
+        err
+          ? res.status(500).json({ message: "Could not register student" })
+          : res.status(200).json({ message: "Successfully Registered Student" })
+      );
+    }
   });
-
-  newStudentInfo.save((err) =>
-    err
-      ? res.status(500).json({ message: "Could not register student" })
-      : res.status(200).json({ message: "Successfully Registered Student" })
-  );
 });
 
 app.post("/api/register/teacher", async (req, res) => {
