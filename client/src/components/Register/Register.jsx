@@ -3,6 +3,7 @@ import Button from "../Utilities/Button/Button";
 import Loading from "../Utilities/Loading/Loading";
 import { useDispatch } from "react-redux";
 import { toggleLogRegModalActions } from "../../features/toggleLogRegModal";
+import { isLoggedInActions } from "../../features/isLoggedIn";
 import { useState } from "react";
 
 import axios from "axios";
@@ -30,6 +31,7 @@ const Register = ({ isTeacher }) => {
     setFNameInvalid(false);
     setPasswordInvalid(false);
     setLNameInvalid(false);
+
     const { name, value } = event.target;
     setUserInfo((prev) => {
       return { ...prev, [name]: value };
@@ -59,6 +61,7 @@ const Register = ({ isTeacher }) => {
           if (serverRes.status === 200) {
             setAlreadyRegistered(false);
             setServerErr(false);
+            dispatch(isLoggedInActions.setIsLoggedIn());
 
             // AUTO LOGIN: SHOW MAIN PAGE
           }
