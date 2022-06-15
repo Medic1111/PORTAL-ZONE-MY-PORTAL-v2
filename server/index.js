@@ -5,8 +5,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const saltRounds = 12;
 const path = require("path");
-const exp = require("constants");
-const { resolve } = require("path");
+const session = require("express-session");
 require("dotenv").config();
 
 const app = express();
@@ -15,6 +14,14 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.static(path.resolve(__dirname, "../client/build")));
+app.use(
+  session({
+    secret: `${process.env.SECRET_STRING}`,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 60000 },
+  })
+);
 
 mongoose.connect(`${process.env.DB_URI}`, (err) =>
   err ? console.log(err) : console.log("Connected to DB")
@@ -98,7 +105,7 @@ app.post("/api/register/teacher", async (req, res) => {
 
 app.get("*", (req, res) => {
   res.sendFile(
-    express.static(resolve(__dirname, "../client/build", "index.html"))
+    express.static(path.resolve(__dirname, "../client/build", "index.html"))
   );
 });
 
