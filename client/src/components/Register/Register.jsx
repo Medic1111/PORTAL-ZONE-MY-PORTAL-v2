@@ -61,9 +61,9 @@ const Register = ({ isTeacher }) => {
           if (serverRes.status === 200) {
             setAlreadyRegistered(false);
             setServerErr(false);
-            dispatch(isLoggedInActions.setIsLoggedIn());
 
             // AUTO LOGIN: SHOW MAIN PAGE
+            dispatch(isLoggedInActions.setIsLoggedIn());
           }
         })
         .catch((err) => {
@@ -112,7 +112,9 @@ const Register = ({ isTeacher }) => {
               type="text"
               placeholder="First name"
             />
-            {fNnameInvalid && <p>Please fill out all fields</p>}
+            {fNnameInvalid && (
+              <p className={classes.serverErr}>Please fill out all fields</p>
+            )}
             <input
               onChange={inputChangeHandler}
               value={userInfo.lName}
@@ -121,7 +123,9 @@ const Register = ({ isTeacher }) => {
               type="text"
               placeholder="Last name"
             />
-            {lNameInvalid && <p>Please fill out all fields</p>}
+            {lNameInvalid && (
+              <p className={classes.serverErr}>Please fill out all fields</p>
+            )}
 
             <input
               onChange={inputChangeHandler}
@@ -131,7 +135,9 @@ const Register = ({ isTeacher }) => {
               type="email"
               placeholder="Email"
             />
-            {emailInvalid && <p>Please enter a valid Email</p>}
+            {emailInvalid && (
+              <p className={classes.serverErr}>Please enter a valid Email</p>
+            )}
 
             <input
               onChange={inputChangeHandler}
@@ -142,7 +148,9 @@ const Register = ({ isTeacher }) => {
               placeholder="Create password"
             />
             {passwordInvalid && (
-              <p>Password must be at least 6 characters long</p>
+              <p className={classes.serverErr}>
+                Password must be at least 6 characters long
+              </p>
             )}
 
             <div className={classes.btnBox}>

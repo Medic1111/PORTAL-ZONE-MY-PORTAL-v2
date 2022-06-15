@@ -21,6 +21,11 @@ const Hero = () => {
     dispatch(isRegisteringActions.setIsRegistering(true));
   };
 
+  const directToLogInHandler = () => {
+    dispatch(toggleLogRegModalActions.setIsModal());
+    dispatch(isRegisteringActions.setIsRegistering(false));
+  };
+
   return (
     <article className={classes.article}>
       <div className={classes.div}>
@@ -38,7 +43,10 @@ const Hero = () => {
           <p className={classes.identifierP}>I am...</p>
           <Button innerTxt={"Learning"} clickMe={registerStudentHandler} />
           <div className={classes.padLink}>
-            <Link innerTxt={"Already registered? Log in"} />
+            <Link
+              innerTxt={"Already registered? Log in"}
+              clickMe={directToLogInHandler}
+            />
           </div>
         </div>
       </div>
