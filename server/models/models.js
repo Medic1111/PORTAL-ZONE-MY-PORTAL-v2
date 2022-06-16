@@ -22,6 +22,7 @@ const studentSchema = new mongoose.Schema({
   password: String,
   role: String,
   classes: Array,
+  id: String,
 });
 
 const Student = new mongoose.model("Student", studentSchema);

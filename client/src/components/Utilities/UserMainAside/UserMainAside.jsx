@@ -21,6 +21,16 @@ const UserMainAside = () => {
 
   const enrollClassHandler = () => {
     console.log("enrolling...");
+    axios
+      .post("/api/student/newclass", {
+        secretKey: "6051me",
+        teacherEmail: "teacher@teacher.com",
+        user,
+      })
+      .then((serverRes) => {
+        dispatch(currentUserActions.setCurrentUser(serverRes.data));
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
