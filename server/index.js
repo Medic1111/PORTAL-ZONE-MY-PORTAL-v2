@@ -5,8 +5,14 @@ const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
 require("dotenv").config();
-const authTeacherRoute = require("./routes/AuthTeacher");
-const authStudentRoute = require("./routes/AuthStudent");
+const {
+  logInTeacherRoute,
+  registerTeacherRoute,
+} = require("./routes/AuthTeacher");
+const {
+  loginStudentRoute,
+  registerStudentRoute,
+} = require("./routes/AuthStudent");
 const app = express();
 
 app.use(express.json());
@@ -26,8 +32,10 @@ mongoose.connect(`${process.env.DB_URI}`, (err) =>
   err ? console.log(err) : console.log("Connected to DB")
 );
 
-app.use("/", authTeacherRoute);
-app.use("/", authStudentRoute);
+app.use("/", logInTeacherRoute);
+app.use("/", registerTeacherRoute);
+app.use("/", loginStudentRoute);
+app.use("/", registerStudentRoute);
 
 app.get("*", (req, res) => {
   res.sendFile(

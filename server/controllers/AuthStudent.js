@@ -49,10 +49,10 @@ const registerStudent = async (req, res) => {
         role: "Student",
         classes: [],
       });
-      newStudentInfo.save((err) =>
+      newStudentInfo.save((err, docs) =>
         err
           ? res.status(500).json({ message: "Could not register student" })
-          : res.status(200).json({ message: "Successfully Registered Student" })
+          : res.status(200).json(docs)
       );
     }
   });

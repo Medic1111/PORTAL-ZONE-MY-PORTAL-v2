@@ -5,6 +5,7 @@ import Button from "../Utilities/Button/Button";
 import Loading from "../Utilities/Loading/Loading";
 import { toggleLogRegModalActions } from "../../features/toggleLogRegModal";
 import { isLoggedInActions } from "../../features/isLoggedIn";
+import { whatRoleActions } from "../../features/whatRole";
 
 import axios from "axios";
 
@@ -50,13 +51,10 @@ const Login = () => {
     let url;
     if (userInfo.role === "teacher") {
       url = "/api/login/teacher";
-      console.log("student");
     } else if (userInfo.role === "student") {
       url = "/api/login/student";
-      console.log("teacher");
     } else {
       setInvalidRole(true);
-      console.log("invalid");
     }
 
     if (
@@ -71,7 +69,7 @@ const Login = () => {
           setIsLoading(false);
           if (serverRes.status === 200) {
             // WORK WITH DATA:
-            console.log(serverRes.data);
+            dispatch(whatRoleActions.setRole(serverRes.data[0].role));
             setNotRegistered(false);
             setServerErr(false);
             dispatch(isLoggedInActions.setIsLoggedIn());

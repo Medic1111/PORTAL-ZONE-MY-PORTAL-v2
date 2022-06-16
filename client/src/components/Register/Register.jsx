@@ -4,6 +4,8 @@ import Loading from "../Utilities/Loading/Loading";
 import { useDispatch } from "react-redux";
 import { toggleLogRegModalActions } from "../../features/toggleLogRegModal";
 import { isLoggedInActions } from "../../features/isLoggedIn";
+import { whatRoleActions } from "../../features/whatRole";
+
 import { useState } from "react";
 
 import axios from "axios";
@@ -57,22 +59,23 @@ const Register = ({ isTeacher }) => {
       axios
         .post(url, userInfo)
         .then((serverRes) => {
+          console.log(serverRes);
           setIsLoading(false);
-          if (serverRes.status === 200) {
-            setAlreadyRegistered(false);
-            setServerErr(false);
-
-            // AUTO LOGIN: SHOW MAIN PAGE
-            dispatch(isLoggedInActions.setIsLoggedIn());
-          }
+          setAlreadyRegistered(false);
+          setServerErr(false);
+          // AUTO LOGIN: SHOW MAIN PAGE/ SENDS WHETHER MENTOR OR STUDENT
+          dispatch(whatRoleActions.setRole(serverRes.data.role));
+          dispatch(isLoggedInActions.setIsLoggedIn());
         })
+
         .catch((err) => {
-          setIsLoading(false);
+          // err && console.log(err);
           if (err.response.status === 409) {
             setAlreadyRegistered(true);
           } else {
             setServerErr(true);
           }
+          setIsLoading(false);
         });
 
       setUserInfo({

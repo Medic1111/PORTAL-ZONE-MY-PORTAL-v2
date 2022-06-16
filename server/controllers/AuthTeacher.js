@@ -24,7 +24,7 @@ const registerTeacher = async (req, res) => {
       newTeacherInfo.save((err, doc) =>
         err
           ? res.status(500).json({ message: "Could not register the teacher" })
-          : res.status(200).json({ message: "Successfully Registered Teacher" })
+          : res.status(200).json(doc)
       );
     }
   });

@@ -3,9 +3,12 @@ const router = express.Router();
 const { registerTeacher, loginTeacher } = require("../controllers/AuthTeacher");
 
 // LOGIN
-router.post("/api/login/teacher", loginTeacher);
+const logInTeacherRoute = router.post("/api/login/teacher", loginTeacher);
 
 // REGISTER
-router.post("/api/register/teacher", registerTeacher);
+const registerTeacherRoute = router.post(
+  "/api/register/teacher",
+  registerTeacher
+);
 
-module.exports = router;
+module.exports = { logInTeacherRoute, registerTeacherRoute };
