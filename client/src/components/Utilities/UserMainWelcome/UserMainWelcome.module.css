@@ -1,0 +1,14 @@
+.article {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5vw;
+}
+.h3 {
+  font-size: 2em;
+  letter-spacing: 1px;
+  color: #927f93da;
+  text-transform: uppercase;
+}

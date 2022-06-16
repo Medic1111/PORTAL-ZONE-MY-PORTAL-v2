@@ -1,0 +1,20 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  width: 100%;
+}
+.div {
+  height: 100%;
+  width: 100%;
+}
+
+.divComp {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5% 5vw;
+}

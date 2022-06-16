@@ -5,6 +5,7 @@ import IsRegistering from "../features/isRegistering";
 import IsTeacher from "../features/isTeacher";
 import IsLoggedIn from "../features/isLoggedIn";
 import WhatRole from "../features/whatRole";
+import CurrentUser from "../features/currentUser";
 
 const reduxStore = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const reduxStore = configureStore({
     IsTeacher,
     IsLoggedIn,
     WhatRole,
+    CurrentUser,
   },
 });
 

@@ -1,0 +1,14 @@
+.li {
+  width: 90%;
+  min-height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: solid rgb(128, 17, 128);
+  background-color: #7d6b7e3e;
+  color: #887a89ef;
+  font-size: 2em;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
