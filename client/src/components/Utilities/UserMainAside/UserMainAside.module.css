@@ -22,3 +22,9 @@
   align-items: center;
   gap: 3vh;
 }
+
+@media (max-width: 798px) {
+  .aside {
+    width: 100%;
+  }
+}

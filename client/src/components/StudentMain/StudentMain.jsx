@@ -11,7 +11,7 @@ const StudentMain = () => {
         <div className={classes.divComp}>
           <UserMainAside />
 
-          {/* <section>SECTION</section> */}
+          <section className={classes.test}>SECTION SECTION SECTION</section>
         </div>
       </div>
     </main>
