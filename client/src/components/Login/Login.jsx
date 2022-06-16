@@ -22,6 +22,7 @@ const Login = () => {
   const [invalidRole, setInvalidRole] = useState(false);
   const [serverErr, setServerErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [passwordDontMatch, setPasswordDontMatch] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
     email: "",
@@ -33,6 +34,7 @@ const Login = () => {
     setEmailInvalid(false);
     setPasswordInvalid(false);
     setInvalidRole(false);
+    setPasswordDontMatch(false);
 
     const { name, value } = event.target;
     setUserInfo((prev) => {
@@ -68,21 +70,19 @@ const Login = () => {
         .then((serverRes) => {
           setIsLoading(false);
           if (serverRes.status === 200) {
+            // WORK WITH DATA:
             console.log(serverRes.data);
             setNotRegistered(false);
             setServerErr(false);
-
-            // AUTO LOGIN: SHOW MAIN PAGE
             dispatch(isLoggedInActions.setIsLoggedIn());
           }
         })
         .catch((err) => {
-          console.log(err);
           setIsLoading(false);
           if (err.response.status === 404) {
             setNotRegistered(true);
           } else if (err.response.status === 401) {
-            setPasswordInvalid(true);
+            setPasswordDontMatch(true);
           } else {
             setServerErr(true);
           }
@@ -133,6 +133,9 @@ const Login = () => {
               <p className={classes.serverErr}>
                 Password must be at least 6 characters long
               </p>
+            )}
+            {passwordDontMatch && (
+              <p className={classes.serverErr}>Wrong password</p>
             )}
             <select
               className={classes.select}
