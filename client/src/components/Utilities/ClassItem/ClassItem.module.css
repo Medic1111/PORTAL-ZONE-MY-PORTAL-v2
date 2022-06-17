@@ -5,6 +5,8 @@
   justify-content: center;
   align-items: center;
   border-left: solid rgb(128, 17, 128);
+  border-left: solid #7d6b7eda;
+
   background-color: #7d6b7e26;
   color: #887a89ef;
   font-size: 2em;

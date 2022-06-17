@@ -6,6 +6,7 @@ const enrollInClass = (req, res) => {
   let classToEnroll;
   let mentor;
   let mentorEmail;
+  let mentorId;
 
   Teacher.find({ email: teacherEmail }, (err, doc) => {
     if (err) {
@@ -13,6 +14,7 @@ const enrollInClass = (req, res) => {
     } else {
       mentor = `${doc[0].fName} ${doc[0].lName}`;
       mentorEmail = doc[0].email;
+      mentorId = doc[0]._id;
     }
 
     classToEnroll = doc[0].classes.find((obj, index) => {
@@ -29,6 +31,8 @@ const enrollInClass = (req, res) => {
             ...classToEnroll,
             mentor,
             mentorEmail,
+            mentorId,
+            secretKey,
           },
         ],
       },

@@ -22,9 +22,21 @@ const studentSchema = new mongoose.Schema({
   password: String,
   role: String,
   classes: Array,
-  id: String,
 });
 
 const Student = new mongoose.model("Student", studentSchema);
 
-module.exports = { Teacher, Student };
+// CLASSES SCHEMA
+
+const classSchema = new mongoose.Schema({
+  className: String,
+  teacherId: String,
+  secretKey: String,
+  assignments: Array,
+  whoTeach: Object,
+  roster: Array,
+});
+
+const Class = new mongoose.mongoose.model("Class", classSchema);
+
+module.exports = { Teacher, Student, Class };

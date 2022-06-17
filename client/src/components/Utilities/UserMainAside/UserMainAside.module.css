@@ -22,6 +22,19 @@
   align-items: center;
   gap: 3vh;
 }
+.input {
+  height: 7vh;
+  border: transparent;
+  width: 90%;
+  background-color: #f7f7f720;
+  outline: none;
+  border-left: solid #7d6b7eda;
+  padding-left: 0.5em;
+  font-size: 1.7em;
+  letter-spacing: 0.7px;
+  color: #7d6b7eda;
+  border-radius: 0 3px 3px 0;
+}
 
 @media (max-width: 798px) {
   .aside {

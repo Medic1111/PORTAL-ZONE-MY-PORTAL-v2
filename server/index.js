@@ -5,6 +5,12 @@ const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
 require("dotenv").config();
+
+// ROUTES:
+
+const addNewClassRouter = require("./routes/NewClassTeacher");
+const enrollInClassRouter = require("./routes/NewClassStudent");
+const updateTeacherRouter = require("./routes/teacherUpdate");
 const {
   logInTeacherRoute,
   registerTeacherRoute,
@@ -13,9 +19,6 @@ const {
   loginStudentRoute,
   registerStudentRoute,
 } = require("./routes/AuthStudent");
-
-const addNewClassRouter = require("./routes/NewClassTeacher");
-const enrollInClassRouter = require("./routes/NewClassStudent");
 
 const app = express();
 
@@ -42,6 +45,7 @@ app.use("/", loginStudentRoute);
 app.use("/", registerStudentRoute);
 app.use("/", addNewClassRouter);
 app.use("/", enrollInClassRouter);
+app.use("/", updateTeacherRouter);
 
 app.get("*", (req, res) => {
   res.sendFile(

@@ -6,7 +6,6 @@ import { toggleLogRegModalActions } from "../../features/toggleLogRegModal";
 import { isLoggedInActions } from "../../features/isLoggedIn";
 import { whatRoleActions } from "../../features/whatRole";
 import { currentUserActions } from "../../features/currentUser";
-
 import { useState } from "react";
 
 import axios from "axios";
@@ -60,7 +59,6 @@ const Register = ({ isTeacher }) => {
       axios
         .post(url, userInfo)
         .then((serverRes) => {
-          console.log(serverRes.data);
           dispatch(currentUserActions.setCurrentUser(serverRes.data));
           setIsLoading(false);
           setAlreadyRegistered(false);

@@ -6,7 +6,12 @@ export const currentUser = createSlice({
   reducers: {
     setCurrentUser: (state, action) => {
       state.user = action.payload;
-      console.log(state.user);
+    },
+    addNewClass: (state, action) => {
+      state.user = {
+        ...state.user,
+        classes: [...state.user.classes, action.payload],
+      };
     },
   },
 });

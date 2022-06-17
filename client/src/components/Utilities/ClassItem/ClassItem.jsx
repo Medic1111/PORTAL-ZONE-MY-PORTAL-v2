@@ -7,7 +7,7 @@ const ClassItem = ({ obj }) => {
 
   return (
     <li className={classes.li} obj={obj} onClick={showClassHandler}>
-      {obj.name}
+      {obj.className}
     </li>
   );
 };

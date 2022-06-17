@@ -1,4 +1,3 @@
-import Button from "../Utilities/Button/Button";
 import Link from "../Utilities/Link/Link";
 import classes from "./Header.module.css";
 import { darkModeActions } from "../../features/darkModeSlice";
