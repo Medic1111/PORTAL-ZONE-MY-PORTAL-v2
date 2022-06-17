@@ -12,6 +12,7 @@
 
 .ul {
   height: 80%;
+
   width: 100%;
   padding: 5vh 0vw;
   overflow-y: scroll;
@@ -29,7 +30,7 @@
   background-color: #f7f7f720;
   outline: none;
   border-left: solid #7d6b7eda;
-  padding-left: 0.5em;
+  padding: 0.5em;
   font-size: 1.7em;
   letter-spacing: 0.7px;
   color: #7d6b7eda;
@@ -47,5 +48,8 @@
 @media (max-width: 798px) {
   .aside {
     width: 100%;
+  }
+  .ul {
+    min-height: 50%;
   }
 }

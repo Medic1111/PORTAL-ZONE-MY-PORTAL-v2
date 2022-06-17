@@ -2,7 +2,7 @@ import classes from "./UserMainAside.module.css";
 import Button from "../Button/Button";
 import Loading from "../Loading/Loading";
 import { useSelector, useDispatch } from "react-redux";
-import { currentUserActions } from "../../../features/currentUser";
+import { getClassCountActions } from "../../../features/getClassCount";
 import axios from "axios";
 import ClassItem from "../ClassItem/ClassItem";
 import React, { useState } from "react";
@@ -28,8 +28,7 @@ const UserMainAside = () => {
         .then((serverRes) => {
           setClassName("");
           setIsLoading(false);
-          // TEST-ADDING CLASSES TO CURUSER.CLASSES
-          dispatch(currentUserActions.addNewClass(serverRes.data));
+          dispatch(getClassCountActions.increase());
         })
         .catch((err) => {
           setIsLoading(false);
@@ -41,16 +40,22 @@ const UserMainAside = () => {
   };
 
   const enrollClassHandler = () => {
-    axios
-      .post("/api/student/newclass", {
-        secretKey: "3212Tansy",
-        teacherEmail: "teacher@teacher.com",
-        user,
-      })
-      .then((serverRes) => {
-        dispatch(currentUserActions.setCurrentUser(serverRes.data));
-      })
-      .catch((err) => console.log(err));
+    if (className.length > 0) {
+      setIsLoading(true);
+      axios
+        .post("/api/student/newclass", {
+          secretKey: className, //in this case is secret key
+          user,
+        })
+        .then((serverRes) => {
+          dispatch(getClassCountActions.increase());
+          setIsLoading(false);
+          setClassName("");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setInvalidForm(true);
+    }
   };
 
   {
@@ -67,7 +72,7 @@ const UserMainAside = () => {
             value={className}
             onChange={(e) => setClassName(e.target.value)}
             type="text"
-            placeholder="Class Name"
+            placeholder={role === "Mentor" ? "Class Name" : "Class Key"}
           />
           {invalidForm && <p>REQUIRED</p>}
           {role === "Mentor" ? (

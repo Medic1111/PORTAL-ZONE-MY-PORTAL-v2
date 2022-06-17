@@ -10,7 +10,6 @@ require("dotenv").config();
 
 const addNewClassRouter = require("./routes/NewClassTeacher");
 const enrollInClassRouter = require("./routes/NewClassStudent");
-const updateTeacherRouter = require("./routes/teacherUpdate");
 const {
   logInTeacherRoute,
   registerTeacherRoute,
@@ -19,6 +18,7 @@ const {
   loginStudentRoute,
   registerStudentRoute,
 } = require("./routes/AuthStudent");
+const { Class } = require("./models/models");
 
 const app = express();
 
@@ -45,7 +45,21 @@ app.use("/", loginStudentRoute);
 app.use("/", registerStudentRoute);
 app.use("/", addNewClassRouter);
 app.use("/", enrollInClassRouter);
-app.use("/", updateTeacherRouter);
+
+app.get("/api/teacher/:_id/classes", (req, res) => {
+  let id = req.params._id;
+  Class.find({ teacherId: id }, (err, docs) => {
+    err ? console.log(err) : res.status(200).json(docs);
+  });
+});
+
+app.get("/api/student/:_id/classes", (req, res) => {
+  let id = req.params._id;
+
+  Class.find({ "roster._id": id }, (err, docs) => {
+    err ? console.log(err) : res.status(200).json(docs);
+  });
+});
 
 app.get("*", (req, res) => {
   res.sendFile(

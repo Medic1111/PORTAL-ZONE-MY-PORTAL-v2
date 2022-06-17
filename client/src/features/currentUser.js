@@ -10,7 +10,7 @@ export const currentUser = createSlice({
     addNewClass: (state, action) => {
       state.user = {
         ...state.user,
-        classes: [...state.user.classes, action.payload],
+        classes: action.payload,
       };
     },
   },
