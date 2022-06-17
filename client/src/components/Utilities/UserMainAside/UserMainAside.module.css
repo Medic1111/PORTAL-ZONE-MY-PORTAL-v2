@@ -36,6 +36,14 @@
   border-radius: 0 3px 3px 0;
 }
 
+.div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  width: 100%;
+}
+
 @media (max-width: 798px) {
   .aside {
     width: 100%;
