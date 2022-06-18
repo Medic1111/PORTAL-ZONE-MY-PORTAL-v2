@@ -95,7 +95,8 @@
   align-items: center;
   gap: 1em;
   /* background-color: aqua; */
-  /* padding: 2.5vh 0; */
+
+  padding: 2.5vh 0vw 7.5vh 0vw;
 }
 
 /* STAYS */
