@@ -1,20 +1,19 @@
 .aside {
-  width: 35%;
+  width: 25%;
   height: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  gap: 5%;
   background-color: #84708626;
   flex-direction: column;
   color: #7d6b7eda;
+  padding: 2.5vh 0;
 }
 
 .ul {
-  height: 80%;
-
+  height: 70%;
   width: 100%;
-  padding: 5vh 0vw;
+  padding: 2.5vh 0vw;
   overflow-y: scroll;
   list-style: none;
   display: flex;
@@ -24,17 +23,18 @@
   gap: 3vh;
 }
 .input {
-  height: 7vh;
+  height: 6vh;
   border: transparent;
   width: 90%;
-  background-color: #f7f7f720;
   outline: none;
   border-left: solid #7d6b7eda;
   padding: 0.5em;
-  font-size: 1.7em;
+  font-size: 1.6em;
   letter-spacing: 0.7px;
   color: #7d6b7eda;
   border-radius: 0 3px 3px 0;
+  background-color: #928d9234;
+  background-color: #7d6b7e26;
 }
 
 .div {
@@ -48,8 +48,6 @@
 @media (max-width: 798px) {
   .aside {
     width: 100%;
-  }
-  .ul {
-    min-height: 50%;
+    min-height: 100%;
   }
 }

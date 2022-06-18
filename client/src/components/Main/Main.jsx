@@ -1,21 +1,21 @@
-import classes from "./StudentMain.module.css";
+import classes from "./Main.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import UserMainWelcome from "../Utilities/UserMainWelcome/UserMainWelcome";
 import UserMainAside from "../Utilities/UserMainAside/UserMainAside";
+import UserMainSection from "../Utilities/UserMainSection/UserMainSection";
 
-const StudentMain = () => {
+const Main = () => {
   return (
     <main className={classes.main}>
       <div className={classes.div}>
         <UserMainWelcome />
         <div className={classes.divComp}>
           <UserMainAside />
-
-          {/* <section className={classes.test}>SECTION SECTION SECTION</section> */}
+          <UserMainSection />
         </div>
       </div>
     </main>
   );
 };
 
-export default StudentMain;
+export default Main;

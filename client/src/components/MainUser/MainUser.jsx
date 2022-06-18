@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import TeacherMain from "../TeacherMain/TeacherMain";
-import StudentMain from "../StudentMain/StudentMain";
+import TeacherMain from "../Main/Main";
 import { currentUserActions } from "../../features/currentUser";
 import React from "react";
 import axios from "axios";
@@ -28,11 +27,7 @@ const MainUser = () => {
 
   useEffect(fetchAllClasses, [classCount]);
 
-  return (
-    <React.Fragment>
-      {whatRole === "Mentor" ? <TeacherMain /> : <StudentMain />}
-    </React.Fragment>
-  );
+  return <TeacherMain />;
 };
 
 export default MainUser;
