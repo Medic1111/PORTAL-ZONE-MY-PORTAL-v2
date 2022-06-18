@@ -1,8 +1,12 @@
 import classes from "./ClassItem.module.css";
+import { useDispatch } from "react-redux";
+import { currentClassActions } from "../../../features/currentClass";
 
 const ClassItem = ({ obj }) => {
+  const dispatch = useDispatch();
+
   const showClassHandler = () => {
-    console.log(obj);
+    dispatch(currentClassActions.setCurrentClass(obj));
   };
 
   return (

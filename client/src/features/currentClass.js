@@ -2,7 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const currentClass = createSlice({
   name: "currentClass",
-  initialState: { class: {} },
+  initialState: {
+    class: {
+      className: "Select a class",
+      roster: [],
+      secretKey: "",
+      assignments: [],
+    },
+  },
   reducers: {
     setCurrentClass: (state, action) => {
       state.class = action.payload;

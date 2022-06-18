@@ -15,11 +15,9 @@ const enrollInClass = (req, res) => {
         updatedDoc,
         { new: true, returnOriginal: false },
         (err, success) => {
-          err ? console.log(err) : console.log(success);
+          err ? console.log(err) : res.status(200).json(doc[0]);
         }
       );
-
-      res.status(200).json(doc[0]);
     }
   });
 };

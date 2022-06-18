@@ -1,0 +1,15 @@
+/* COMP3 */
+.section2 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  /* padding: 0vh 0vw 10vh 0vw; */
+}
+
+@media (max-width: 798px) {
+  .section2 {
+    padding: 0vh 0vw 10vh 0vw;
+  }
+}

@@ -72,7 +72,7 @@ const UserMainAside = () => {
             value={className}
             onChange={(e) => setClassName(e.target.value)}
             type="text"
-            placeholder={role === "Mentor" ? "Class Name" : "Class Key"}
+            placeholder={role === "Mentor" ? "New Class Name" : "Class Key"}
           />
           {invalidForm && <p>REQUIRED</p>}
           {role === "Mentor" ? (
