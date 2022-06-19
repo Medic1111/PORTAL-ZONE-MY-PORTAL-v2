@@ -265,7 +265,7 @@ _FRONTEND_: UseEffect will send a request to get all classes via teacherId. Send
 
 [student]: FEATURES
 
-- Currently only option is the drop outta class an open chat box
+- Currently only option is the drop outta class and open chat box
 
 - Work on both features
 
@@ -275,4 +275,8 @@ _FRONTEND_: UseEffect will send a request to get all classes via teacherId. Send
 
 - Add assignments {COMPLETED}
 
+- Deletes assignments
+
 - Check roster getting specifics of a user
+
+- Delete class
