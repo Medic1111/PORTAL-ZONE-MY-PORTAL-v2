@@ -68,7 +68,6 @@ const Login = () => {
         .then((serverRes) => {
           setIsLoading(false);
           if (serverRes.status === 200) {
-            // WORK WITH DATA:
             dispatch(currentUserActions.setCurrentUser(serverRes.data[0]));
             dispatch(whatRoleActions.setRole(serverRes.data[0].role));
             setNotRegistered(false);

@@ -63,13 +63,11 @@ const Register = ({ isTeacher }) => {
           setIsLoading(false);
           setAlreadyRegistered(false);
           setServerErr(false);
-          // AUTO LOGIN: SHOW MAIN PAGE/ SENDS WHETHER MENTOR OR STUDENT
           dispatch(whatRoleActions.setRole(serverRes.data.role));
           dispatch(isLoggedInActions.setIsLoggedIn());
         })
 
         .catch((err) => {
-          // err && console.log(err);
           if (err.response.status === 409) {
             setAlreadyRegistered(true);
           } else {

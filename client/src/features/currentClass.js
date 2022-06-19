@@ -13,7 +13,6 @@ export const currentClass = createSlice({
   reducers: {
     setCurrentClass: (state, action) => {
       state.class = action.payload;
-      console.log(state.class);
     },
   },
 });

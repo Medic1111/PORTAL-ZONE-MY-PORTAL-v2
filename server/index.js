@@ -20,6 +20,7 @@ const addNewClassRouter = require("./routes/NewClassTeacher");
 const enrollInClassRouter = require("./routes/NewClassStudent");
 const getAllClassesTeacherRoute = require("./routes/GetClassesTeacher");
 const getAllClassesStudentRoute = require("./routes/GetClassesStudent");
+const { Class } = require("./models/models");
 
 const app = express();
 
@@ -48,6 +49,35 @@ app.use("/", addNewClassRouter);
 app.use("/", enrollInClassRouter);
 app.use("/", getAllClassesTeacherRoute);
 app.use("/", getAllClassesStudentRoute);
+
+// ADD assignment
+
+app.post("/api/teacher/assignments/new", (req, res) => {
+  const { assign, currentClass } = req.body;
+  let updatedClass;
+
+  Class.find({ _id: currentClass._id }, async (err, doc) => {
+    if (err) {
+      console.log(err);
+    } else {
+      await doc[0].assignments.push(assign);
+      updatedClass = doc[0];
+
+      Class.findOneAndUpdate(
+        { _id: currentClass._id },
+        updatedClass,
+        { new: true, returnOriginal: false },
+        (err, docs) => {
+          if (err) {
+            res.status(500).json({ message: "No go, try again" });
+          } else {
+            res.status(200).json(docs);
+          }
+        }
+      );
+    }
+  });
+});
 
 app.get("*", (req, res) => {
   res.sendFile(

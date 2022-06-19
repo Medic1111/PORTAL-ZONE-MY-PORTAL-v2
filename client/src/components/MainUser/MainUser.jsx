@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import TeacherMain from "../Main/Main";
+import Main from "../Main/Main";
+
 import { currentUserActions } from "../../features/currentUser";
 import React from "react";
 import axios from "axios";
@@ -27,7 +28,7 @@ const MainUser = () => {
 
   useEffect(fetchAllClasses, [classCount]);
 
-  return <TeacherMain />;
+  return <Main />;
 };
 
 export default MainUser;

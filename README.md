@@ -143,6 +143,22 @@
 [7] Teacher will have the option to add a class
 [8] Student will have the option to enroll in class
 
+[STATUS_ACCOMPLISHED:SOLUTION]:
+
+- Login form opens when link in Root is created. Option in form to login as mentor or student.
+
+- Validation takes lace both front-end and back-end
+
+- Server send the user info which is stored in currentUser reducer
+
+- Student has its main page, teachers as well, render according to the 'role' included in the server response object, also a reducer
+
+- On the aside(used for both types of user but with different actions accordingly), the teacher has the option to add a class, and student has the option to enroll into a class
+
+- A secret key is generated on the server, and attached to the classInfo stored in DB
+
+- The student may, if teacher email and secretKey available, enroll in that class.
+
 # KEY/ENROLLMENT
 
 [1] Server creates key code and stores in databse
@@ -150,79 +166,113 @@
 [3] Teacher has the option to share code with student so student can enroll
 [4]- Student attempts to enroll and a pending request is sent to teacher
 [5]- Teacher accepts student and connection between student and teacher is created
+[6]- Student is added to teacher's class roster
+[7]- If clicking on a specific class (aside component), details of the class will show on the teacher side, get request will be sent on students side to gather latest assignments posted
 
-# STEP_THREE
+[ACCOMPLISHED_BUT]:
 
-# CREATE CLASS
+- RETHINKING DATABASE MODELING.
+- ADDED A MODEL MAP
+- WILL RECREATE AND SEE HOW IT WORKS
+- IF SUCCESSFULL, THAT WILL BE THE NEW MODELING
 
-[1]- Give ability to create class
-[2]- Gather class name
-[3]- Add to db
-[4]- Returns a secret key
+# REBUILDING ALL REQUESTS AND HOW RECEIVED DATA CAUSES REACTIONS ON FRONT-END
 
-# STUDENT
+[CREDENTIALFORM]
 
-[1]- Creates an account/ save to DB
-[2]- Acces student portal
-[3]- Has the ability to sign up for a class using the secret code
-[4]- Send in info in schema and stores to DB
+- CredentialForm will read is registering true of false and render either a Register or Login component
 
-// MAP OUT JSON FOR DB
+[REGISTER]
 
-// app.get("/api/teacher/json", (req, res) => {
-// console.log("get request in");
-// res.json({
-// fName: "The",
-// lName: "mentor",
-// email: "teacher",
-// password: "xxxx",
-// role: "teacher",
-// classes: [
-// {
-// name: "math",
-// key: "Secret",
-// assignments: ["assignment one", "assignment two"],
-// roster: [
-// {
-// student: {
-// studentId: "yuhki",
-// name: "student one",
-// currentGrade: "a",
-// pending: [],
-// graded: [],
-// messages: [],
-// },
-// },
-// ],
-// },
-// ],
-// });
-// });
+[_POST_]
 
-<!-- STUDENT -->
+- Besides validations, send post request according to isTeacher reducer (set when mentoring or learning button is pressed at ROOT/HERO)
 
-app.get("/api/student/json", (req, res) => {
-console.log("get request in");
-res.json({
-name: "The student",
+- URL is dynamic
 
-    credentials: {
-      username: "student",
-      password: "xxxx",
-      studentId: "blahblah",
-    },
-    role: "student",
-    classes: [
-      {
-        name: "math",
-        key: "Secret",
-        teacher: {
-          name: "yuhki",
-          email: "student@one.com",
-          messages: [],
-        },
-      },
-    ],
+- Info Passed is:
 
-});
-});
+  fName: "",
+  lName: "",
+  email: "",
+  password: "",
+
+- SETS CURRENT USER AS THE RESPONSE FROM SERVER
+
+_SERVER_: Generates the \_id object, must generate role and classes per new modeling which it already does for both STUDENT AND TEACHER
+
+[LOGIN]:
+
+[_POST_]
+
+- Adds validations, handlers modal toggles, sets url according to role, and send post request with form info
+
+_SERVER_: Searches for user in database by email, matches passowor with bcrypt, returns the user obj to frontend which sets it as currentUser on reducer
+
+[UserMainAside]
+
+[TEACHER_POST_ADD_CLASS]:
+
+- Sends request with posted user (currentUser set at login), and class name; Now, sends user, class name, AND teacherID for findMany operation
+
+_SERVER_:
+
+Receives the requests and creates a new class with all info received, sends back the new class info (NOT USED IN THE FRONT END ANYMORE)
+
+_FRONTEND_: UseEffect will send a request to get all classes via teacherId. Sends back and is stored currentUser classes reducer that will be used to render the list. Added counter reducer as dependency to useEffect everytime a class is added.
+
+[satisfied]: TRUE
+
+[STUDENT_POST_ADD_CLASS]:
+
+- Currently sends secretKey, user, and teacherEmail. Will need only user and secretKey. User will be added to the class roster that will be found via secretKey
+
+- UseEffect will also get all classes student is enrolled and assign to reducer that will be listed, also relies on requestCounter dependency
+
+[satisfied]: TRUE
+
+# STEP 3 - CLASSES SPECIFICS
+
+[1]- Cliking on a class renders the specifics of it
+[2]- It will be a section next to aside
+[3]- Teacher will be given different info compared to student
+[4]- Teacher will have access to roster with students info, className, classKey, assignments, consider pendingAssignments and graded assignments, message box
+[5]- Student will have access to className, assignments, some of teacher's info, consider completed assignments, and grade (consider on teacher side too), as well as message box
+[6]- There will be an "Edit" box for each type of user. For teachers it will allow operations related to elements being shown described on 5, same for student
+[7]- In addition, teacher will have the option to delete the class altogether, and student will have the option to drop out of class
+
+[STATUS:ALMOST_THERE]:
+
+- DONT FORGET LOADING SPINNER
+
+- A Main section component was created, it contains 3 nested components, first, second and third.
+
+- All three are being used dynamically according to role
+
+- When clicking on a class, specifics of the class show up
+
+- Teacher: Sees the class name, secret key, roster list, assignments list, chat link, and has two Buttons one for adding assignments and one for deleting the class
+
+- Students: See teachers basic info, class name, current grade, chat link, assignments, and have the option of dropping outta class
+
+- Refined models on backend for consistency accross data
+
+- Provided initial state to currentStateSlicer to contain keys needed on three nested components and avoid undefined
+
+- Logging out currently resets currentClass to initial state
+
+[CLASSES_SPECIFICS_USER]:
+
+[student]: FEATURES
+
+- Currently only option is the drop outta class an open chat box
+
+- Work on both features
+
+[teacher]: FEATURES
+
+- Shares chat box features
+
+- Add assignments {COMPLETED}
+
+- Check roster getting specifics of a user
