@@ -29,6 +29,15 @@ export const currentClass = createSlice({
       //
       // WILL ATTEMPT WITH STATE AND DUMMY ARR
     },
+    clearClass: (state) => {
+      state.class = {
+        className: "Select a class",
+        roster: [],
+        secretKey: "",
+        assignments: [],
+        messages: [],
+      };
+    },
   },
 });
 

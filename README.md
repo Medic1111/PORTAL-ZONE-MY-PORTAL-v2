@@ -280,3 +280,5 @@ _FRONTEND_: UseEffect will send a request to get all classes via teacherId. Send
 - Check roster getting specifics of a user
 
 - Delete class
+
+<!-- NEED TO DISCONNECT FROM CHAT AT MODAL CLOSE FOR CHAT< AND >CLICK OF NEW CLASS -->

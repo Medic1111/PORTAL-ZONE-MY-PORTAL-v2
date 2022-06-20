@@ -13,6 +13,9 @@ export const currentUser = createSlice({
     insertAllClasses: (state, action) => {
       state.user.classes = action.payload;
     },
+    clearCurrentUser: (state) => {
+      state.user = { user: { classes: [] } };
+    },
   },
 });
 

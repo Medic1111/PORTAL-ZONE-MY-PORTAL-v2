@@ -8,7 +8,9 @@ import { currentClassActions } from "../../../features/currentClass";
 const Chat = ({ socket, secretKey, user }) => {
   const [msg, setMsg] = useState("");
   const currentUser = useSelector((state) => state.CurrentUser.user);
-
+  const currentSecretKey = useSelector(
+    (state) => state.CurrentClass.class.secretKey
+  );
   const [dummyArr, setDummyArr] = useState([]);
 
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ const Chat = ({ socket, secretKey, user }) => {
   const sendMsgHandler = async (event) => {
     event.preventDefault();
     const msgData = {
-      secretKey,
+      secretKey: currentSecretKey,
       user,
       msg,
       time: `${new Date(Date.now()).getHours()}:${new Date(
@@ -32,6 +34,7 @@ const Chat = ({ socket, secretKey, user }) => {
 
     await socket.emit("send_message", msgData);
     dispatch(currentClassActions.updateMessages(msgData));
+    setMsg("");
     // setDummyArr((prev) => {
     //   return [...prev, msgData];
     // });
