@@ -51,7 +51,7 @@ const Chat = ({ socket, secretKey, user }) => {
         Be polite, all messages are being recorded.
       </h4>
       <ul className={classes.txtBox}>
-        {dummyArr.messages.map((item, index) => {
+        {dummyArr.map((item, index) => {
           return (
             <div key={`MSG_${index}`}>
               <p className={classes.p}>
