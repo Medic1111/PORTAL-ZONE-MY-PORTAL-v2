@@ -4,18 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { chatActions } from "../../../features/chat";
 import React from "react";
 import Chat from "../Chat/Chat";
-// import io from "socket.io-client";
 
-// const socket = io.connect("/");
 const MainSecFirstComp = ({ socket }) => {
   const isChat = useSelector((state) => state.ChatModal.isChat);
-
   const dispatch = useDispatch();
   const currentClass = useSelector((state) => state.CurrentClass.class);
   const role = useSelector((state) => state.WhatRole.role);
   const user = useSelector((state) => state.CurrentUser.user);
 
-  // TEST SOCKET
   const enterChatHandler = () => {
     socket.emit("join_room", currentClass.secretKey);
     dispatch(chatActions.setIsChat(true));

@@ -6,14 +6,16 @@ import { chatActions } from "../../../features/chat";
 import { currentClassActions } from "../../../features/currentClass";
 import ScrollToBottom from "react-scroll-to-bottom";
 
-const Chat = ({ socket, secretKey, user }) => {
+const Chat = ({ socket, user }) => {
+  // ADD DATE TO THE MSGDATA BEING
+  //SENT TO SERVER
+
+  const dispatch = useDispatch();
   const [msg, setMsg] = useState("");
+  const currentClass = useSelector((state) => state.CurrentClass.class);
   const currentSecretKey = useSelector(
     (state) => state.CurrentClass.class.secretKey
   );
-
-  const dispatch = useDispatch();
-  const currentClass = useSelector((state) => state.CurrentClass.class);
 
   const closeChatHandler = () => {
     const data = {

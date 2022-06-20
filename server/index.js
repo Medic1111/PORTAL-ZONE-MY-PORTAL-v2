@@ -26,6 +26,8 @@ const { Class } = require("./models/models");
 
 const app = express();
 
+// MIDDLEWARES
+
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors({ origin: "*" }));
@@ -39,9 +41,13 @@ app.use(
   })
 );
 
+// DATABASE
+
 mongoose.connect(`${process.env.DB_URI}`, (err) =>
   err ? console.log(err) : console.log("Connected to DB")
 );
+
+// ROUTE HANDLERS
 
 app.use("/", logInTeacherRoute);
 app.use("/", registerTeacherRoute);
@@ -53,33 +59,28 @@ app.use("/", getAllClassesTeacherRoute);
 app.use("/", getAllClassesStudentRoute);
 app.use("/", addAssignment);
 
+// UNHANDLED ROUTES
 app.get("*", (req, res) => {
   res.sendFile(
     express.static(path.resolve(__dirname, "../client/build", "index.html"))
   );
 });
 
+// SPIN SERVER
 const server = app.listen(process.env.PORT || 3009, () =>
   console.log("Server Spinning")
 );
 
 // SOCKET SERVER:
-
 const io = socketio(server);
 
 io.on("connection", (socket) => {
-  // CONNECTION
   console.log("user connected:", socket.id);
 
   // JOINING
   socket.on("join_room", (secretKey) => {
     socket.join(secretKey);
-    console.log(
-      "user:",
-      socket.id,
-      " has entenred chat for class: ",
-      secretKey
-    );
+    console.log(socket.id, " has entered ", secretKey);
   });
 
   // MESSAGING
@@ -90,7 +91,6 @@ io.on("connection", (socket) => {
     socket.to(data.secretKey).emit("receiving_msg", data);
 
     // SAVE IN DB
-
     Class.find({ secretKey: data.secretKey }, async (err, doc) => {
       err ? console.log(err) : await doc[0].messages.push(data);
       let upDoc = doc[0];
@@ -106,13 +106,12 @@ io.on("connection", (socket) => {
   });
 
   // LEAVING ROOM
-
   socket.on("leave_chat", async (data) => {
     await socket.leave(data.secretKey);
     console.log("User has left room: ", data.secretKey);
   });
 
-  // disconnecting
+  // DISCONNECTING FROM SOCKET SERVER
   socket.on("disconnect", () => {
     console.log("User disconnected from socket server", socket.id);
   });

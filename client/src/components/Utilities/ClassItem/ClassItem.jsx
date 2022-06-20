@@ -5,6 +5,7 @@ import { chatActions } from "../../../features/chat";
 
 const ClassItem = ({ obj, socket }) => {
   const dispatch = useDispatch();
+
   const currentSecretKey = useSelector(
     (state) => state.CurrentClass.class.secretKey
   );
@@ -12,7 +13,7 @@ const ClassItem = ({ obj, socket }) => {
   const showClassHandler = () => {
     dispatch(currentClassActions.setCurrentClass(obj));
     dispatch(chatActions.setIsChat(false));
-    // TEST
+
     const data = {
       secretKey: currentSecretKey,
     };

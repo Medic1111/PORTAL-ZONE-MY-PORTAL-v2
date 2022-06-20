@@ -5,6 +5,9 @@ import axios from "axios";
 import { currentClassActions } from "../../../features/currentClass";
 
 const MainSecCompThree = () => {
+  // SEND SERVER SIDE ERROR MESSAGE
+  // ON CATCH
+
   const dispatch = useDispatch();
   const role = useSelector((state) => state.WhatRole.role);
   const currentClass = useSelector((state) => state.CurrentClass.class);

@@ -10,7 +10,6 @@ const UserMainWelcome = () => {
   const user = useSelector((state) => state.CurrentUser.user);
 
   const logOutHandler = () => {
-    // CREATE CLEAR METHOD ON REDUCER FOR CLASS
     dispatch(currentClassActions.clearClass());
     dispatch(currentUserActions.clearCurrentUser());
     dispatch(isLoggedInActions.setIsLoggedIn());

@@ -1,5 +1,4 @@
 import classes from "./App.module.css";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";

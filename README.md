@@ -281,7 +281,20 @@ _FRONTEND_: UseEffect will send a request to get all classes via teacherId. Send
 
 - Delete class
 
-<!-- NEED TO DISCONNECT FROM CHAT AT MODAL CLOSE FOR CHAT< AND >CLICK OF NEW CLASS -->
+[FEATURES_ADDRESSING]:
 
-_ FIRST TASK_:_CLEAN_UP_ - DONE
-_SECOND TASK_ : TEST_SOCKET_DEPLOYED
+[1]: CHAT
+
+- Integrated SOCKET IO for real time chatting
+
+- Connection starts at root.
+
+- Socket is passed as props
+
+- Joing a room happens when the link to CHAT in first main component (utilities) is clicked
+
+- Leaving a room happens when user closes the chat as well as click on a different class from the class list located on the main aside component
+
+- When leaving the chat, all listeners get removed to avoid multiple messages
+
+- On the back end, all messages being exchanged gets stored in the Classes DB message array, it is rendered when user opens the chat
