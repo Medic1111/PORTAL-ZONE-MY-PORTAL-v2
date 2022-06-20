@@ -13,6 +13,7 @@ const addAssignment = (req, res) => {
   Class.find({ _id: currentClass._id }, async (err, doc) => {
     err ? console.log(err) : await doc[0].assignments.push(assign);
 
+    updatedClass = doc[0];
     Class.findOneAndUpdate(
       { _id: currentClass._id },
       updatedClass,

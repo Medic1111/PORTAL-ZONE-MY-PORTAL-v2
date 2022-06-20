@@ -16,6 +16,10 @@ const Chat = ({ socket, user }) => {
   const currentSecretKey = useSelector(
     (state) => state.CurrentClass.class.secretKey
   );
+  const currentUser = useSelector((state) => state.CurrentUser.user);
+  let author = `${currentUser.fName} ${currentUser.lName}`;
+
+  console.log(user === author);
 
   const closeChatHandler = () => {
     const data = {
@@ -55,7 +59,10 @@ const Chat = ({ socket, user }) => {
         Be polite, all messages are being recorded.
       </h4>
       <ul className={classes.txtBox}>
-        <ScrollToBottom className={classes.scroll}>
+        <ScrollToBottom
+          initialScrollBehavior="scrollToEnd"
+          className={classes.scroll}
+        >
           {currentClass.messages.map((item, index) => {
             return (
               <div key={`MSG_${index}`}>

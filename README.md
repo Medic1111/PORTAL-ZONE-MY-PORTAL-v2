@@ -271,7 +271,7 @@ _FRONTEND_: UseEffect will send a request to get all classes via teacherId. Send
 
 [teacher]: FEATURES
 
-- Shares chat box features
+- Shares chat box features {COMPLETED}
 
 - Add assignments {COMPLETED}
 
@@ -293,8 +293,41 @@ _FRONTEND_: UseEffect will send a request to get all classes via teacherId. Send
 
 - Joing a room happens when the link to CHAT in first main component (utilities) is clicked
 
+- The chat will pop taking over the rendering of the 3 components in the main section, conditionally, with a button to close, and a form to type messages and send
+
+- The chat autoscrolls to the bottom always showing latest message
+
 - Leaving a room happens when user closes the chat as well as click on a different class from the class list located on the main aside component
 
 - When leaving the chat, all listeners get removed to avoid multiple messages
 
 - On the back end, all messages being exchanged gets stored in the Classes DB message array, it is rendered when user opens the chat
+
+[ANNOYING_DETAILS_TO_CHECK]:
+
+- Mobile is absolute trash...
+- Come up with solution for mobile
+- If author is writing msg, differentiate somehow from other msgs
+- Add date and remove $ from the msgs info
+
+_NEXT_
+
+[2]: DROP FROM CLASS
+
+- Easy enough, lets get it out of the way
+- Student click drop class and a pop up confirm appear. Cancel returns, confirm will send a put request to backend
+- Server will receive the current class info, and update the roster from db sending back a confirmation response
+- Loading spinner will be active
+
+_STUDENT_ _WILL_ _BE_ _COMPLETE_
+
+[3]: DELETE CLASS
+
+- Easy enough, lets get it out of the way
+- Teacher click drop class and a pop up confirm appear. Cancel returns, confirm will send a delete request to backend
+- Server will receive the current class info, and delete from db sending back a confirmation response
+- Loading spinner will be active
+
+{from there, roster, add class modal, remove or edit assignment, grade within the roster check}
+
+[FURTHER_IDEAS]: Intend to limit amount of classes a teacher can add without submitting a payment. Perhaps implement some private, some paid for the student... developing the idea still, but hoping to be able to integrate stripe for payments.
