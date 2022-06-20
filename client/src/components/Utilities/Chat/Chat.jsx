@@ -15,7 +15,8 @@ const Chat = ({ socket, secretKey, user }) => {
   const currentClass = useSelector((state) => state.CurrentClass.class);
 
   const closeChatHandler = () => {
-    socket.disconnect();
+    // DONT DISCONNECT HERE
+    // socket.disconnect();
     dispatch(chatActions.setIsChat(false));
   };
   const sendMsgHandler = async (event) => {
