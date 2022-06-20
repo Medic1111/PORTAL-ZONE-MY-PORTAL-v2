@@ -7,12 +7,13 @@ import axios from "axios";
 import ClassItem from "../ClassItem/ClassItem";
 import React, { useState } from "react";
 
-const UserMainAside = () => {
+const UserMainAside = ({ socket }) => {
   const dispatch = useDispatch();
   const [className, setClassName] = useState("");
   const [invalidForm, setInvalidForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [notFound, setNotFound] = useState(false);
+  const [serverError, setServerError] = useState(false);
   const user = useSelector((state) => state.CurrentUser.user);
   const role = useSelector((state) => state.WhatRole.role);
 
@@ -28,12 +29,12 @@ const UserMainAside = () => {
         .then((serverRes) => {
           setClassName("");
           setIsLoading(false);
-          console.log(serverRes.data);
+          setServerError(false);
           dispatch(currentUserActions.addNewClass(serverRes.data));
         })
         .catch((err) => {
           setIsLoading(false);
-          console.log(err);
+          setServerError(true);
         });
     } else {
       setInvalidForm(true);
@@ -49,13 +50,18 @@ const UserMainAside = () => {
           user,
         })
         .then((serverRes) => {
-          // dispatch(getClassCountActions.increase());
           setIsLoading(false);
           setClassName("");
-          console.log(serverRes.data);
+          setNotFound(false);
+          setServerError(false);
           dispatch(currentUserActions.addNewClass(serverRes.data));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setIsLoading(false);
+          err.response.status === 404
+            ? setNotFound(true)
+            : setServerError(true);
+        });
     } else {
       setInvalidForm(true);
     }
@@ -67,7 +73,9 @@ const UserMainAside = () => {
         <aside className={classes.aside}>
           <ul className={classes.ul}>
             {user.classes.map((obj, index) => {
-              return <ClassItem key={`CLASS_${index}`} obj={obj} />;
+              return (
+                <ClassItem socket={socket} key={`CLASS_${index}`} obj={obj} />
+              );
             })}
           </ul>
           <input
@@ -78,6 +86,9 @@ const UserMainAside = () => {
             placeholder={role === "Mentor" ? "New Class Name" : "Class Key"}
           />
           {invalidForm && <p>REQUIRED</p>}
+          {notFound && <p>NO CLASS FOUND WITH THAT KEY</p>}
+          {serverError && <p>Something went wrong, please try again</p>}
+
           {role === "Mentor" ? (
             <Button clickMe={addClassHandler} innerTxt={"Add Class"} />
           ) : (

@@ -31,7 +31,13 @@ const Student = new mongoose.model("Student", studentSchema);
 const classSchema = new mongoose.Schema({
   className: { type: String, required: true, trim: true, lowercase: true },
   teacherId: { type: String, required: true, trim: true },
-  secretKey: { type: String, required: true, trim: true, lowercase: true },
+  secretKey: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+    unique: true,
+  },
   assignments: { type: Array, default: [] },
   whoTeach: Object,
   roster: { type: Array, default: [] },

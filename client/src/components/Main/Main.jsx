@@ -9,7 +9,7 @@ const Main = ({ socket }) => {
       <div className={classes.div}>
         <UserMainWelcome />
         <div className={classes.divComp}>
-          <UserMainAside />
+          <UserMainAside socket={socket} />
           <UserMainSection socket={socket} />
         </div>
       </div>

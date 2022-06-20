@@ -1,3 +1,9 @@
+// RECEIVES ASSIGNMENT AND REFERENCE
+// FOR CURRENT CLASS
+// FIND THE CLASS IN DB, ALTERS THE ASSIGNMENT
+// BY PUSHING, STORES IT IN NEW VAR
+// UPDATES WITH NEW DOC
+
 const { Class } = require("../models/models");
 
 const addAssignment = (req, res) => {
@@ -5,25 +11,18 @@ const addAssignment = (req, res) => {
   let updatedClass;
 
   Class.find({ _id: currentClass._id }, async (err, doc) => {
-    if (err) {
-      console.log(err);
-    } else {
-      await doc[0].assignments.push(assign);
-      updatedClass = doc[0];
+    err ? console.log(err) : await doc[0].assignments.push(assign);
 
-      Class.findOneAndUpdate(
-        { _id: currentClass._id },
-        updatedClass,
-        { new: true, returnOriginal: false },
-        (err, docs) => {
-          if (err) {
-            res.status(500).json({ message: "No go, try again" });
-          } else {
-            res.status(200).json(docs);
-          }
-        }
-      );
-    }
+    Class.findOneAndUpdate(
+      { _id: currentClass._id },
+      updatedClass,
+      { new: true, returnOriginal: false },
+      (err, docs) => {
+        err
+          ? res.status(500).json({ message: "No go, try again" })
+          : res.status(200).json(docs);
+      }
+    );
   });
 };
 

@@ -53,14 +53,6 @@ app.use("/", getAllClassesTeacherRoute);
 app.use("/", getAllClassesStudentRoute);
 app.use("/", addAssignment);
 
-// STORING MESSAGES TO CLASS
-
-// app.post("/api/:id/messages", (req, res) => {
-//   console.log(req.params);
-//   console.log(req.body);
-//   res.send("Copy that");
-// });
-
 app.get("*", (req, res) => {
   res.sendFile(
     express.static(path.resolve(__dirname, "../client/build", "index.html"))
@@ -70,12 +62,16 @@ app.get("*", (req, res) => {
 const server = app.listen(process.env.PORT || 3009, () =>
   console.log("Server Spinning")
 );
+
+// SOCKET SERVER:
+
 const io = socketio(server);
 
 io.on("connection", (socket) => {
-  // connection
+  // CONNECTION
   console.log("user connected:", socket.id);
-  // joining
+
+  // JOINING
   socket.on("join_room", (secretKey) => {
     socket.join(secretKey);
     console.log(
@@ -85,40 +81,32 @@ io.on("connection", (socket) => {
       secretKey
     );
   });
+
   // MESSAGING
   socket.on("send_message", (data) => {
     console.log(data);
 
-    // NEEDS TO SEND TO OTHER USERS
+    // SENDING TO OTHER USERS IN SAME CHAT
     socket.to(data.secretKey).emit("receiving_msg", data);
 
     // SAVE IN DB
 
     Class.find({ secretKey: data.secretKey }, async (err, doc) => {
-      if (err) {
-        console.log(err);
-      } else {
-        await doc[0].messages.push(data);
-        let upDoc = doc[0];
-
-        Class.findOneAndUpdate(
-          { secretKey: data.secretKey },
-          upDoc,
-          { new: true, returnOriginal: false },
-          (err, success) => {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log("updated");
-            }
-          }
-        );
-      }
+      err ? console.log(err) : await doc[0].messages.push(data);
+      let upDoc = doc[0];
+      Class.findOneAndUpdate(
+        { secretKey: data.secretKey },
+        upDoc,
+        { new: true, returnOriginal: false },
+        (error, success) => {
+          error ? console.log(error) : console.log("Updated");
+        }
+      );
     });
   });
   // disconnecting
   socket.on("disconnect", () => {
-    console.log("User disconnected", socket.id);
-    socket.removeAllListeners();
+    console.log("User disconnected from class: ", socket.id);
+    // socket.removeAllListeners();
   });
 });

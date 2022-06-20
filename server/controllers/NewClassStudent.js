@@ -4,9 +4,9 @@ const enrollInClass = (req, res) => {
   const { secretKey, user } = req.body;
 
   Class.find({ secretKey: secretKey }, async (err, doc) => {
-    if (err) {
-      console.log(err);
-    } else {
+    err && res.status(500).json({ message: "Server side err occured" });
+
+    if (doc.length !== 0) {
       await doc[0].roster.push(user);
       let updatedDoc = doc[0];
 
@@ -15,9 +15,13 @@ const enrollInClass = (req, res) => {
         updatedDoc,
         { new: true, returnOriginal: false },
         (err, success) => {
-          err ? console.log(err) : res.status(200).json(doc[0]);
+          err
+            ? res.status(500).json({ message: "Server side err occured" })
+            : res.status(200).json(doc[0]);
         }
       );
+    } else {
+      res.status(404).json({ message: "No class found with that key" });
     }
   });
 };

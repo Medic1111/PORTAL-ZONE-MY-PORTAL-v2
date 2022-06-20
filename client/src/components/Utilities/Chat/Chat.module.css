@@ -50,6 +50,10 @@
   gap: 3vh;
   overflow-y: scroll;
 }
+.scroll {
+  height: 100%;
+  width: 100%;
+}
 .p {
   width: 100%;
   display: flex;
