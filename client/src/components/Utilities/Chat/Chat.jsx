@@ -30,18 +30,18 @@ const Chat = ({ socket, secretKey, user }) => {
     };
 
     await socket.emit("send_message", msgData);
-    // dispatch(currentClassActions.updateMessages(msgData));
-    setDummyArr((prev) => {
-      return [...prev, msgData];
-    });
+    dispatch(currentClassActions.updateMessages(msgData));
+    // setDummyArr((prev) => {
+    //   return [...prev, msgData];
+    // });
   };
 
   useEffect(() => {
     socket.on("receiving_msg", (data) => {
-      // dispatch(currentClassActions.updateMessages(data));
-      setDummyArr((prev) => {
-        return [...prev, data];
-      });
+      dispatch(currentClassActions.updateMessages(data));
+      // setDummyArr((prev) => {
+      //   return [...prev, data];
+      // });
     });
   }, [socket]);
 
@@ -51,7 +51,7 @@ const Chat = ({ socket, secretKey, user }) => {
         Be polite, all messages are being recorded.
       </h4>
       <ul className={classes.txtBox}>
-        {dummyArr.map((item, index) => {
+        {currentClass.messages.map((item, index) => {
           return (
             <div key={`MSG_${index}`}>
               <p className={classes.p}>
