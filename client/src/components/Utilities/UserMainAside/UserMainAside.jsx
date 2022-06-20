@@ -2,7 +2,7 @@ import classes from "./UserMainAside.module.css";
 import Button from "../Button/Button";
 import Loading from "../Loading/Loading";
 import { useSelector, useDispatch } from "react-redux";
-import { getClassCountActions } from "../../../features/getClassCount";
+import { currentUserActions } from "../../../features/currentUser";
 import axios from "axios";
 import ClassItem from "../ClassItem/ClassItem";
 import React, { useState } from "react";
@@ -28,7 +28,8 @@ const UserMainAside = () => {
         .then((serverRes) => {
           setClassName("");
           setIsLoading(false);
-          dispatch(getClassCountActions.increase());
+          console.log(serverRes.data);
+          dispatch(currentUserActions.addNewClass(serverRes.data));
         })
         .catch((err) => {
           setIsLoading(false);
@@ -48,9 +49,11 @@ const UserMainAside = () => {
           user,
         })
         .then((serverRes) => {
-          dispatch(getClassCountActions.increase());
+          // dispatch(getClassCountActions.increase());
           setIsLoading(false);
           setClassName("");
+          console.log(serverRes.data);
+          dispatch(currentUserActions.addNewClass(serverRes.data));
         })
         .catch((err) => console.log(err));
     } else {

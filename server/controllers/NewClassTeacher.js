@@ -1,4 +1,4 @@
-const { Teacher, Class } = require("../models/models");
+const { Class } = require("../models/models");
 
 const newClassTeacher = (req, res) => {
   const { user, className, teacherId } = req.body;
@@ -14,6 +14,7 @@ const newClassTeacher = (req, res) => {
     assignments: [],
     whoTeach: user,
     roster: [],
+    messages: [],
   });
 
   newClass.save((err, doc) => {

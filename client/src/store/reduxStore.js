@@ -8,6 +8,8 @@ import WhatRole from "../features/whatRole";
 import CurrentUser from "../features/currentUser";
 import CurrentClass from "../features/currentClass";
 import GetClassCount from "../features/getClassCount";
+import ChatModal from "../features/chat";
+
 const reduxStore = configureStore({
   reducer: {
     DarkMode,
@@ -19,6 +21,7 @@ const reduxStore = configureStore({
     CurrentUser,
     CurrentClass,
     GetClassCount,
+    ChatModal,
   },
 });
 

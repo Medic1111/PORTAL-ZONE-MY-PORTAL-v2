@@ -35,6 +35,7 @@ const classSchema = new mongoose.Schema({
   assignments: { type: Array, default: [] },
   whoTeach: Object,
   roster: { type: Array, default: [] },
+  messages: { type: Array, default: [] },
 });
 
 const Class = new mongoose.mongoose.model("Class", classSchema);

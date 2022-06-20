@@ -3,14 +3,14 @@ import UserMainWelcome from "../Utilities/UserMainWelcome/UserMainWelcome";
 import UserMainAside from "../Utilities/UserMainAside/UserMainAside";
 import UserMainSection from "../Utilities/UserMainSection/UserMainSection";
 
-const Main = () => {
+const Main = ({ socket }) => {
   return (
     <main className={classes.main}>
       <div className={classes.div}>
         <UserMainWelcome />
         <div className={classes.divComp}>
           <UserMainAside />
-          <UserMainSection />
+          <UserMainSection socket={socket} />
         </div>
       </div>
     </main>

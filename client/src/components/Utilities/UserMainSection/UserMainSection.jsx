@@ -3,10 +3,10 @@ import MainSecFirstComp from "../MainSecFirstComp/MainSecFirstComp";
 import MainSecCompTwo from "../MainSecCompTwo/MainSecCompTwo";
 import MainSecCompThree from "../MainSecCompThree/MainSecCompThree";
 
-const UserMainSection = () => {
+const UserMainSection = ({ socket }) => {
   return (
     <section className={classes.section}>
-      <MainSecFirstComp />
+      <MainSecFirstComp socket={socket} />
       <MainSecCompTwo />
       <MainSecCompThree />
     </section>

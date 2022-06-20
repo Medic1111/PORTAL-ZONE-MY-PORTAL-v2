@@ -8,6 +8,7 @@ const MainSecCompThree = () => {
   const dispatch = useDispatch();
   const role = useSelector((state) => state.WhatRole.role);
   const currentClass = useSelector((state) => state.CurrentClass.class);
+  const isChat = useSelector((state) => state.ChatModal.isChat);
 
   const addAssignmentHandler = () => {
     axios
@@ -21,15 +22,21 @@ const MainSecCompThree = () => {
       .catch((err) => console.log(err));
   };
 
-  return (
-    <section className={classes.section2}>
-      {role === "Mentor" && (
-        <Button innerTxt={"Add Assigment"} clickMe={addAssignmentHandler} />
-      )}
-      {role === "Mentor" && <Button innerTxt={"Delete Class"} />}
-      {role === "Student" && <Button innerTxt={"Un-enroll from Class"} />}
-    </section>
-  );
+  {
+    if (!isChat) {
+      return (
+        <section className={classes.section2}>
+          {role === "Mentor" && (
+            <Button innerTxt={"Add Assigment"} clickMe={addAssignmentHandler} />
+          )}
+          {role === "Mentor" && <Button innerTxt={"Delete Class"} />}
+          {role === "Student" && <Button innerTxt={"Un-enroll from Class"} />}
+        </section>
+      );
+    } else {
+      return null;
+    }
+  }
 };
 
 export default MainSecCompThree;

@@ -6,14 +6,14 @@ import CredentialsForm from "../../components/CredentialsForm/CredentialsForm";
 import { useSelector } from "react-redux";
 import MainUser from "../../components/MainUser/MainUser";
 
-const RegisterModal = ({ dark }) => {
+const RegisterModal = ({ dark, socket }) => {
   const showMainPage = useSelector((state) => state.IsLoggedIn.isUserLoggedIn);
 
   return (
     <Portal>
       <article className={dark ? `${classes.dark}` : `${classes.light}`}>
         <Header />
-        {showMainPage ? <MainUser /> : <CredentialsForm />}
+        {showMainPage ? <MainUser socket={socket} /> : <CredentialsForm />}
         <Footer />
       </article>
     </Portal>

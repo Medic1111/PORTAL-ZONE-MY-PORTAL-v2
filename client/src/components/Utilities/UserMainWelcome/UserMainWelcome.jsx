@@ -16,6 +16,7 @@ const UserMainWelcome = () => {
         secretKey: "",
         roster: [],
         assignments: [],
+        messages: [],
       })
     );
     dispatch(isLoggedInActions.setIsLoggedIn());
