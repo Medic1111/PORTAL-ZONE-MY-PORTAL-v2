@@ -22,7 +22,7 @@
 .input {
   width: 80%;
   border: transparent;
-  border-radius: 3px;
+  border-radius: 3px 0px 0 3px;
   cursor: pointer;
   font-size: 1.7em;
   letter-spacing: 0.7px;
@@ -33,6 +33,7 @@
   padding-right: 0.5em;
   background-color: #f7f7f7;
   color: #887a89ef;
+  height: 5vh;
 }
 .actionDiv {
   display: flex;
@@ -75,9 +76,25 @@
 }
 /* STAYS */
 
+.send {
+  height: 5vh;
+  border: transparent;
+  width: 20%;
+  background-color: #f7f7f7e8;
+  color: goldenrod;
+  font-size: 1.7em;
+  padding: 0.25em;
+  border-radius: 0 3px 3px 0;
+}
+
 @media (max-width: 798px) {
   .section {
     width: 100%;
     min-height: 100%;
+    /* max-height: auto; */
+    overflow-y: scroll;
+  }
+  .input {
+    width: 80%;
   }
 }

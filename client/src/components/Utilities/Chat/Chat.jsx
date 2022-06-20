@@ -15,6 +15,7 @@ const Chat = ({ socket, secretKey, user }) => {
   const currentClass = useSelector((state) => state.CurrentClass.class);
 
   const closeChatHandler = () => {
+    socket.disconnect();
     dispatch(chatActions.setIsChat(false));
   };
   const sendMsgHandler = async (event) => {
@@ -75,7 +76,9 @@ const Chat = ({ socket, secretKey, user }) => {
             type="text"
             placeholder="type here..."
           />
-          <Button innerTxt={"Send"} clickMe={sendMsgHandler} />
+          <button className={classes.send} onClick={sendMsgHandler}>
+            send
+          </button>
         </div>
       </form>
 
