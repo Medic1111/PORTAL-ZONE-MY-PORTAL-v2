@@ -16,8 +16,10 @@ const Chat = ({ socket, secretKey, user }) => {
   const currentClass = useSelector((state) => state.CurrentClass.class);
 
   const closeChatHandler = () => {
-    // DONT DISCONNECT HERE
-    // socket.disconnect();
+    const data = {
+      secretKey: currentSecretKey,
+    };
+    socket.emit("leave_chat", data);
     socket.removeAllListeners();
 
     dispatch(chatActions.setIsChat(false));
@@ -41,7 +43,6 @@ const Chat = ({ socket, secretKey, user }) => {
 
   useEffect(() => {
     socket.on("receiving_msg", (data) => {
-      console.log(data);
       dispatch(currentClassActions.updateMessages(data));
     });
   }, [socket]);

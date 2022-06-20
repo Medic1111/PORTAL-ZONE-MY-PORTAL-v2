@@ -104,9 +104,16 @@ io.on("connection", (socket) => {
       );
     });
   });
+
+  // LEAVING ROOM
+
+  socket.on("leave_chat", async (data) => {
+    await socket.leave(data.secretKey);
+    console.log("User has left room: ", data.secretKey);
+  });
+
   // disconnecting
   socket.on("disconnect", () => {
-    console.log("User disconnected from class: ", socket.id);
-    // socket.removeAllListeners();
+    console.log("User disconnected from socket server", socket.id);
   });
 });
