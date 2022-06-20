@@ -28,7 +28,7 @@ const app = express();
 
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "*" }));
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 app.use(
   session({
