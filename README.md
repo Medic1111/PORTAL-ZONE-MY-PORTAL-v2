@@ -347,6 +347,18 @@ _NEXT_
 
 _STUDENT_ _WILL_ _BE_ _COMPLETE_
 
+[STATUS:COMPLETED]:
+
+[ANNOYING_DETAILS_TO_CHECK]:
+
+- Loading Spinner
+- Ensure loading spinner on add class is fixed to entire page?
+- Must figure wrapper reducer minification
+
+[satisfied]: TRUE
+
+_STUDENT_ _IS_ _BE_ _COMPLETE_
+
 [3]: DELETE CLASS
 
 - Easy enough, lets get it out of the way
@@ -355,5 +367,35 @@ _STUDENT_ _WILL_ _BE_ _COMPLETE_
 - Loading spinner will be active
 
 {from there, roster, add class modal, remove or edit assignment, grade within the roster check}
+
+[STATUS:COMPLETED]:
+
+[ANNOYING_DETAILS_TO_CHECK]:
+
+- Loading Spinner
+- Ensure loading spinner on add class is fixed to entire page?
+- Must figure wrapper reducer minification
+- CHAT CURRENT SESSION UPDATE
+- ASSIGNMENTS CURRENT SESSION UPDATE
+
+[satisfied]: TRUE
+
+{from there: remove or edit assignments, consider grade}
+
+[CURRENT_PRIORITIES]:
+
+- CHAT CURRENT SESSION UPDATE
+- ASSIGNMENT CURRENT SESSION
+- WRAPPER REDUCER MINIFY
+- CHECK ON ALL CATCH BLOCKS AND ENSURE FRONT END HANDLES IT
+- CHECK ALL SPINNERS SHOW APPROPRIATELY
+- CLEAN UP
+- COMPRESS!!!!
+
+[LEAST_PRIORITIES]:
+
+- FOCUS ON DESIGN
+- RESPONSIVE DESIGN
+- ALLOWING STUDENTS LOTS OF ACTIONS
 
 [FURTHER_IDEAS]: Intend to limit amount of classes a teacher can add without submitting a payment. Perhaps implement some private, some paid for the student... developing the idea still, but hoping to be able to integrate stripe for payments.
