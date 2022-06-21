@@ -1,0 +1,11 @@
+.p {
+  font-size: 2em;
+  letter-spacing: 1px;
+  font-weight: 400;
+  color: #6f5d70da;
+  cursor: pointer;
+  padding: 0.25em 0;
+}
+.p:hover {
+  color: rgb(188, 149, 49);
+}

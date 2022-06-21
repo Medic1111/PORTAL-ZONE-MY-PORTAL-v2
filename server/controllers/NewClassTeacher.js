@@ -2,7 +2,7 @@ const { Class } = require("../models/models");
 
 const newClassTeacher = async (req, res) => {
   const { user, className, teacherId } = req.body;
-
+  console.log(req.body);
   let secretKey = Math.floor(Math.random() * 10) * 10000;
 
   // CLASSES:

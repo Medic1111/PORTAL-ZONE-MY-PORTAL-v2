@@ -1,0 +1,52 @@
+.div {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: #6f5d70da;
+  background-color: #6f5d70da;
+  background-color: #84708626;
+  padding: 2.5vh 2.5vw;
+}
+.p {
+  font-size: 1.8em;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #713077;
+  margin-bottom: 5vh;
+}
+.rosterList {
+  width: 30%;
+  height: 100%;
+  border-right: solid #713077;
+}
+
+.studentDiv {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pTitle {
+  font-size: 3em;
+  letter-spacing: 2px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 2vh;
+}
+.pInfo {
+  font-size: 2.5em;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.btnBox {
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

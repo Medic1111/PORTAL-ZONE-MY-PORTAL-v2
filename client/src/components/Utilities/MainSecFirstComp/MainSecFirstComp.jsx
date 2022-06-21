@@ -3,6 +3,7 @@ import Link from "../Link/Link";
 import { useSelector, useDispatch } from "react-redux";
 import { chatActions } from "../../../features/chat";
 import React from "react";
+import { wrapperActions } from "../../../features/wrapper";
 
 const MainSecFirstComp = ({ socket }) => {
   const dispatch = useDispatch();
@@ -12,6 +13,15 @@ const MainSecFirstComp = ({ socket }) => {
   const enterChatHandler = () => {
     socket.emit("join_room", currentClass.secretKey);
     dispatch(chatActions.setIsChat(true));
+  };
+
+  // ROSTER TEST
+
+  const openRosterHandler = () => {
+    dispatch(wrapperActions.setRoster(true));
+    dispatch(wrapperActions.setForm(false));
+    dispatch(wrapperActions.setMain(false));
+    dispatch(wrapperActions.setConfirm(false));
   };
 
   return (
@@ -27,16 +37,16 @@ const MainSecFirstComp = ({ socket }) => {
       )}
 
       {role === "Mentor" && (
-        <select className={classes.select}>
+        /* <select onChange={showStudentHandler} className={classes.select}>
           <option className={classes.option}>Roster</option>
           {currentClass.roster.map((obj, index) => {
             return (
-              <option key={`ROSTER_${index}`} className={classes.option}>
-                {`${obj.fName}`.toUpperCase()} {`${obj.lName}`.toUpperCase()}
-              </option>
+              <RosterOption value={obj} key={`ROSTER_${index}`} obj={obj} />
             );
           })}
-        </select>
+        </select> */
+
+        <Link innerTxt={"ROSTER"} clickMe={openRosterHandler} />
       )}
       {role === "Student" && currentClass.whoTeach && (
         <p className={classes.p}>Grade: C</p>

@@ -1,0 +1,24 @@
+.popUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
+  height: 100%;
+  width: 100%;
+}
+.btnBox {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
+}
+.p {
+  font-size: 3em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #6f5d70da;
+  text-align: center;
+}

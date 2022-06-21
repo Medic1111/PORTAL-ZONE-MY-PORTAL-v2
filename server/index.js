@@ -28,7 +28,7 @@ const app = express();
 
 // MIDDLEWARES
 
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 app.use(morgan("dev"));
 app.use(cors({ origin: "*" }));
 app.use(express.static(path.resolve(__dirname, "../client/build")));

@@ -5,6 +5,7 @@ import MainSecCompThree from "../MainSecCompThree/MainSecCompThree";
 import { useSelector } from "react-redux";
 import React from "react";
 import Chat from "../Chat/Chat";
+
 const UserMainSection = ({ socket }) => {
   const isChat = useSelector((state) => state.ChatModal.isChat);
   const user = useSelector((state) => state.CurrentUser.user);

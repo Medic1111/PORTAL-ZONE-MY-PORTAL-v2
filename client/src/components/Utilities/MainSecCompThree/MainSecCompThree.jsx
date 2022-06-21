@@ -1,27 +1,25 @@
 import classes from "./MainSecCompThree.module.css";
 import Button from "../Button/Button";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
-import { currentClassActions } from "../../../features/currentClass";
 
+import { wrapperActions } from "../../../features/wrapper";
 const MainSecCompThree = () => {
-  // SEND SERVER SIDE ERROR MESSAGE
-  // ON CATCH
-
   const dispatch = useDispatch();
   const role = useSelector((state) => state.WhatRole.role);
-  const currentClass = useSelector((state) => state.CurrentClass.class);
 
   const addAssignmentHandler = () => {
-    axios
-      .post("/api/teacher/assignments/new", {
-        assign: "Get your homework done",
-        currentClass,
-      })
-      .then((serverRes) => {
-        dispatch(currentClassActions.setCurrentClass(serverRes.data));
-      })
-      .catch((err) => console.log(err));
+    dispatch(wrapperActions.setForm(true));
+    dispatch(wrapperActions.setMain(false));
+    dispatch(wrapperActions.setConfirm(false));
+    dispatch(wrapperActions.setRoster(false));
+  };
+
+  // TEST
+  const deleteClass = () => {
+    dispatch(wrapperActions.setMain(false));
+    dispatch(wrapperActions.setForm(false));
+    dispatch(wrapperActions.setConfirm(true));
+    dispatch(wrapperActions.setRoster(false));
   };
 
   return (
@@ -29,8 +27,12 @@ const MainSecCompThree = () => {
       {role === "Mentor" && (
         <Button innerTxt={"Add Assigment"} clickMe={addAssignmentHandler} />
       )}
-      {role === "Mentor" && <Button innerTxt={"Delete Class"} />}
-      {role === "Student" && <Button innerTxt={"Un-enroll from Class"} />}
+      {role === "Mentor" && (
+        <Button innerTxt={"Delete Class"} clickMe={deleteClass} />
+      )}
+      {role === "Student" && (
+        <Button innerTxt={"Un-enroll from Class"} clickMe={deleteClass} />
+      )}
     </section>
   );
 };

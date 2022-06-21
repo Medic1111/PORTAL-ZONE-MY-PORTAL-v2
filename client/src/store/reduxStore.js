@@ -8,6 +8,8 @@ import WhatRole from "../features/whatRole";
 import CurrentUser from "../features/currentUser";
 import CurrentClass from "../features/currentClass";
 import ChatModal from "../features/chat";
+import Wrapper from "../features/wrapper";
+import CurrentRoster from "../features/currentRoster";
 
 const reduxStore = configureStore({
   reducer: {
@@ -20,6 +22,8 @@ const reduxStore = configureStore({
     CurrentUser,
     CurrentClass,
     ChatModal,
+    Wrapper,
+    CurrentRoster,
   },
 });
 

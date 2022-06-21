@@ -1,0 +1,17 @@
+.article {
+  z-index: 10;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0vh 0 0 2.5vw;
+}
+
+@media (max-width: 798px) {
+  .article {
+    padding: 5vh 0;
+    width: 100%;
+    min-height: 100%;
+  }
+}

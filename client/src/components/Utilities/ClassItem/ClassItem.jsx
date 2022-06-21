@@ -2,7 +2,7 @@ import classes from "./ClassItem.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { currentClassActions } from "../../../features/currentClass";
 import { chatActions } from "../../../features/chat";
-
+import { currentRosterActions } from "../../../features/currentRoster";
 const ClassItem = ({ obj, socket }) => {
   const dispatch = useDispatch();
 
@@ -13,6 +13,7 @@ const ClassItem = ({ obj, socket }) => {
   const showClassHandler = () => {
     dispatch(currentClassActions.setCurrentClass(obj));
     dispatch(chatActions.setIsChat(false));
+    dispatch(currentRosterActions.setStudent(obj));
 
     const data = {
       secretKey: currentSecretKey,
