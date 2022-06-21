@@ -1,0 +1,34 @@
+.article {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #84708626;
+  flex-direction: column;
+  color: #7d6b7eda;
+  padding: 2.5vh 2.5vw;
+}
+.pTitle {
+  font-size: 3em;
+  width: 100%;
+}
+.pQuote {
+  max-width: 70%;
+  text-align: center;
+  font-size: 4em;
+}
+.pAuthor {
+  font-size: 2em;
+}
+.pSelect {
+  font-size: 2em;
+  height: 15%;
+}
+
+@media (max-width: 798px) {
+  .article {
+    width: 100%;
+    min-height: 100%;
+  }
+}

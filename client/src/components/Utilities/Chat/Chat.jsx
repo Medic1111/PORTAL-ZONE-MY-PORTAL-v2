@@ -16,10 +16,6 @@ const Chat = ({ socket, user }) => {
   const currentSecretKey = useSelector(
     (state) => state.CurrentClass.class.secretKey
   );
-  const currentUser = useSelector((state) => state.CurrentUser.user);
-  let author = `${currentUser.fName} ${currentUser.lName}`;
-
-  console.log(user === author);
 
   const closeChatHandler = () => {
     const data = {

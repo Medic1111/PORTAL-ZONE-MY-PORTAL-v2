@@ -4,7 +4,7 @@ export const currentClass = createSlice({
   name: "CurrentClass",
   initialState: {
     class: {
-      className: "Select a class",
+      className: "",
       roster: [],
       secretKey: "",
       assignments: [],
@@ -20,7 +20,7 @@ export const currentClass = createSlice({
     },
     clearClass: (state) => {
       state.class = {
-        className: "Select a class",
+        className: "",
         roster: [],
         secretKey: "",
         assignments: [],
