@@ -303,6 +303,31 @@ _FRONTEND_: UseEffect will send a request to get all classes via teacherId. Send
 
 - On the back end, all messages being exchanged gets stored in the Classes DB message array, it is rendered when user opens the chat
 
+[2]: ROSTER
+
+- When clicking on roster, a new component is rendered and a list of students in the roster appears (REMOVED SELECT AND OPTION)
+
+- When clicking on a student, the students information shows
+
+- There's a button that allows closing the modal
+
+- Not closing the modal and clicking on a different class, will show that particular class's roster, and identifier
+
+[3]: ADDING_ASSIGNMENTS
+
+- When add assignment is cliked, a component gets rendered with a form and two buttons
+
+- Once cancels and closes that component
+
+- The other sends the request to the server to add that entry to the database
+
+[MISSING_FEATURES]:
+
+- drop out
+- delete class
+- delete assignment
+  _consider_ _grade_
+
 [ANNOYING_DETAILS_TO_CHECK]:
 
 - Mobile is absolute trash...
