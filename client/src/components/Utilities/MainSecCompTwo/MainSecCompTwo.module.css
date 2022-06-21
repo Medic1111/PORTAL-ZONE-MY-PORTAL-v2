@@ -8,7 +8,6 @@
   width: 100%;
   gap: 3em;
   height: 65%;
-  /* background-color: aqua; */
 }
 .p2 {
   width: 100%;
@@ -40,6 +39,15 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
+}
+
+/* TEST */
+.ul {
+  height: 40%;
+  gap: 2vh;
+}
+.article {
+  height: 45%;
 }
 
 /* MEDIA COMP 2 */

@@ -38,6 +38,24 @@
   border-radius: 0 3px 3px 0;
 }
 
+/* test */
+.div {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: auto;
+  gap: 1.5em;
+  /* background-color: aqua; */
+  width: 100%;
+  padding: 2.5vh 0;
+}
+.select {
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
 /* MEDIA COMP ONE */
 
 @media (max-width: 798px) {

@@ -20,8 +20,12 @@ const MainSecFirstComp = ({ socket }) => {
       {role === "Mentor" ? (
         <p className={classes.pKey}>Key: {currentClass.secretKey}</p>
       ) : (
-        <p className={classes.p}>Grade: C</p>
+        <React.Fragment>
+          <p className={classes.p}>Mentor: {currentClass.whoTeach.lName}</p>
+          <p className={classes.p}>Email: {currentClass.whoTeach.email}</p>
+        </React.Fragment>
       )}
+
       {role === "Mentor" && (
         <select className={classes.select}>
           <option className={classes.option}>Roster</option>
@@ -35,10 +39,7 @@ const MainSecFirstComp = ({ socket }) => {
         </select>
       )}
       {role === "Student" && currentClass.whoTeach && (
-        <React.Fragment>
-          <p className={classes.p}>Mentor: {currentClass.whoTeach.lName}</p>
-          <p className={classes.p}>Email: {currentClass.whoTeach.email}</p>
-        </React.Fragment>
+        <p className={classes.p}>Grade: C</p>
       )}
       <Link innerTxt={"Chat"} clickMe={enterChatHandler} />
     </div>
