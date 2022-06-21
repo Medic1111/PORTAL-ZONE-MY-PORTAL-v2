@@ -16,6 +16,10 @@ export const wrapper = createSlice({
     setRoster: (state, action) => {
       state.roster = action.payload;
     },
+    setInitial: (state) => {
+      state = { form: false, main: true, confirm: false, roster: false };
+      console.log(state.confirm);
+    },
   },
 });
 

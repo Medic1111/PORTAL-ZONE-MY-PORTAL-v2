@@ -17,10 +17,6 @@ const UserMainAside = ({ socket }) => {
   const user = useSelector((state) => state.CurrentUser.user);
   const role = useSelector((state) => state.WhatRole.role);
 
-  console.log(user);
-  console.log(className);
-  console.log(user._id);
-
   const addClassHandler = () => {
     if (className.length > 0) {
       setIsLoading(true);

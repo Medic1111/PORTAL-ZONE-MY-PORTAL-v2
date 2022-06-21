@@ -327,6 +327,7 @@ _FRONTEND_: UseEffect will send a request to get all classes via teacherId. Send
 - delete class
 - delete assignment
   _consider_ _grade_
+  _RESOLVE_ _WRAPPERDISPATCH_
 
 [ANNOYING_DETAILS_TO_CHECK]:
 

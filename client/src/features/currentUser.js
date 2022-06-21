@@ -16,6 +16,12 @@ export const currentUser = createSlice({
     clearCurrentUser: (state) => {
       state.user = { user: { classes: [] } };
     },
+    removeClass: (state, action) => {
+      const clearList = state.user.classes.filter((obj, index) => {
+        return obj._id !== action.payload._id;
+      });
+      state.user.classes = clearList;
+    },
   },
 });
 

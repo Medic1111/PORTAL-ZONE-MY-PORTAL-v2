@@ -19,7 +19,6 @@ const ClassItem = ({ obj, socket }) => {
       secretKey: currentSecretKey,
     };
     socket.emit("leave_chat", data);
-    console.log(currentSecretKey);
     socket.removeAllListeners();
   };
 
