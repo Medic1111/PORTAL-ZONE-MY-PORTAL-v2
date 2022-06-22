@@ -10,6 +10,7 @@ import CurrentClass from "../features/currentClass";
 import ChatModal from "../features/chat";
 import Wrapper from "../features/wrapper";
 import CurrentRoster from "../features/currentRoster";
+import IsLoading from "../features/loading";
 
 const reduxStore = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ const reduxStore = configureStore({
     ChatModal,
     Wrapper,
     CurrentRoster,
+    IsLoading,
   },
 });
 

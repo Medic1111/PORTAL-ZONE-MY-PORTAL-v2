@@ -4,6 +4,7 @@ import { wrapperActions } from "../../features/wrapper";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { currentClassActions } from "../../features/currentClass";
+import { isLoadingActions } from "../../features/loading";
 import { useState } from "react";
 
 const AddAssignForm = () => {
@@ -18,16 +19,23 @@ const AddAssignForm = () => {
 
   const addAssignment = (e) => {
     e.preventDefault();
+    dispatch(isLoadingActions.setIsLoading(true));
     axios
       .post("/api/teacher/assignments/new", {
         assign,
         currentClass,
       })
       .then((serverRes) => {
+        dispatch(isLoadingActions.setIsLoading(false));
+
         dispatch(currentClassActions.setCurrentClass(serverRes.data));
         dispatch(wrapperActions.setInitial());
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        // ADDRESS THIS CATCH!!!
+        dispatch(isLoadingActions.setIsLoading(false));
+      });
   };
 
   return (

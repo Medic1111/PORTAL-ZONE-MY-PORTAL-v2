@@ -47,7 +47,7 @@ const Chat = ({ socket, user }) => {
     socket.on("receiving_msg", (data) => {
       dispatch(currentClassActions.updateMessages(data));
     });
-  }, [socket]);
+  }, [socket, dispatch]);
 
   return (
     <section className={classes.section}>
@@ -56,7 +56,7 @@ const Chat = ({ socket, user }) => {
       </h4>
       <ul className={classes.txtBox}>
         <ScrollToBottom
-          initialScrollBehavior="scrollToEnd"
+          // initialScrollBehavior="scrollToEnd"
           className={classes.scroll}
         >
           {currentClass.messages.map((item, index) => {

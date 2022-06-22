@@ -1,3 +1,11 @@
+.flexParent {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* From uiverse.io by @EmmaxPlay */
 
 .spinner {

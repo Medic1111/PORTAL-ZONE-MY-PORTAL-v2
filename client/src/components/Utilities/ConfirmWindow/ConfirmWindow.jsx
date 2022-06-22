@@ -6,6 +6,7 @@ import { currentUserActions } from "../../../features/currentUser";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { currentClassActions } from "../../../features/currentClass";
+import { isLoadingActions } from "../../../features/loading";
 
 const ConfirmWindow = () => {
   const dispatch = useDispatch();
@@ -24,21 +25,34 @@ const ConfirmWindow = () => {
   };
 
   const dropHandler = () => {
+    dispatch(isLoadingActions.setIsLoading(true));
     axios
       .put(url, { currentClass, user })
       .then((serverRes) => {
         dispatchBunch();
+        dispatch(isLoadingActions.setIsLoading(false));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        // ADDRESS THIS CATCH
+        dispatch(isLoadingActions.setIsLoading(true));
+        console.log(err);
+      });
   };
 
   const deleteHandler = () => {
+    dispatch(isLoadingActions.setIsLoading(true));
+
     axios
       .delete(url, { data: { currentClass } })
       .then((serverRes) => {
         dispatchBunch();
+        dispatch(isLoadingActions.setIsLoading(false));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        dispatch(isLoadingActions.setIsLoading(false));
+        console.log(err);
+        // ADDRESS THIS CATCH
+      });
   };
 
   const cancelHandler = () => {

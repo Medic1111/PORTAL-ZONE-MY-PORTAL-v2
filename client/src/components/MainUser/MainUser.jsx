@@ -4,12 +4,14 @@ import { currentUserActions } from "../../features/currentUser";
 import React from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import Loading from "../Utilities/Loading/Loading";
 
 const MainUser = ({ socket }) => {
   const dispatch = useDispatch();
   const whatRole = useSelector((state) => state.WhatRole.role);
   const user = useSelector((state) => state.CurrentUser.user);
-
+  const isLoading = useSelector((state) => state.IsLoading.loading);
+  console.log(isLoading);
   let url;
   whatRole === "Mentor"
     ? (url = `/api/teacher/${user._id}/classes`)
@@ -24,9 +26,9 @@ const MainUser = ({ socket }) => {
       .catch((err) => console.log(err));
   };
 
-  useEffect(fetchAllClasses, []);
+  useEffect(fetchAllClasses, [dispatch]);
 
-  return <Main socket={socket} />;
+  return !isLoading ? <Main socket={socket} /> : <Loading />;
 };
 
 export default MainUser;

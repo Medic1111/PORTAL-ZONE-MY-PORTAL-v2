@@ -3,6 +3,7 @@ import Button from "../Button/Button";
 import { useSelector, useDispatch } from "react-redux";
 
 import { wrapperActions } from "../../../features/wrapper";
+import React from "react";
 const MainSecCompThree = () => {
   const dispatch = useDispatch();
   const role = useSelector((state) => state.WhatRole.role);
@@ -12,7 +13,6 @@ const MainSecCompThree = () => {
     dispatch(wrapperActions.setMain(false));
   };
 
-  // TEST
   const deleteClass = () => {
     dispatch(wrapperActions.setMain(false));
     dispatch(wrapperActions.setConfirm(true));
@@ -21,10 +21,10 @@ const MainSecCompThree = () => {
   return (
     <section className={classes.section2}>
       {role === "Mentor" && (
-        <Button innerTxt={"Add Assigment"} clickMe={addAssignmentHandler} />
-      )}
-      {role === "Mentor" && (
-        <Button innerTxt={"Delete Class"} clickMe={deleteClass} />
+        <React.Fragment>
+          <Button innerTxt={"Add Assigment"} clickMe={addAssignmentHandler} />
+          <Button innerTxt={"Delete Class"} clickMe={deleteClass} />
+        </React.Fragment>
       )}
       {role === "Student" && (
         <Button innerTxt={"Un-enroll from Class"} clickMe={deleteClass} />

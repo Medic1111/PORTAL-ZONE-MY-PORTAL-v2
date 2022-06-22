@@ -353,7 +353,6 @@ _STUDENT_ _WILL_ _BE_ _COMPLETE_
 
 - Loading Spinner
 - Ensure loading spinner on add class is fixed to entire page?
-- Must figure wrapper reducer minification
 
 [satisfied]: TRUE
 
