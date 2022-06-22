@@ -1,11 +1,11 @@
 import classes from "./Register.module.css";
 import Button from "../Utilities/Button/Button";
-import Loading from "../Utilities/Loading/Loading";
 import { useDispatch } from "react-redux";
 import { toggleLogRegModalActions } from "../../features/toggleLogRegModal";
 import { isLoggedInActions } from "../../features/isLoggedIn";
 import { whatRoleActions } from "../../features/whatRole";
 import { currentUserActions } from "../../features/currentUser";
+import { isLoadingActions } from "../../features/loading";
 import { useState } from "react";
 
 import axios from "axios";
@@ -19,7 +19,6 @@ const Register = ({ isTeacher }) => {
   const [passwordInvalid, setPasswordInvalid] = useState(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
   const [serverErr, setServerErr] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
     fName: "",
@@ -42,7 +41,7 @@ const Register = ({ isTeacher }) => {
 
   const registerHandler = (event) => {
     event.preventDefault();
-    setIsLoading(true);
+    dispatch(isLoadingActions.setIsLoading(true));
 
     let url;
     isTeacher
@@ -60,7 +59,8 @@ const Register = ({ isTeacher }) => {
         .post(url, userInfo)
         .then((serverRes) => {
           dispatch(currentUserActions.setCurrentUser(serverRes.data));
-          setIsLoading(false);
+          dispatch(isLoadingActions.setIsLoading(false));
+
           setAlreadyRegistered(false);
           setServerErr(false);
           dispatch(whatRoleActions.setRole(serverRes.data.role));
@@ -73,7 +73,7 @@ const Register = ({ isTeacher }) => {
           } else {
             setServerErr(true);
           }
-          setIsLoading(false);
+          dispatch(isLoadingActions.setIsLoading(false));
         });
 
       setUserInfo({
@@ -83,7 +83,7 @@ const Register = ({ isTeacher }) => {
         password: "",
       });
     } else {
-      setIsLoading(false);
+      dispatch(isLoadingActions.setIsLoading(false));
 
       userInfo.fName.length <= 0 && setFNameInvalid(true);
       userInfo.lName.length <= 0 && setLNameInvalid(true);
@@ -97,89 +97,80 @@ const Register = ({ isTeacher }) => {
     event.preventDefault();
     dispatch(toggleLogRegModalActions.setIsModal());
   };
-  {
-    if (!isLoading) {
-      return (
-        <div className={classes.div}>
-          <form className={classes.form}>
-            <h2 className={classes.h2}>
-              Register as a {isTeacher ? "Mentor" : "Learner"}
-            </h2>
-            <input
-              onChange={inputChangeHandler}
-              value={userInfo.fName}
-              name="fName"
-              className={classes.input}
-              type="text"
-              placeholder="First name"
-            />
-            {fNnameInvalid && (
-              <p className={classes.serverErr}>Please fill out all fields</p>
-            )}
-            <input
-              onChange={inputChangeHandler}
-              value={userInfo.lName}
-              name="lName"
-              className={classes.input}
-              type="text"
-              placeholder="Last name"
-            />
-            {lNameInvalid && (
-              <p className={classes.serverErr}>Please fill out all fields</p>
-            )}
 
-            <input
-              onChange={inputChangeHandler}
-              value={userInfo.email}
-              name="email"
-              className={classes.input}
-              type="email"
-              placeholder="Email"
-            />
-            {emailInvalid && (
-              <p className={classes.serverErr}>Please enter a valid Email</p>
-            )}
+  return (
+    <div className={classes.div}>
+      <form className={classes.form}>
+        <h2 className={classes.h2}>
+          Register as a {isTeacher ? "Mentor" : "Learner"}
+        </h2>
+        <input
+          onChange={inputChangeHandler}
+          value={userInfo.fName}
+          name="fName"
+          className={classes.input}
+          type="text"
+          placeholder="First name"
+        />
+        {fNnameInvalid && (
+          <p className={classes.serverErr}>Please fill out all fields</p>
+        )}
+        <input
+          onChange={inputChangeHandler}
+          value={userInfo.lName}
+          name="lName"
+          className={classes.input}
+          type="text"
+          placeholder="Last name"
+        />
+        {lNameInvalid && (
+          <p className={classes.serverErr}>Please fill out all fields</p>
+        )}
 
-            <input
-              onChange={inputChangeHandler}
-              value={userInfo.password}
-              name="password"
-              className={classes.input}
-              type="password"
-              placeholder="Create password"
-            />
-            {passwordInvalid && (
-              <p className={classes.serverErr}>
-                Password must be at least 6 characters long
-              </p>
-            )}
+        <input
+          onChange={inputChangeHandler}
+          value={userInfo.email}
+          name="email"
+          className={classes.input}
+          type="email"
+          placeholder="Email"
+        />
+        {emailInvalid && (
+          <p className={classes.serverErr}>Please enter a valid Email</p>
+        )}
 
-            <div className={classes.btnBox}>
-              {alreadyRegistered && (
-                <p className={classes.serverErr}>
-                  USER ALREADY REGISTERED, PLEASE LOG IN
-                </p>
-              )}
-              {serverErr && (
-                <p className={classes.serverErr}>
-                  Something went wrong, please try again!
-                </p>
-              )}
+        <input
+          onChange={inputChangeHandler}
+          value={userInfo.password}
+          name="password"
+          className={classes.input}
+          type="password"
+          placeholder="Create password"
+        />
+        {passwordInvalid && (
+          <p className={classes.serverErr}>
+            Password must be at least 6 characters long
+          </p>
+        )}
 
-              <Button innerTxt={"Register"} clickMe={registerHandler} />
-              <Button innerTxt={"Return"} clickMe={closeModalHandler} />
-            </div>
-          </form>
+        <div className={classes.btnBox}>
+          {alreadyRegistered && (
+            <p className={classes.serverErr}>
+              USER ALREADY REGISTERED, PLEASE LOG IN
+            </p>
+          )}
+          {serverErr && (
+            <p className={classes.serverErr}>
+              Something went wrong, please try again!
+            </p>
+          )}
+
+          <Button innerTxt={"Register"} clickMe={registerHandler} />
+          <Button innerTxt={"Return"} clickMe={closeModalHandler} />
         </div>
-      );
-    } else {
-      return (
-        <div className={classes.div}>
-          <Loading />
-        </div>
-      );
-    }
-  }
+      </form>
+    </div>
+  );
 };
 
 export default Register;
