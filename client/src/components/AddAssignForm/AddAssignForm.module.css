@@ -37,3 +37,20 @@
   align-items: center;
   gap: 3em;
 }
+.submit {
+  width: 15em;
+  border: transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 1.7em;
+  letter-spacing: 0.7px;
+  padding: 0.5em;
+  background-color: #713077;
+  color: #f7f7f7;
+}
+
+.submit:hover {
+  background-color: #58445b;
+  background-color: rgb(188, 149, 49);
+  transition: 0.2s;
+}

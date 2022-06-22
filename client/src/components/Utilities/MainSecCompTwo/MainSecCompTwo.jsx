@@ -12,6 +12,7 @@ const MainSecCompTwo = () => {
     axios
       .get(`/api/classes/${currentClass._id}`)
       .then((serverRes) => {
+        console.log("UPDATING CLASS");
         dispatch(currentClassActions.setCurrentClass(serverRes.data));
       })
       .catch((err) => console.log(err));

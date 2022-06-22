@@ -19,7 +19,6 @@ const AddAssignForm = () => {
   };
 
   const addAssignment = async (e) => {
-    e.preventDefault();
     dispatch(isLoadingActions.setIsLoading(true));
     await axios
       .post("/api/teacher/assignments/new", {
@@ -38,7 +37,7 @@ const AddAssignForm = () => {
   };
 
   return (
-    <form className={classes.form}>
+    <form onSubmit={addAssignment} className={classes.form}>
       <p className={classes.p}>
         ADDING ASSIGNMENT TO: {currentClass.className}
       </p>
@@ -50,8 +49,8 @@ const AddAssignForm = () => {
         placeholder="New Assignment"
       />
       <div className={classes.btnBox}>
+        <input className={classes.submit} type="submit" />
         <Button innerTxt="Cancel" clickMe={closeFormHandler} />
-        <Button innerTxt="Confirm" clickMe={addAssignment} />
       </div>
     </form>
   );
