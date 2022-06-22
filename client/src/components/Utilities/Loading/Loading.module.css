@@ -1,9 +1,33 @@
-.flexParent {
+.flexParent,
+.flexParentError {
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.flexParentError {
+  flex-direction: column;
+  gap: 2.5vh;
+  padding-bottom: 15vh;
+}
+.p {
+  text-align: center;
+  font-size: 3em;
+  letter-spacing: 2px;
+  color: rgb(188, 149, 49);
+  max-width: 90%;
+  /* color: #6f5d70da; */
+  margin-bottom: 7.5vh;
+}
+.pSad {
+  text-align: center;
+  font-size: 5em;
+  letter-spacing: 1.5px;
+  color: rgb(188, 149, 49);
+  /* margin-bottom: 2.5vh; */
+  color: #6f5d70da;
+  transform: rotate(90deg);
 }
 
 /* From uiverse.io by @EmmaxPlay */

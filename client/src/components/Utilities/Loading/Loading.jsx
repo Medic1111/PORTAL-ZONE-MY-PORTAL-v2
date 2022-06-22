@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { errorActions } from "../../../features/error";
 import { isLoadingActions } from "../../../features/loading";
 import React from "react";
+import Button from "../Button/Button";
 
 const Loading = () => {
   const dispatch = useDispatch();
@@ -16,9 +17,12 @@ const Loading = () => {
   {
     if (error.isError) {
       return (
-        <div className={classes.flexParent}>
-          <p>{error.msg}</p>
-          <button onClick={resetError}>CLOSE</button>
+        <div className={classes.flexParentError}>
+          <p className={classes.pSad}>=[</p>
+
+          <p className={classes.p}>{error.msg}</p>
+          {/* <button onClick={resetError}>CLOSE</button> */}
+          <Button clickMe={resetError} innerTxt={"Close"} />
         </div>
       );
     } else {
