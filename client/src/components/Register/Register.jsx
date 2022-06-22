@@ -6,6 +6,7 @@ import { isLoggedInActions } from "../../features/isLoggedIn";
 import { whatRoleActions } from "../../features/whatRole";
 import { currentUserActions } from "../../features/currentUser";
 import { isLoadingActions } from "../../features/loading";
+import { errorActions } from "../../features/error";
 import { useState } from "react";
 
 import axios from "axios";
@@ -17,8 +18,6 @@ const Register = ({ isTeacher }) => {
   const [lNameInvalid, setLNameInvalid] = useState(false);
   const [emailInvalid, setEmailInvalid] = useState(false);
   const [passwordInvalid, setPasswordInvalid] = useState(false);
-  const [alreadyRegistered, setAlreadyRegistered] = useState(false);
-  const [serverErr, setServerErr] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
     fName: "",
@@ -39,7 +38,7 @@ const Register = ({ isTeacher }) => {
     });
   };
 
-  const registerHandler = (event) => {
+  const registerHandler = async (event) => {
     event.preventDefault();
     dispatch(isLoadingActions.setIsLoading(true));
 
@@ -55,33 +54,23 @@ const Register = ({ isTeacher }) => {
       userInfo.email.length > 7 &&
       userInfo.password.length >= 6
     ) {
-      axios
+      await axios
         .post(url, userInfo)
         .then((serverRes) => {
           dispatch(currentUserActions.setCurrentUser(serverRes.data));
           dispatch(isLoadingActions.setIsLoading(false));
-
-          setAlreadyRegistered(false);
-          setServerErr(false);
           dispatch(whatRoleActions.setRole(serverRes.data.role));
           dispatch(isLoggedInActions.setIsLoggedIn());
         })
 
         .catch((err) => {
+          dispatch(errorActions.setIsError(true));
           if (err.response.status === 409) {
-            setAlreadyRegistered(true);
+            dispatch(errorActions.setMsg("Email already Registered"));
           } else {
-            setServerErr(true);
+            dispatch(errorActions.setMsg("Server error, please try again"));
           }
-          dispatch(isLoadingActions.setIsLoading(false));
         });
-
-      setUserInfo({
-        fName: "",
-        lName: "",
-        email: "",
-        password: "",
-      });
     } else {
       dispatch(isLoadingActions.setIsLoading(false));
 
@@ -154,17 +143,6 @@ const Register = ({ isTeacher }) => {
         )}
 
         <div className={classes.btnBox}>
-          {alreadyRegistered && (
-            <p className={classes.serverErr}>
-              USER ALREADY REGISTERED, PLEASE LOG IN
-            </p>
-          )}
-          {serverErr && (
-            <p className={classes.serverErr}>
-              Something went wrong, please try again!
-            </p>
-          )}
-
           <Button innerTxt={"Register"} clickMe={registerHandler} />
           <Button innerTxt={"Return"} clickMe={closeModalHandler} />
         </div>

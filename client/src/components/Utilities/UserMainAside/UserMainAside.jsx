@@ -3,19 +3,15 @@ import Button from "../Button/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { currentUserActions } from "../../../features/currentUser";
 import { isLoadingActions } from "../../../features/loading";
+import { errorActions } from "../../../features/error";
 import axios from "axios";
 import ClassItem from "../ClassItem/ClassItem";
 import React, { useState } from "react";
-
-// CHECK WARNING MESSAGE ON STUDENT
-// FAILING
 
 const UserMainAside = ({ socket }) => {
   const dispatch = useDispatch();
   const [className, setClassName] = useState("");
   const [invalidForm, setInvalidForm] = useState(false);
-  const [notFound, setNotFound] = useState(false);
-  const [serverError, setServerError] = useState(false);
   const user = useSelector((state) => state.CurrentUser.user);
   const role = useSelector((state) => state.WhatRole.role);
 
@@ -31,42 +27,36 @@ const UserMainAside = ({ socket }) => {
         .then((serverRes) => {
           setClassName("");
           dispatch(isLoadingActions.setIsLoading(false));
-
-          setServerError(false);
           dispatch(currentUserActions.addNewClass(serverRes.data));
         })
         .catch((err) => {
-          dispatch(isLoadingActions.setIsLoading(false));
-
-          setServerError(true);
+          dispatch(errorActions.setIsError(true));
+          dispatch(errorActions.setMsg("Server error, please try again"));
         });
     } else {
       setInvalidForm(true);
     }
   };
 
-  const enrollClassHandler = () => {
+  const enrollClassHandler = async () => {
     if (className.length > 0) {
       dispatch(isLoadingActions.setIsLoading(true));
 
-      axios
+      await axios
         .post("/api/student/newclass", {
           secretKey: className, //in this case is secret key
           user,
         })
         .then((serverRes) => {
           dispatch(isLoadingActions.setIsLoading(false));
-
           setClassName("");
-          setNotFound(false);
-          setServerError(false);
           dispatch(currentUserActions.addNewClass(serverRes.data));
         })
         .catch((err) => {
-          dispatch(isLoadingActions.setIsLoading(false));
+          dispatch(errorActions.setIsError(true));
           err.response.status === 404
-            ? setNotFound(true)
-            : setServerError(true);
+            ? dispatch(errorActions.setMsg("No classes found with that id"))
+            : dispatch(errorActions.setMsg("Server error, please try again."));
         });
     } else {
       setInvalidForm(true);
@@ -88,8 +78,6 @@ const UserMainAside = ({ socket }) => {
         placeholder={role === "Mentor" ? "New Class Name" : "Class Key"}
       />
       {invalidForm && <p>REQUIRED</p>}
-      {notFound && <p>NO CLASS FOUND WITH THAT KEY</p>}
-      {serverError && <p>Something went wrong, please try again</p>}
 
       {role === "Mentor" ? (
         <Button clickMe={addClassHandler} innerTxt={"Add Class"} />

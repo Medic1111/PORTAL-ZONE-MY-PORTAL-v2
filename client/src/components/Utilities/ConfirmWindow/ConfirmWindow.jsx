@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { currentClassActions } from "../../../features/currentClass";
 import { isLoadingActions } from "../../../features/loading";
+import { errorActions } from "../../../features/error";
 
 const ConfirmWindow = () => {
   const dispatch = useDispatch();
@@ -24,34 +25,32 @@ const ConfirmWindow = () => {
     dispatch(currentClassActions.setCurrentClass({ className: "" }));
   };
 
-  const dropHandler = () => {
+  const dropHandler = async () => {
     dispatch(isLoadingActions.setIsLoading(true));
-    axios
+    await axios
       .put(url, { currentClass, user })
       .then((serverRes) => {
         dispatchBunch();
         dispatch(isLoadingActions.setIsLoading(false));
       })
       .catch((err) => {
-        // ADDRESS THIS CATCH
-        dispatch(isLoadingActions.setIsLoading(true));
-        console.log(err);
+        dispatch(errorActions.setIsError(true));
+        dispatch(errorActions.setMsg("Server error, please try again"));
       });
   };
 
-  const deleteHandler = () => {
+  const deleteHandler = async () => {
     dispatch(isLoadingActions.setIsLoading(true));
 
-    axios
+    await axios
       .delete(url, { data: { currentClass } })
       .then((serverRes) => {
         dispatchBunch();
         dispatch(isLoadingActions.setIsLoading(false));
       })
       .catch((err) => {
-        dispatch(isLoadingActions.setIsLoading(false));
-        console.log(err);
-        // ADDRESS THIS CATCH
+        dispatch(errorActions.setIsError(true));
+        dispatch(errorActions.setMsg("Server error, please try again"));
       });
   };
 
@@ -68,6 +67,7 @@ const ConfirmWindow = () => {
       </p>
 
       <p className={classes.p}>Are your sure?</p>
+
       <div className={classes.btnBox}>
         <Button innerTxt={"Cancel"} clickMe={cancelHandler} />
         {user.role === "Mentor" ? (

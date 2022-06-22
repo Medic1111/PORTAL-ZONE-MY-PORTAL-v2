@@ -2,16 +2,13 @@ import classes from "./Login.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Button from "../Utilities/Button/Button";
-import Loading from "../Utilities/Loading/Loading";
 import { toggleLogRegModalActions } from "../../features/toggleLogRegModal";
 import { isLoggedInActions } from "../../features/isLoggedIn";
 import { whatRoleActions } from "../../features/whatRole";
 import { currentUserActions } from "../../features/currentUser";
 import { isLoadingActions } from "../../features/loading";
-
+import { errorActions } from "../../features/error";
 import axios from "axios";
-
-// ENSURE LOADING OR SOMETHING
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -21,12 +18,9 @@ const Login = () => {
     dispatch(toggleLogRegModalActions.setIsModal());
   };
 
-  const [notRegistered, setNotRegistered] = useState(false);
   const [emailInvalid, setEmailInvalid] = useState(false);
   const [passwordInvalid, setPasswordInvalid] = useState(false);
   const [invalidRole, setInvalidRole] = useState(false);
-  const [serverErr, setServerErr] = useState(false);
-  const [passwordDontMatch, setPasswordDontMatch] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
     email: "",
@@ -38,7 +32,6 @@ const Login = () => {
     setEmailInvalid(false);
     setPasswordInvalid(false);
     setInvalidRole(false);
-    setPasswordDontMatch(false);
 
     const { name, value } = event.target;
     setUserInfo((prev) => {
@@ -46,7 +39,7 @@ const Login = () => {
     });
   };
 
-  const logInHandler = (event) => {
+  const logInHandler = async (event) => {
     event.preventDefault();
 
     dispatch(isLoadingActions.setIsLoading(true));
@@ -66,43 +59,31 @@ const Login = () => {
       userInfo.password.length >= 6 &&
       invalidRole === false
     ) {
-      axios
+      await axios
         .post(url, userInfo)
         .then((serverRes) => {
           dispatch(isLoadingActions.setIsLoading(false));
-
-          if (serverRes.status === 200) {
-            dispatch(currentUserActions.setCurrentUser(serverRes.data[0]));
-            dispatch(whatRoleActions.setRole(serverRes.data[0].role));
-            setNotRegistered(false);
-            setServerErr(false);
-            dispatch(isLoggedInActions.setIsLoggedIn());
-          }
+          dispatch(currentUserActions.setCurrentUser(serverRes.data[0]));
+          dispatch(whatRoleActions.setRole(serverRes.data[0].role));
+          dispatch(isLoggedInActions.setIsLoggedIn());
         })
         .catch((err) => {
-          dispatch(isLoadingActions.setIsLoading(false));
+          dispatch(errorActions.setIsError(true));
 
           if (err.response.status === 404) {
-            setNotRegistered(true);
+            dispatch(errorActions.setMsg("Not Registered"));
           } else if (err.response.status === 401) {
-            setPasswordDontMatch(true);
+            dispatch(errorActions.setMsg("Wrong Password"));
           } else {
-            setServerErr(true);
+            dispatch(errorActions.setMsg("Server error, try again."));
           }
         });
-
-      setUserInfo({
-        email: "",
-        password: "",
-        role: "",
-      });
     } else {
-      dispatch(isLoadingActions.setIsLoading(false));
-
       !userInfo.email.includes("@") && setEmailInvalid(true);
       userInfo.email.length <= 7 && setEmailInvalid(true);
       userInfo.password.length < 6 && setPasswordInvalid(true);
       userInfo.role === "" && setInvalidRole(true);
+      dispatch(isLoadingActions.setIsLoading(false));
     }
   };
 
@@ -119,9 +100,7 @@ const Login = () => {
           type="email"
           placeholder="Email"
         />
-        {emailInvalid && (
-          <p className={classes.serverErr}>Please enter a valid Email</p>
-        )}
+        {emailInvalid && <p className={classes.serverErr}>Enter valid email</p>}
 
         <input
           onChange={inputChangeHandler}
@@ -133,12 +112,10 @@ const Login = () => {
         />
         {passwordInvalid && (
           <p className={classes.serverErr}>
-            Password must be at least 6 characters long
+            Password must be at least 6 characters
           </p>
         )}
-        {passwordDontMatch && (
-          <p className={classes.serverErr}>Wrong password</p>
-        )}
+
         <select
           className={classes.select}
           onChange={inputChangeHandler}
@@ -160,17 +137,6 @@ const Login = () => {
         )}
 
         <div className={classes.btnBox}>
-          {notRegistered && (
-            <p className={classes.serverErr}>
-              USER NOT REGISTERED, PLEASE REGISTER
-            </p>
-          )}
-          {serverErr && (
-            <p className={classes.serverErr}>
-              Something went wrong, please try again!
-            </p>
-          )}
-
           <Button innerTxt={"Login"} clickMe={logInHandler} />
           <Button innerTxt={"Return"} clickMe={closeModalHandler} />
         </div>

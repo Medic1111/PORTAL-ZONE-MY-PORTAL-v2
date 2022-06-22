@@ -11,7 +11,6 @@ const MainUser = ({ socket }) => {
   const whatRole = useSelector((state) => state.WhatRole.role);
   const user = useSelector((state) => state.CurrentUser.user);
   const isLoading = useSelector((state) => state.IsLoading.loading);
-  console.log(isLoading);
   let url;
   whatRole === "Mentor"
     ? (url = `/api/teacher/${user._id}/classes`)
