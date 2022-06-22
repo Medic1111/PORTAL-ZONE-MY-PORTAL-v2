@@ -11,10 +11,7 @@ const Roster = () => {
   const student = useSelector((state) => state.CurrentRoster.student);
 
   const closeRosterHandler = () => {
-    dispatch(wrapperActions.setConfirm(false));
-    dispatch(wrapperActions.setForm(false));
-    dispatch(wrapperActions.setMain(true));
-    dispatch(wrapperActions.setRoster(false));
+    dispatch(wrapperActions.setInitial());
   };
 
   return (

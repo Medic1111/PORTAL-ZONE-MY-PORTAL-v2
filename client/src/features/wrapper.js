@@ -1,8 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  form: false,
+  main: true,
+  confirm: false,
+  roster: false,
+};
+
 export const wrapper = createSlice({
   name: "Wrapper",
-  initialState: { form: false, main: true, confirm: false, roster: false },
+  initialState,
   reducers: {
     setForm: (state, action) => {
       state.form = action.payload;
@@ -16,10 +23,7 @@ export const wrapper = createSlice({
     setRoster: (state, action) => {
       state.roster = action.payload;
     },
-    setInitial: (state) => {
-      state = { form: false, main: true, confirm: false, roster: false };
-      console.log(state.confirm);
-    },
+    setInitial: () => initialState,
   },
 });
 

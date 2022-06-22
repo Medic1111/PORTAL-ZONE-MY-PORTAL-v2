@@ -17,10 +17,15 @@ const {
   loginStudentRoute,
   registerStudentRoute,
 } = require("./routes/AuthStudent");
-const addNewClassRouter = require("./routes/NewClassTeacher");
-const enrollInClassRouter = require("./routes/NewClassStudent");
-const getAllClassesTeacherRoute = require("./routes/GetClassesTeacher");
-const getAllClassesStudentRoute = require("./routes/GetClassesStudent");
+const {
+  newClassTeacherRouter,
+  enrollInClassRouter,
+} = require("./routes/NewClass");
+const {
+  getClassesTeacherRoute,
+  getClassesStudentRoute,
+} = require("./routes/GetClasses");
+const { dropClass, deleteClass } = require("./routes/DropClass");
 const addAssignment = require("./routes/AddAssignment");
 const { Class } = require("./models/models");
 
@@ -53,49 +58,13 @@ app.use("/", logInTeacherRoute);
 app.use("/", registerTeacherRoute);
 app.use("/", loginStudentRoute);
 app.use("/", registerStudentRoute);
-app.use("/", addNewClassRouter);
+app.use("/", newClassTeacherRouter);
 app.use("/", enrollInClassRouter);
-app.use("/", getAllClassesTeacherRoute);
-app.use("/", getAllClassesStudentRoute);
+app.use("/", getClassesTeacherRoute);
+app.use("/", getClassesStudentRoute);
 app.use("/", addAssignment);
-
-// TEST: TEACHER DELETE CLASS
-app.delete("/api/teacher/classes/delete", (req, res) => {
-  const id = req.body.currentClass._id;
-  Class.findByIdAndDelete({ _id: id }, (err, succ) => {
-    err
-      ? res.status(500).json({ message: "Server Error occured, try again" })
-      : res.status(200).json({ message: "Deleted" });
-  });
-});
-
-app.put("/api/student/classes/delete", (req, res) => {
-  const { currentClass, user } = req.body;
-
-  Class.find({ _id: currentClass._id }, async (err, doc) => {
-    if (err) {
-      res.status(500).json({ message: "Server Error occured, try again" });
-    } else {
-      let update = await doc[0].roster.filter((obj) => {
-        return obj._id !== user._id;
-      });
-      doc[0].roster = update;
-
-      Class.findOneAndUpdate(
-        { _id: currentClass._id },
-        doc[0],
-        { new: true, returnOriginal: false },
-        (err, succ) => {
-          err
-            ? res
-                .status(500)
-                .json({ message: "Server Error occured, try again" })
-            : res.status(200).json({ message: "Dropped out" });
-        }
-      );
-    }
-  });
-});
+app.use("/", dropClass);
+app.use("/", deleteClass);
 
 // UNHANDLED ROUTES
 app.get("*", (req, res) => {

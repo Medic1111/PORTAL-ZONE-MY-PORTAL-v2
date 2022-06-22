@@ -1,5 +1,26 @@
 const { Class } = require("../models/models");
 
+const newClassTeacher = async (req, res) => {
+  const { user, className, teacherId } = req.body;
+  let secretKey = Math.floor(Math.random() * 10000);
+
+  const newClass = new Class({
+    className,
+    secretKey: `${secretKey}${user.lName}`,
+    teacherId,
+    assignments: [],
+    whoTeach: user,
+    roster: [],
+    messages: [],
+  });
+
+  await newClass.save((err, doc) => {
+    err
+      ? res.status(500).json({ message: "Something went wrong" })
+      : res.status(200).json(doc);
+  });
+};
+
 const enrollInClass = (req, res) => {
   const { secretKey, user } = req.body;
 
@@ -26,4 +47,4 @@ const enrollInClass = (req, res) => {
   });
 };
 
-module.exports = { enrollInClass };
+module.exports = { newClassTeacher, enrollInClass };

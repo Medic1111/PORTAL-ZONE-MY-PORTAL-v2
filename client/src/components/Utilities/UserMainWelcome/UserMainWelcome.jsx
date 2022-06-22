@@ -13,10 +13,7 @@ const UserMainWelcome = () => {
     dispatch(currentClassActions.clearClass());
     dispatch(currentUserActions.clearCurrentUser());
     dispatch(isLoggedInActions.setIsLoggedIn());
-    dispatch(wrapperActions.setConfirm(false));
-    dispatch(wrapperActions.setMain(true));
-    dispatch(wrapperActions.setForm(false));
-    dispatch(wrapperActions.setRoster(false));
+    dispatch(wrapperActions.setInitial());
   };
 
   return (

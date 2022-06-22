@@ -19,10 +19,7 @@ const ConfirmWindow = () => {
 
   const dispatchBunch = () => {
     dispatch(currentUserActions.removeClass(currentClass));
-    dispatch(wrapperActions.setConfirm(false));
-    dispatch(wrapperActions.setMain(true));
-    dispatch(wrapperActions.setForm(false));
-    dispatch(wrapperActions.setRoster(false));
+    dispatch(wrapperActions.setInitial());
     dispatch(currentClassActions.setCurrentClass({ className: "" }));
   };
 
@@ -45,10 +42,7 @@ const ConfirmWindow = () => {
   };
 
   const cancelHandler = () => {
-    dispatch(wrapperActions.setConfirm(false));
-    dispatch(wrapperActions.setMain(true));
-    dispatch(wrapperActions.setForm(false));
-    dispatch(wrapperActions.setRoster(false));
+    dispatch(wrapperActions.setInitial());
   };
 
   return (

@@ -13,10 +13,7 @@ const AddAssignForm = () => {
 
   const closeFormHandler = (e) => {
     e.preventDefault();
-    dispatch(wrapperActions.setConfirm(false));
-    dispatch(wrapperActions.setForm(false));
-    dispatch(wrapperActions.setMain(true));
-    dispatch(wrapperActions.setRoster(false));
+    dispatch(wrapperActions.setInitial());
   };
 
   const addAssignment = (e) => {
@@ -28,10 +25,7 @@ const AddAssignForm = () => {
       })
       .then((serverRes) => {
         dispatch(currentClassActions.setCurrentClass(serverRes.data));
-        dispatch(wrapperActions.setConfirm(false));
-        dispatch(wrapperActions.setForm(false));
-        dispatch(wrapperActions.setMain(true));
-        dispatch(wrapperActions.setRoster(false));
+        dispatch(wrapperActions.setInitial());
       })
       .catch((err) => console.log(err));
   };

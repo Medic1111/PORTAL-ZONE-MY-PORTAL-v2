@@ -10,16 +10,12 @@ const MainSecCompThree = () => {
   const addAssignmentHandler = () => {
     dispatch(wrapperActions.setForm(true));
     dispatch(wrapperActions.setMain(false));
-    dispatch(wrapperActions.setConfirm(false));
-    dispatch(wrapperActions.setRoster(false));
   };
 
   // TEST
   const deleteClass = () => {
     dispatch(wrapperActions.setMain(false));
-    dispatch(wrapperActions.setForm(false));
     dispatch(wrapperActions.setConfirm(true));
-    dispatch(wrapperActions.setRoster(false));
   };
 
   return (

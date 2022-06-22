@@ -15,13 +15,9 @@ const MainSecFirstComp = ({ socket }) => {
     dispatch(chatActions.setIsChat(true));
   };
 
-  // ROSTER TEST
-
   const openRosterHandler = () => {
     dispatch(wrapperActions.setRoster(true));
-    dispatch(wrapperActions.setForm(false));
     dispatch(wrapperActions.setMain(false));
-    dispatch(wrapperActions.setConfirm(false));
   };
 
   return (
@@ -37,15 +33,6 @@ const MainSecFirstComp = ({ socket }) => {
       )}
 
       {role === "Mentor" && (
-        /* <select onChange={showStudentHandler} className={classes.select}>
-          <option className={classes.option}>Roster</option>
-          {currentClass.roster.map((obj, index) => {
-            return (
-              <RosterOption value={obj} key={`ROSTER_${index}`} obj={obj} />
-            );
-          })}
-        </select> */
-
         <Link innerTxt={"ROSTER"} clickMe={openRosterHandler} />
       )}
       {role === "Student" && currentClass.whoTeach && (

@@ -10,27 +10,22 @@ import ConfirmWindow from "../Utilities/ConfirmWindow/ConfirmWindow";
 import Roster from "../Roster/Roster";
 const Main = ({ socket }) => {
   const currentClass = useSelector((state) => state.CurrentClass.class);
-  // TEST
+  const wrapper = useSelector((state) => state.Wrapper);
 
-  const showMain = useSelector((state) => state.Wrapper.main);
-  const showAddClass = useSelector((state) => state.Wrapper.form);
-  const showConfirm = useSelector((state) => state.Wrapper.confirm);
-  const roster = useSelector((state) => state.Wrapper.roster);
   return (
     <main className={classes.main}>
       <div className={classes.div}>
         <UserMainWelcome />
         <div className={classes.divComp}>
           <UserMainAside socket={socket} />
-
           <SectionWrapper>
-            {showMain && currentClass.className !== "" && (
+            {wrapper.main && currentClass.className !== "" && (
               <UserMainSection socket={socket} />
             )}
             {currentClass.className === "" && <SelectClass />}
-            {showAddClass && <AddAssignForm />}
-            {showConfirm && <ConfirmWindow />}
-            {roster && <Roster />}
+            {wrapper.form && <AddAssignForm />}
+            {wrapper.confirm && <ConfirmWindow />}
+            {wrapper.roster && <Roster />}
           </SectionWrapper>
         </div>
       </div>
