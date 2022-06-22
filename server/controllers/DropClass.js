@@ -7,9 +7,7 @@ const dropClassHandler = (req, res) => {
     if (err) {
       res.status(500).json({ message: "Server Error occured, try again" });
     } else {
-      let update = await doc[0].roster.filter((obj) => {
-        return obj._id !== user._id;
-      });
+      let update = await doc[0].roster.filter((obj) => obj._id !== user._id);
       doc[0].roster = update;
 
       Class.findOneAndUpdate(

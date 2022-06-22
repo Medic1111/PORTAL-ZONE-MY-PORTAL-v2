@@ -6,7 +6,6 @@ export const currentRoster = createSlice({
   reducers: {
     setStudent: (state, action) => {
       state.student = action.payload;
-      console.log(state.student.fName);
     },
   },
 });

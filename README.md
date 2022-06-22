@@ -365,15 +365,7 @@ _STUDENT_ _IS_ _BE_ _COMPLETE_
 - Server will receive the current class info, and delete from db sending back a confirmation response
 - Loading spinner will be active
 
-{from there, roster, add class modal, remove or edit assignment, grade within the roster check}
-
-[STATUS:COMPLETED]:
-
-[ANNOYING_DETAILS_TO_CHECK]:
-
-- Loading Spinner
-- CHAT CURRENT SESSION UPDATE
-- ASSIGNMENTS CURRENT SESSION UPDATE
+[STATUS:COMPLETED]
 
 [satisfied]: TRUE
 
@@ -381,11 +373,10 @@ _STUDENT_ _IS_ _BE_ _COMPLETE_
 
 [CURRENT_PRIORITIES]:
 
+- LOADING LOG/REG
 - CHAT CURRENT SESSION UPDATE
 - ASSIGNMENT CURRENT SESSION
 - CHECK ON ALL CATCH BLOCKS AND ENSURE FRONT END HANDLES IT
-- CHECK ALL SPINNERS SHOW APPROPRIATELY
-- CLEAN UP
 - COMPRESS!!!!
 
 [LEAST_PRIORITIES]:

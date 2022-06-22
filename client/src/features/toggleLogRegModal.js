@@ -4,7 +4,7 @@ export const toggleLogRegModal = createSlice({
   name: "toggleLogRegModal",
   initialState: { isModal: false },
   reducers: {
-    setIsModal: (state, action) => {
+    setIsModal: (state) => {
       state.isModal = !state.isModal;
     },
   },
