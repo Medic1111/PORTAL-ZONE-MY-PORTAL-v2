@@ -66,6 +66,17 @@ app.use("/", addAssignment);
 app.use("/", dropClass);
 app.use("/", deleteClass);
 
+// TEST: GET SPECIFIC CLASS
+
+app.get("/api/classes/:id", (req, res) => {
+  let id = req.params.id;
+  Class.find({ _id: id }, (err, docs) => {
+    err
+      ? res.status(500).json({ message: "Server error occured" })
+      : res.status(200).json(docs[0]);
+  });
+});
+
 // UNHANDLED ROUTES
 app.get("*", (req, res) => {
   res.sendFile(
