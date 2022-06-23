@@ -4,10 +4,11 @@ import { useEffect } from "react";
 import { currentClassActions } from "../../../features/currentClass";
 import axios from "axios";
 
-const MainSecCompTwo = () => {
+const MainSecCompTwo = ({ socket }) => {
   const currentClass = useSelector((state) => state.CurrentClass.class);
   const dispatch = useDispatch();
 
+  // THIS EFFECT UPDATES ASSIGNEMTNS
   useEffect(() => {
     axios
       .get(`/api/classes/${currentClass._id}`)

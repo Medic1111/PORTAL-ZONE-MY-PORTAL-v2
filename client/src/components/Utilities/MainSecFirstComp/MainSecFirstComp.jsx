@@ -4,15 +4,27 @@ import { useSelector, useDispatch } from "react-redux";
 import { chatActions } from "../../../features/chat";
 import React from "react";
 import { wrapperActions } from "../../../features/wrapper";
+import axios from "axios";
+import { currentClassActions } from "../../../features/currentClass";
 
 const MainSecFirstComp = ({ socket }) => {
   const dispatch = useDispatch();
   const currentClass = useSelector((state) => state.CurrentClass.class);
   const role = useSelector((state) => state.WhatRole.role);
 
-  const enterChatHandler = () => {
+  const enterChatHandler = async () => {
     socket.emit("join_room", currentClass.secretKey);
     dispatch(chatActions.setIsChat(true));
+
+    // THIS CALL UPDATES ALL MESSAGES
+
+    await axios
+      .get(`/api/classes/${currentClass._id}`)
+      .then((serverRes) => {
+        console.log("UPDATING CLASS");
+        dispatch(currentClassActions.setCurrentClass(serverRes.data));
+      })
+      .catch((err) => console.log(err));
   };
 
   const openRosterHandler = () => {
