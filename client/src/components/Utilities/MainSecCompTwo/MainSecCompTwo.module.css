@@ -7,7 +7,7 @@
   align-items: center;
   width: 100%;
   gap: 3em;
-  height: 65%;
+  min-height: 80%;
 }
 .p2 {
   width: 100%;
@@ -23,6 +23,8 @@
   list-style: none;
   gap: 3vh;
   overflow-y: scroll;
+  padding: 1em 0;
+  height: 100%;
 }
 
 .li {
@@ -55,10 +57,7 @@
 }
 
 /* TEST */
-.ul {
-  height: 40%;
-  gap: 2vh;
-}
+
 .article {
   height: 45%;
 }
@@ -67,6 +66,12 @@
 
 @media (max-width: 798px) {
   .ul {
-    height: 65%;
+    /* height: 40%; */
+    gap: 2vh;
+    min-height: auto;
+  }
+  .article {
+    height: 55%;
+    min-height: auto;
   }
 }

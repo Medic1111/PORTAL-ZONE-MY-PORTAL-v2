@@ -57,17 +57,14 @@ const Chat = ({ socket, user }) => {
         Be polite, all messages are being recorded.
       </h4>
       <ul className={classes.txtBox}>
-        <ScrollToBottom
-          // initialScrollBehavior="scrollToEnd"
-          className={classes.scroll}
-        >
+        <ScrollToBottom className={classes.scroll}>
           {currentClass.messages.map((item, index) => {
             return (
               <div key={`MSG_${index}`}>
                 <p className={classes.p}>
                   {item.user.toUpperCase()}{" "}
                   <span>
-                    {new Date().getMonth()}/{new Date().getDate()} ${"  "}
+                    {new Date().getMonth()}/{new Date().getDate()} {"  "}
                     {item.time}
                   </span>
                 </p>

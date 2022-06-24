@@ -13,6 +13,7 @@ const ConfirmWindow = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.CurrentUser.user);
   const currentClass = useSelector((state) => state.CurrentClass.class);
+  const dark = useSelector((state) => state.DarkMode.isDarkMode);
 
   let url;
   user.role === "Mentor"
@@ -60,7 +61,7 @@ const ConfirmWindow = () => {
 
   return (
     <div className={classes.popUp}>
-      <p className={classes.p}>
+      <p className={dark ? `${classes.darkP}` : `${classes.lightP}`}>
         {user.role === "Mentor"
           ? `delete ${currentClass.className}?`
           : `Drop out of ${currentClass.className}?`}

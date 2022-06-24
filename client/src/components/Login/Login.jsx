@@ -1,6 +1,6 @@
 import classes from "./Login.module.css";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../Utilities/Button/Button";
 import { toggleLogRegModalActions } from "../../features/toggleLogRegModal";
 import { isLoggedInActions } from "../../features/isLoggedIn";
@@ -12,6 +12,7 @@ import axios from "axios";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const dark = useSelector((state) => state.DarkMode.isDarkMode);
 
   const closeModalHandler = (event) => {
     event.preventDefault();
@@ -92,13 +93,15 @@ const Login = () => {
   return (
     <div className={classes.div}>
       <form className={classes.form}>
-        <h2 className={classes.h2}>Log In</h2>
+        <h2 className={dark ? `${classes.darkH2}` : `${classes.lightH2}`}>
+          Log In
+        </h2>
 
         <input
           onChange={inputChangeHandler}
           value={userInfo.email}
           name="email"
-          className={classes.input}
+          className={dark ? `${classes.darkInput}` : `${classes.lightInput}`}
           type="email"
           placeholder="Email"
         />
@@ -108,7 +111,7 @@ const Login = () => {
           onChange={inputChangeHandler}
           value={userInfo.password}
           name="password"
-          className={classes.input}
+          className={dark ? `${classes.darkInput}` : `${classes.lightInput}`}
           type="password"
           placeholder="Password"
         />
@@ -119,7 +122,7 @@ const Login = () => {
         )}
 
         <select
-          className={classes.select}
+          className={dark ? `${classes.darkInput}` : `${classes.lightInput}`}
           onChange={inputChangeHandler}
           name="role"
           value={userInfo.role}

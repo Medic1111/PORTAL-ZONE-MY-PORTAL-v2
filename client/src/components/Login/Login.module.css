@@ -17,27 +17,50 @@
   color: #7d6b7eda;
   border-radius: 2px;
 }
-.h2 {
+.lightH2,
+.darkH2 {
   font-size: 3em;
   letter-spacing: 2px;
   text-align: center;
   max-width: 90%;
   padding: 1em 0;
 }
-.input {
+.lightH2 {
+  color: #473c48;
+}
+.darkH2 {
+  color: #f7f7f7ca;
+}
+
+.darkInput,
+.lightInput {
   height: 7vh;
   border: transparent;
   width: 85%;
-  background-color: #f7f7f720;
   outline: none;
-  border-left: solid #7d6b7eda;
   padding-left: 0.5em;
   font-size: 1.7em;
   letter-spacing: 0.7px;
-  color: #7d6b7eda;
   border-radius: 0 3px 3px 0;
 }
 
+.lightInput {
+  color: #473c48;
+  background-color: #f7f7f766;
+  border-left: solid #7d6b7eda;
+}
+.lightInput::placeholder {
+  color: #473c48;
+}
+
+.darkInput {
+  background-color: #f7f7f720;
+  color: #f7f7f7ca;
+  border-left: solid #d0b9d2da;
+}
+.darkInput::placeholder {
+  color: #f7f7f7ca;
+}
 .btnBox {
   display: flex;
   flex-direction: column;
@@ -51,18 +74,4 @@
   font-size: 1.7em;
   color: rgb(150, 119, 150);
   color: rgb(188, 149, 49);
-}
-
-.select {
-  height: 7vh;
-  border: transparent;
-  width: 85%;
-  background-color: #f7f7f720;
-  outline: none;
-  border-left: solid #7d6b7eda;
-  padding-left: 0.5em;
-  font-size: 1.7em;
-  letter-spacing: 0.7px;
-  color: #7d6b7eda;
-  border-radius: 0 3px 3px 0;
 }

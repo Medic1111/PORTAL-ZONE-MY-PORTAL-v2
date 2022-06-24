@@ -12,6 +12,7 @@ const AddAssignForm = () => {
   const dispatch = useDispatch();
   const currentClass = useSelector((state) => state.CurrentClass.class);
   const [assign, setAssign] = useState("");
+  const dark = useSelector((state) => state.DarkMode.isDarkMode);
 
   const closeFormHandler = (e) => {
     e.preventDefault();
@@ -47,7 +48,7 @@ const AddAssignForm = () => {
       <input
         value={assign}
         onChange={(e) => setAssign(e.target.value)}
-        className={classes.input}
+        className={dark ? `${classes.darkInput}` : `${classes.lightInput}`}
         type="txt"
         placeholder="New Assignment"
       />

@@ -4,28 +4,48 @@
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   background-color: #84708626;
   flex-direction: column;
   color: #7d6b7eda;
   padding: 2.5vh 2.5vw;
 }
-.pTitle {
+.lightPdate,
+.darkPdate {
   font-size: 3em;
   width: 100%;
 }
-.pQuote {
+.lightPquote,
+.darkPquote {
   max-width: 70%;
   text-align: center;
   font-size: 4em;
 }
-.pAuthor {
+.lightPauthor,
+.darkPauthor {
   font-size: 2em;
 }
-.pSelect {
-  font-size: 2em;
-  height: 15%;
+
+.lightPauthor,
+.lightPdate,
+.lightPquote {
+  color: #473c48e3;
+}
+
+.darkPauthor,
+.darkPdate,
+.darkPquote {
+  color: #f7f7f7f5;
+}
+.quoteBox {
+  width: 100%;
+  display: flex;
+  height: 85%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
 }
 
 @media (max-width: 798px) {

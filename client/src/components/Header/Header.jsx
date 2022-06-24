@@ -1,10 +1,11 @@
 import Link from "../Utilities/Link/Link";
 import classes from "./Header.module.css";
 import { darkModeActions } from "../../features/darkModeSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const Header = ({ dark }) => {
+const Header = () => {
   const dispatch = useDispatch();
+  const dark = useSelector((state) => state.DarkMode.isDarkMode);
 
   const toggleDarkHandler = () => {
     dispatch(darkModeActions.toggleDarkMode());
@@ -12,7 +13,9 @@ const Header = ({ dark }) => {
 
   return (
     <header className={classes.header}>
-      <h1 className={classes.h1}>PORTAL-ZONE</h1>
+      <h1 className={dark ? `${classes.darkH1}` : `${classes.lightH1}`}>
+        PORTAL-ZONE
+      </h1>
       <Link
         clickMe={toggleDarkHandler}
         innerTxt={dark ? "Light" : "Dark"}

@@ -11,6 +11,7 @@ const MainSecFirstComp = ({ socket }) => {
   const dispatch = useDispatch();
   const currentClass = useSelector((state) => state.CurrentClass.class);
   const role = useSelector((state) => state.WhatRole.role);
+  const dark = useSelector((state) => state.DarkMode.isDarkMode);
 
   const enterChatHandler = async () => {
     socket.emit("join_room", currentClass.secretKey);
@@ -34,13 +35,21 @@ const MainSecFirstComp = ({ socket }) => {
 
   return (
     <div className={classes.div}>
-      <h4 className={classes.h4}>{currentClass.className}</h4>
+      <h4 className={dark ? `${classes.darkH2}` : `${classes.lightH2}`}>
+        {currentClass.className}
+      </h4>
       {role === "Mentor" ? (
-        <p className={classes.pKey}>Key: {currentClass.secretKey}</p>
+        <p className={dark ? `${classes.pDark}` : `${classes.pLight}`}>
+          Key: {currentClass.secretKey}
+        </p>
       ) : (
         <React.Fragment>
-          <p className={classes.p}>Mentor: {currentClass.whoTeach.lName}</p>
-          <p className={classes.p}>Email: {currentClass.whoTeach.email}</p>
+          <p className={dark ? `${classes.pDark}` : `${classes.pLight}`}>
+            Mentor: {currentClass.whoTeach.lName}
+          </p>
+          <p className={dark ? `${classes.pDark}` : `${classes.pLight}`}>
+            Email: {currentClass.whoTeach.email}
+          </p>
         </React.Fragment>
       )}
 
@@ -48,7 +57,9 @@ const MainSecFirstComp = ({ socket }) => {
         <Link innerTxt={"ROSTER"} clickMe={openRosterHandler} />
       )}
       {role === "Student" && currentClass.whoTeach && (
-        <p className={classes.p}>Grade: C</p>
+        <p className={dark ? `${classes.pDark}` : `${classes.pLight}`}>
+          Grade: C
+        </p>
       )}
       <Link innerTxt={"Chat"} clickMe={enterChatHandler} />
     </div>

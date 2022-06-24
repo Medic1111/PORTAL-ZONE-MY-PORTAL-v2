@@ -5,6 +5,7 @@ import { chatActions } from "../../../features/chat";
 import { currentRosterActions } from "../../../features/currentRoster";
 const ClassItem = ({ obj, socket }) => {
   const dispatch = useDispatch();
+  const dark = useSelector((state) => state.DarkMode.isDarkMode);
 
   const currentSecretKey = useSelector(
     (state) => state.CurrentClass.class.secretKey
@@ -23,7 +24,11 @@ const ClassItem = ({ obj, socket }) => {
   };
 
   return (
-    <li className={classes.li} obj={obj} onClick={showClassHandler}>
+    <li
+      className={dark ? `${classes.darkInput}` : `${classes.lightInput}`}
+      obj={obj}
+      onClick={showClassHandler}
+    >
       {obj.className}
     </li>
   );

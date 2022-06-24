@@ -6,11 +6,18 @@
   align-items: center;
   padding: 0 5vw;
 }
-.h3 {
+
+.lightH2,
+.darkH2 {
   font-size: 2em;
   letter-spacing: 1px;
-  color: #927f93da;
   text-transform: uppercase;
   text-align: center;
   max-width: 40%;
+}
+.lightH2 {
+  color: #473c48;
+}
+.darkH2 {
+  color: #f7f7f7ca;
 }

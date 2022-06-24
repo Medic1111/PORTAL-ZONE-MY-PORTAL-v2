@@ -22,21 +22,6 @@
   align-items: center;
   gap: 3vh;
 }
-.input {
-  height: 6vh;
-  border: transparent;
-  width: 90%;
-  outline: none;
-  border-left: solid #7d6b7eda;
-  padding: 0.5em;
-  font-size: 1.6em;
-  letter-spacing: 0.7px;
-  color: #7d6b7eda;
-  border-radius: 0 3px 3px 0;
-  background-color: #928d9234;
-  background-color: #7d6b7e26;
-  text-align: center;
-}
 
 .div {
   display: flex;
@@ -44,6 +29,52 @@
   align-items: center;
   height: 85vh;
   width: 100%;
+}
+
+.lightInput,
+.darkInput {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7em;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  height: 6vh;
+  border: transparent;
+  width: 90%;
+  outline: none;
+  padding: 0.5em;
+  font-size: 1.6em;
+  letter-spacing: 0.7px;
+}
+
+.lightInput {
+  color: #473c48e3;
+  background-color: #f7f7f766;
+  border-left: solid #7d6b7eda;
+  color: #6f5d70da;
+}
+
+.darkInput {
+  background-color: #f7f7f720;
+  color: #f7f7f7ca;
+  border-left: solid #d0b9d2da;
+}
+.lightInput::placeholder {
+  color: #473c48e3;
+  color: #6f5d70da;
+}
+
+.darkInput::placeholder {
+  color: #f7f7f7ca;
+}
+.btnBox {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 798px) {

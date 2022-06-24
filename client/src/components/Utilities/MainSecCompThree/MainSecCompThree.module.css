@@ -3,13 +3,10 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 1em;
-  /* padding: 0vh 0vw 10vh 0vw; */
+  max-height: 10%;
 }
 
 @media (max-width: 798px) {
-  .section2 {
-    padding: 0vh 0vw 10vh 0vw;
-  }
 }

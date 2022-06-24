@@ -1,15 +1,25 @@
-.li {
+.lightInput,
+.darkInput {
   width: 90%;
   min-height: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-left: solid rgb(128, 17, 128);
-  border-left: solid #7d6b7eda;
-  background-color: #7d6b7e26;
-  color: #887a89ef;
   font-size: 1.7em;
   letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
+}
+
+.lightInput {
+  color: #473c48e3;
+  background-color: #f7f7f766;
+  border-left: solid #7d6b7eda;
+  color: #6f5d70da;
+}
+
+.darkInput {
+  background-color: #f7f7f720;
+  color: #f7f7f7ca;
+  border-left: solid #d0b9d2da;
 }

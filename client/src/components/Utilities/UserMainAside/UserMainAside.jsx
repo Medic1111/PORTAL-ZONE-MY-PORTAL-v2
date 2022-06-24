@@ -14,6 +14,7 @@ const UserMainAside = ({ socket }) => {
   const [invalidForm, setInvalidForm] = useState(false);
   const user = useSelector((state) => state.CurrentUser.user);
   const role = useSelector((state) => state.WhatRole.role);
+  const dark = useSelector((state) => state.DarkMode.isDarkMode);
 
   const addClassHandler = () => {
     if (className.length > 0) {
@@ -71,19 +72,20 @@ const UserMainAside = ({ socket }) => {
         })}
       </ul>
       <input
-        className={classes.input}
+        className={dark ? `${classes.darkInput}` : `${classes.lightInput}`}
         value={className}
         onChange={(e) => setClassName(e.target.value)}
         type="text"
         placeholder={role === "Mentor" ? "New Class Name" : "Class Key"}
       />
       {invalidForm && <p>REQUIRED</p>}
-
-      {role === "Mentor" ? (
-        <Button clickMe={addClassHandler} innerTxt={"Add Class"} />
-      ) : (
-        <Button clickMe={enrollClassHandler} innerTxt={"Enroll Class"} />
-      )}
+      <div className={classes.btnBox}>
+        {role === "Mentor" ? (
+          <Button clickMe={addClassHandler} innerTxt={"Add Class"} />
+        ) : (
+          <Button clickMe={enrollClassHandler} innerTxt={"Enroll Class"} />
+        )}
+      </div>
     </aside>
   );
 };

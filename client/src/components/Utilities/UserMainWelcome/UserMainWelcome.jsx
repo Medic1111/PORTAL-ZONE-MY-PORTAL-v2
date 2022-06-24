@@ -8,6 +8,7 @@ import { wrapperActions } from "../../../features/wrapper";
 const UserMainWelcome = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.CurrentUser.user);
+  const dark = useSelector((state) => state.DarkMode.isDarkMode);
 
   const logOutHandler = () => {
     dispatch(currentClassActions.clearClass());
@@ -18,7 +19,9 @@ const UserMainWelcome = () => {
 
   return (
     <article className={classes.article}>
-      <h3 className={classes.h3}>WELCOME {user.fName}</h3>
+      <h3 className={dark ? `${classes.darkH2}` : `${classes.lightH2}`}>
+        WELCOME {user.fName}
+      </h3>
       <Button clickMe={logOutHandler} innerTxt={"Log Out"} />
     </article>
   );

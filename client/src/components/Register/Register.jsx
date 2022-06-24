@@ -1,6 +1,6 @@
-import classes from "./Register.module.css";
+import classes from "../Login/Login.module.css";
 import Button from "../Utilities/Button/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleLogRegModalActions } from "../../features/toggleLogRegModal";
 import { isLoggedInActions } from "../../features/isLoggedIn";
 import { whatRoleActions } from "../../features/whatRole";
@@ -13,6 +13,7 @@ import axios from "axios";
 
 const Register = ({ isTeacher }) => {
   const dispatch = useDispatch();
+  const dark = useSelector((state) => state.DarkMode.isDarkMode);
 
   const [fNnameInvalid, setFNameInvalid] = useState(false);
   const [lNameInvalid, setLNameInvalid] = useState(false);
@@ -90,14 +91,14 @@ const Register = ({ isTeacher }) => {
   return (
     <div className={classes.div}>
       <form className={classes.form}>
-        <h2 className={classes.h2}>
+        <h2 className={dark ? `${classes.darkH2}` : `${classes.lightH2}`}>
           Register as a {isTeacher ? "Mentor" : "Learner"}
         </h2>
         <input
           onChange={inputChangeHandler}
           value={userInfo.fName}
           name="fName"
-          className={classes.input}
+          className={dark ? `${classes.darkInput}` : `${classes.lightInput}`}
           type="text"
           placeholder="First name"
         />
@@ -108,7 +109,7 @@ const Register = ({ isTeacher }) => {
           onChange={inputChangeHandler}
           value={userInfo.lName}
           name="lName"
-          className={classes.input}
+          className={dark ? `${classes.darkInput}` : `${classes.lightInput}`}
           type="text"
           placeholder="Last name"
         />
@@ -120,7 +121,7 @@ const Register = ({ isTeacher }) => {
           onChange={inputChangeHandler}
           value={userInfo.email}
           name="email"
-          className={classes.input}
+          className={dark ? `${classes.darkInput}` : `${classes.lightInput}`}
           type="email"
           placeholder="Email"
         />
@@ -132,7 +133,7 @@ const Register = ({ isTeacher }) => {
           onChange={inputChangeHandler}
           value={userInfo.password}
           name="password"
-          className={classes.input}
+          className={dark ? `${classes.darkInput}` : `${classes.lightInput}`}
           type="password"
           placeholder="Create password"
         />

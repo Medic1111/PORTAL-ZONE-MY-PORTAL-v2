@@ -7,11 +7,15 @@
   align-items: center;
 }
 
-.h1 {
+.lightH1,
+.darkH1 {
   font-size: 2.8em;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  /* color: rgb(188, 149, 49); */
-  color: #713077;
-  color: #6f5d70da;
+}
+.ligtH1 {
+  color: #6f5d70ea;
+}
+.darkH1 {
+  color: #f7f7f7e7;
 }

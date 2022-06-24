@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className={dark ? `${classes.darkApp}` : `${classes.lightApp}`}>
-      <Header dark={dark} />
+      <Header />
       {toggleLogReg && <Modal dark={dark} socket={socket} />}
       <Hero />
       <Footer />

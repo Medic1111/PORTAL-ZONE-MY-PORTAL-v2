@@ -8,6 +8,7 @@ import axios from "axios";
 const AssignmentItem = ({ item }) => {
   const dispatch = useDispatch();
   const currentClass = useSelector((state) => state.CurrentClass.class);
+  const dark = useSelector((state) => state.DarkMode.isDarkMode);
 
   const deleteAssignmentHandler = async () => {
     dispatch(isLoadingActions.setIsLoading(true));
@@ -25,7 +26,7 @@ const AssignmentItem = ({ item }) => {
   };
 
   return (
-    <li className={classes.li}>
+    <li className={dark ? `${classes.darkInput}` : `${classes.lightInput}`}>
       <p className={classes.listItemP}>{item}</p>
       <span
         name={item}
