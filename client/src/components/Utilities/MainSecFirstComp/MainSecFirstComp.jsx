@@ -56,11 +56,7 @@ const MainSecFirstComp = ({ socket }) => {
       {role === "Mentor" && (
         <Link innerTxt={"ROSTER"} clickMe={openRosterHandler} />
       )}
-      {role === "Student" && currentClass.whoTeach && (
-        <p className={dark ? `${classes.pDark}` : `${classes.pLight}`}>
-          Grade: C
-        </p>
-      )}
+
       <Link innerTxt={"Chat"} clickMe={enterChatHandler} />
     </div>
   );
