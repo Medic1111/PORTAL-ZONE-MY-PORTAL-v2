@@ -19,21 +19,24 @@ const AddAssignForm = () => {
   };
 
   const addAssignment = async (e) => {
-    dispatch(isLoadingActions.setIsLoading(true));
-    await axios
-      .post("/api/teacher/assignments/new", {
-        assign,
-        currentClass,
-      })
-      .then((serverRes) => {
-        dispatch(isLoadingActions.setIsLoading(false));
-        dispatch(currentClassActions.setCurrentClass(serverRes.data));
-        dispatch(wrapperActions.setInitial());
-      })
-      .catch((err) => {
-        dispatch(errorActions.setIsError(true));
-        dispatch(errorActions.setMsg("Server error, please try again."));
-      });
+    e.preventDefault();
+    if (assign.length > 0) {
+      dispatch(isLoadingActions.setIsLoading(true));
+      await axios
+        .post("/api/teacher/assignments/new", {
+          assign,
+          currentClass,
+        })
+        .then((serverRes) => {
+          dispatch(isLoadingActions.setIsLoading(false));
+          dispatch(currentClassActions.setCurrentClass(serverRes.data));
+          dispatch(wrapperActions.setInitial());
+        })
+        .catch((err) => {
+          dispatch(errorActions.setIsError(true));
+          dispatch(errorActions.setMsg("Server error, please try again."));
+        });
+    }
   };
 
   return (

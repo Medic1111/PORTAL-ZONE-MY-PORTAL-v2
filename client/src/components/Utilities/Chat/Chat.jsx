@@ -37,10 +37,11 @@ const Chat = ({ socket, user }) => {
         Date.now()
       ).getMinutes()}`,
     };
-
-    await socket.emit("send_message", msgData);
-    dispatch(currentClassActions.updateMessages(msgData));
-    setMsg("");
+    if (msg.length > 0) {
+      await socket.emit("send_message", msgData);
+      dispatch(currentClassActions.updateMessages(msgData));
+      setMsg("");
+    }
   };
 
   useEffect(() => {

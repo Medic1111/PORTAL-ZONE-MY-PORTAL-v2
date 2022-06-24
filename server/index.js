@@ -6,7 +6,7 @@ const path = require("path");
 const session = require("express-session");
 require("dotenv").config();
 const socketio = require("socket.io");
-
+const { Class } = require("./models/models");
 // ROUTES:
 
 const {

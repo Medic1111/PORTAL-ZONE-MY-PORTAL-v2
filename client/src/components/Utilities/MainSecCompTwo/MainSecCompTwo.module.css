@@ -27,18 +27,31 @@
 
 .li {
   width: 90%;
-  min-height: 5vh;
+  /* min-height: 5vh; */
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
   border-left: solid rgb(128, 17, 128);
   border-left: solid #7d6b7eda;
   background-color: #7d6b7e26;
   color: #887a89ef;
   font-size: 1.7em;
   letter-spacing: 1px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
+  padding: 0.5em 0.5em;
+  /* max-height: auto; */
+  height: auto;
+}
+
+.listItemP {
   cursor: pointer;
+  max-width: 90%;
+  padding: 0.5em 0;
+}
+.span {
+  cursor: pointer;
+  font-size: 1.4em;
+  color: #887a89ef;
 }
 
 /* TEST */

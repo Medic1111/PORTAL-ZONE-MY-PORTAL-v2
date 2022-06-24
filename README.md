@@ -378,6 +378,31 @@ _STUDENT_ _IS_ _BE_ _COMPLETE_
 - ON CLICK DElAY TO FETCH UNREAD
 - ASSIGNMENTS: NOT SENDING REQUESTS
 
+[ALL_RESOLVED]
+[satisfied]: TRUE
+
+# AT THIS TIME, ALL CURRENT FEATURES ARE BUILT AND WORKING AS EXPECTED
+
+_POSSIBLE_ _ADDITIONS_ _TO_ _CONSIDER_
+
+[X]: Delete assigment option for teacher - TODAY
+[Y]: Check into dark mode and adjust some CSS, regardless of mobile
+
+[DETAILS:]
+
+- Error msg for not selection role during Auth - DONE
+
+- Block empty assignment from being submitted - DONE
+
+- Block empty chat msg from being sent - DONE
+
+###
+
+[1]: Limit amount of allowed classes per teacher unless subscribed (STRIPE INTEGRATION)
+[2]: Consider something similar on the student side
+[3]: Still consider grading system
+[4]: Consider having better assignment situation: Title on list, on click open modal to show actual assignment, due date, perhaps student being able to mark it complete to keep track
+
 - COMPRESS!!!!
 
 [LEAST_PRIORITIES]:
@@ -385,5 +410,3 @@ _STUDENT_ _IS_ _BE_ _COMPLETE_
 - FOCUS ON DESIGN
 - RESPONSIVE DESIGN
 - ALLOWING STUDENTS LOTS OF ACTIONS
-
-[FURTHER_IDEAS]: Intend to limit amount of classes a teacher can add without submitting a payment. Perhaps implement some private, some paid for the student... developing the idea still, but hoping to be able to integrate stripe for payments.

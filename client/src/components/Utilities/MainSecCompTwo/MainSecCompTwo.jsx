@@ -20,6 +20,12 @@ const MainSecCompTwo = ({ socket }) => {
     //
   }, [dispatch, JSON.stringify(currentClass)]);
 
+  // DELETE ASSIGNMENT HANDLER
+
+  const deleteAssignmentHandler = () => {
+    console.log("CREATE ASSIGNMENT ITEM COMPONENT AND PASS ITEM AS PROPS");
+  };
+
   return (
     <article className={classes.article}>
       <p className={classes.p2}>Assignments:</p>
@@ -27,7 +33,14 @@ const MainSecCompTwo = ({ socket }) => {
         {currentClass.assignments.map((item, index) => {
           return (
             <li key={index} className={classes.li}>
-              {item}
+              <p className={classes.listItemP}>{item}</p>
+              <span
+                name={item}
+                onClick={deleteAssignmentHandler}
+                className={classes.span}
+              >
+                ✖️
+              </span>
             </li>
           );
         })}

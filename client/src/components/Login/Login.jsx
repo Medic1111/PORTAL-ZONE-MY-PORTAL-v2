@@ -51,6 +51,8 @@ const Login = () => {
       url = "/api/login/student";
     } else {
       setInvalidRole(true);
+      dispatch(errorActions.setIsError(true));
+      dispatch(errorActions.setMsg("Please, select your role"));
     }
 
     if (

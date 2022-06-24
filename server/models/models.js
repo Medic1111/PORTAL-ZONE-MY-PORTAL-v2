@@ -9,6 +9,7 @@ const teacherSchema = new mongoose.Schema({
   password: { type: String, required: true, trim: true },
   role: { type: String, required: true, default: "Mentor" },
   classes: { type: Array, required: true, default: [] },
+  subscribed: { type: Boolean, default: false },
 });
 
 const Teacher = new mongoose.model("Teacher", teacherSchema);
