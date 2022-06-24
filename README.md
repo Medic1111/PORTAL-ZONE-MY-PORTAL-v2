@@ -35,9 +35,13 @@ role: learning
 [TECH]:
 
 _FRONTEND_: React
+
 _BACKEND_: Node.js, Express
+
 _DATABASE_: MongoDB
+
 _APIs_: Socket.IO
+
 _EXTRAS_: mongoose, MongoDB Atlas, Axios, bcrypt, inspirational-quotes npm
 
 [FEATURES]:
