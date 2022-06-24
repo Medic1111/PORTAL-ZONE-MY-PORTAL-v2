@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { currentClassActions } from "../../../features/currentClass";
 import axios from "axios";
+import AssignmentItem from "../../AssignmentItem/AssignmentItem";
 
 const MainSecCompTwo = ({ socket }) => {
   const currentClass = useSelector((state) => state.CurrentClass.class);
@@ -20,29 +21,12 @@ const MainSecCompTwo = ({ socket }) => {
     //
   }, [dispatch, JSON.stringify(currentClass)]);
 
-  // DELETE ASSIGNMENT HANDLER
-
-  const deleteAssignmentHandler = () => {
-    console.log("CREATE ASSIGNMENT ITEM COMPONENT AND PASS ITEM AS PROPS");
-  };
-
   return (
     <article className={classes.article}>
       <p className={classes.p2}>Assignments:</p>
       <ul className={classes.ul}>
         {currentClass.assignments.map((item, index) => {
-          return (
-            <li key={index} className={classes.li}>
-              <p className={classes.listItemP}>{item}</p>
-              <span
-                name={item}
-                onClick={deleteAssignmentHandler}
-                className={classes.span}
-              >
-                ✖️
-              </span>
-            </li>
-          );
+          return <AssignmentItem key={`Assignment_${index}`} item={item} />;
         })}
       </ul>
     </article>

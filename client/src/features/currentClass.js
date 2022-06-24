@@ -27,6 +27,11 @@ export const currentClass = createSlice({
         messages: [],
       };
     },
+    removeAssigment: (state, action) => {
+      let arr = state.class.assignments;
+      let filter = arr.filter((item) => item !== action.payload);
+      state.class.assignments = filter;
+    },
   },
 });
 

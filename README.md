@@ -385,7 +385,7 @@ _STUDENT_ _IS_ _BE_ _COMPLETE_
 
 _POSSIBLE_ _ADDITIONS_ _TO_ _CONSIDER_
 
-[X]: Delete assigment option for teacher - TODAY
+[X]: Delete assignment option for teacher - DONE
 [Y]: Check into dark mode and adjust some CSS, regardless of mobile
 
 [DETAILS:]
