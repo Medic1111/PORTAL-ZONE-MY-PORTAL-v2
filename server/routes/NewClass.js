@@ -7,6 +7,6 @@ const newClassTeacherRouter = router.post(
   newClassTeacher
 );
 
-const enrollInClassRouter = router.post("/api/student/newclass", enrollInClass);
+const enrollInClassRouter = router.put("/api/student/newclass", enrollInClass);
 
 module.exports = { newClassTeacherRouter, enrollInClassRouter };

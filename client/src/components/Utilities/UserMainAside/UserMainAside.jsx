@@ -44,7 +44,7 @@ const UserMainAside = ({ socket }) => {
       dispatch(isLoadingActions.setIsLoading(true));
 
       await axios
-        .post("/api/student/newclass", {
+        .put("/api/student/newclass", {
           secretKey: className, //in this case is secret key
           user,
         })
@@ -52,6 +52,7 @@ const UserMainAside = ({ socket }) => {
           dispatch(isLoadingActions.setIsLoading(false));
           setClassName("");
           dispatch(currentUserActions.addNewClass(serverRes.data));
+          console.log(serverRes.data);
         })
         .catch((err) => {
           dispatch(errorActions.setIsError(true));

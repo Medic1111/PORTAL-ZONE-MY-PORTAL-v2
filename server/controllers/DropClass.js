@@ -1,17 +1,19 @@
 const { Class } = require("../models/models");
 
 const dropClassHandler = (req, res) => {
-  const { currentClass, user } = req.body;
-
-  Class.find({ _id: currentClass._id }, async (err, doc) => {
+  const { classId, userId } = req.body;
+  console.log(classId, userId);
+  Class.find({ _id: classId }, async (err, doc) => {
     if (err) {
       res.status(500).json({ message: "Server Error occured, try again" });
     } else {
-      let update = await doc[0].roster.filter((obj) => obj._id !== user._id);
+      let update = await doc[0].roster.filter((obj) => obj._id !== userId);
       doc[0].roster = update;
 
+      console.log(doc[0].roster);
+
       Class.findOneAndUpdate(
-        { _id: currentClass._id },
+        { _id: classId },
         doc[0],
         { new: true, returnOriginal: false },
         (err, succ) => {
@@ -27,8 +29,8 @@ const dropClassHandler = (req, res) => {
 };
 
 const deleteClassHandler = (req, res) => {
-  const id = req.body.currentClass._id;
-  Class.findByIdAndDelete({ _id: id }, (err, succ) => {
+  const { classId } = req.body;
+  Class.findByIdAndDelete({ _id: classId }, (err, succ) => {
     err
       ? res.status(500).json({ message: "Server Error occured, try again" })
       : res.status(200).json({ message: "Deleted" });

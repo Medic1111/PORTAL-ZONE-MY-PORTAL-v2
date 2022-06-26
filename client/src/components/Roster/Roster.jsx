@@ -19,7 +19,7 @@ const Roster = () => {
       <div className={classes.rosterList}>
         <p className={classes.p}>ROSTER FOR {currentClass.className}:</p>
         {currentClass.roster.map((obj, index) => {
-          return <RosterOption obj={obj} />;
+          return <RosterOption key={`STUDENT_${index}`} obj={obj} />;
         })}
       </div>
       <div className={classes.studentDiv}>

@@ -29,7 +29,7 @@ const ConfirmWindow = () => {
   const dropHandler = async () => {
     dispatch(isLoadingActions.setIsLoading(true));
     await axios
-      .put(url, { currentClass, user })
+      .put(url, { classId: currentClass._id, userId: user._id })
       .then((serverRes) => {
         dispatchBunch();
         dispatch(isLoadingActions.setIsLoading(false));
@@ -44,7 +44,7 @@ const ConfirmWindow = () => {
     dispatch(isLoadingActions.setIsLoading(true));
 
     await axios
-      .delete(url, { data: { currentClass } })
+      .delete(url, { data: { classId: currentClass._id } })
       .then((serverRes) => {
         dispatchBunch();
         dispatch(isLoadingActions.setIsLoading(false));

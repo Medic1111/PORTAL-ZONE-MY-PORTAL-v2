@@ -37,3 +37,26 @@ d-(register only): email
 NO NEED TO REASSIGN CURRENT CLASS! No need for obj response
 
 [DONE]
+
+# ALL COMPLETED FROM COMPONENTS
+
+# UTILITIES: DROP/DELETE CLASS
+
+- Correct methods, reduced info being sent to server to just IDs
+
+_ATTENTION_ FIX STUDENT ON A CLASS AFTER TEACHER DELETES IT (PREVENT DROP and OPENING CHAT)
+
+[DONE]
+
+# MAINSECCOMPTWO/ONE/ASIDE
+
+- ASIDE: ADD CLASS/ENROLL IN CLASS
+
+- Only needed info being served
+- Correct methods
+
+[DONE]
+
+# MAIN COMP TW0
+
+# MAIN COMP ONE

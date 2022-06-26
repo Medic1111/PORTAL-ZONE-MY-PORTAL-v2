@@ -9,7 +9,7 @@ const newClassTeacher = async (req, res) => {
     secretKey: `${secretKey}${user.lName}`,
     teacherId,
     assignments: [],
-    whoTeach: user,
+    whoTeach: { email: user.email, fName: user.fName, lName: user.lName },
     roster: [],
     messages: [],
   });
@@ -17,7 +17,14 @@ const newClassTeacher = async (req, res) => {
   await newClass.save((err, doc) => {
     err
       ? res.status(500).json({ message: "Something went wrong" })
-      : res.status(200).json(doc);
+      : res.status(200).json({
+          assignments: doc.assignments,
+          className: doc.className,
+          messages: doc.messages,
+          whoTeach: doc.whoTeach,
+          _id: doc._id,
+          roster: doc.roster,
+        });
   });
 };
 
@@ -28,7 +35,12 @@ const enrollInClass = (req, res) => {
     err && res.status(500).json({ message: "Server side err occured" });
 
     if (doc.length !== 0) {
-      await doc[0].roster.push(user);
+      await doc[0].roster.push({
+        email: user.email,
+        fName: user.fName,
+        lName: user.lName,
+        _id: user._id,
+      });
       let updatedDoc = doc[0];
 
       Class.findOneAndUpdate(
@@ -38,7 +50,13 @@ const enrollInClass = (req, res) => {
         (err, success) => {
           err
             ? res.status(500).json({ message: "Server side err occured" })
-            : res.status(200).json(doc[0]);
+            : res.status(200).json({
+                assignments: doc[0].assignments,
+                className: doc[0].className,
+                messages: doc[0].messages,
+                whoTeach: doc[0].whoTeach,
+                _id: doc[0]._id,
+              });
         }
       );
     } else {
