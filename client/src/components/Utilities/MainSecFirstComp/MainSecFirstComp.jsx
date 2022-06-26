@@ -6,7 +6,7 @@ import React from "react";
 import { wrapperActions } from "../../../features/wrapper";
 import axios from "axios";
 import { currentClassActions } from "../../../features/currentClass";
-
+import { errorActions } from "../../../features/error";
 const MainSecFirstComp = ({ socket }) => {
   const dispatch = useDispatch();
   const currentClass = useSelector((state) => state.CurrentClass.class);
@@ -14,17 +14,15 @@ const MainSecFirstComp = ({ socket }) => {
   const dark = useSelector((state) => state.DarkMode.isDarkMode);
 
   const enterChatHandler = async () => {
-    socket.emit("join_room", currentClass.secretKey);
-    dispatch(chatActions.setIsChat(true));
-
-    // THIS CALL UPDATES ALL MESSAGES
-
     await axios
       .get(`/api/classes/${currentClass._id}`)
       .then((serverRes) => {
         dispatch(currentClassActions.setCurrentClass(serverRes.data));
       })
       .catch((err) => console.log(err));
+
+    socket.emit("join_room", currentClass.secretKey);
+    dispatch(chatActions.setIsChat(true));
   };
 
   const openRosterHandler = () => {
