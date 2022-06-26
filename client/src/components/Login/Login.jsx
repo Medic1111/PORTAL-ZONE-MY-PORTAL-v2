@@ -24,9 +24,9 @@ const Login = () => {
   const [invalidRole, setInvalidRole] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
-    email: "",
-    password: "",
-    role: "",
+    email: "teacher@teacher.com",
+    password: "teacher",
+    role: "teacher",
   });
 
   const inputChangeHandler = (event) => {
