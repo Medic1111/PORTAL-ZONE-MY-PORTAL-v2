@@ -63,7 +63,9 @@ const Login = () => {
       invalidRole === false
     ) {
       await axios
-        .post(url, userInfo)
+        .get(url, {
+          params: { email: userInfo.email, password: userInfo.password },
+        })
         .then((serverRes) => {
           dispatch(isLoadingActions.setIsLoading(false));
           dispatch(currentUserActions.setCurrentUser(serverRes.data[0]));

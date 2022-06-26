@@ -15,7 +15,9 @@ const AssignmentItem = ({ item }) => {
     dispatch(isLoadingActions.setIsLoading(true));
     let itemToDel = item;
     await axios
-      .post("/api/teacher/assignments/delete", { itemToDel, currentClass })
+      .delete("/api/teacher/assignments/delete", {
+        data: { itemToDel, id: currentClass._id },
+      })
       .then((serverRes) => {
         dispatch(currentClassActions.removeAssigment(item));
         dispatch(isLoadingActions.setIsLoading(false));

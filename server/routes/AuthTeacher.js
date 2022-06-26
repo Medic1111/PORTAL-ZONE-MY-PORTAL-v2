@@ -3,7 +3,7 @@ const router = express.Router();
 const { registerTeacher, loginTeacher } = require("../controllers/AuthTeacher");
 
 // LOGIN
-const logInTeacherRoute = router.post("/api/login/teacher", loginTeacher);
+const logInTeacherRoute = router.get("/api/login/teacher", loginTeacher);
 
 // REGISTER
 const registerTeacherRoute = router.post(

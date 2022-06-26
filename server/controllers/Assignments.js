@@ -22,8 +22,8 @@ const addAssignment = (req, res) => {
 };
 
 const removeAssignment = (req, res) => {
-  const { itemToDel, currentClass } = req.body;
-  Class.find({ _id: currentClass._id }, async (err, doc) => {
+  const { itemToDel, id } = req.body;
+  Class.find({ _id: id }, async (err, doc) => {
     if (err) {
       res.status(500).json({ message: "Server error" });
     } else {
@@ -33,7 +33,7 @@ const removeAssignment = (req, res) => {
       doc[0].assignments = updated;
 
       Class.findOneAndUpdate(
-        { _id: currentClass._id },
+        { _id: id },
         doc[0],
         { new: true, returnOriginal: false },
         (error, docs) => {

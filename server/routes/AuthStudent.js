@@ -9,6 +9,6 @@ const registerStudentRoute = router.post(
 );
 
 // LOGIN
-const loginStudentRoute = router.post("/api/login/student", loginStudent);
+const loginStudentRoute = router.get("/api/login/student", loginStudent);
 
 module.exports = { registerStudentRoute, loginStudentRoute };
