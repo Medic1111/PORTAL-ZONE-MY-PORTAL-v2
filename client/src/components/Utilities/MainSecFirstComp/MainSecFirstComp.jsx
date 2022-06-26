@@ -22,7 +22,7 @@ const MainSecFirstComp = ({ socket }) => {
     await axios
       .get(`/api/classes/${currentClass._id}`)
       .then((serverRes) => {
-        console.log("UPDATING CLASS");
+        console.log("UPDATING CLASS", serverRes.data);
         dispatch(currentClassActions.setCurrentClass(serverRes.data));
       })
       .catch((err) => console.log(err));
