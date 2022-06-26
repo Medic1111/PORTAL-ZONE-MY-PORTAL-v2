@@ -22,9 +22,7 @@
 
 [1]: Teacher
 
-email: teacher@teacher.com
-password: teacher
-role: mentoring
+PREFILLED LOGIN FORM, Just click login.
 
 [2]: Student
 
