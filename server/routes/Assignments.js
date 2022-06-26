@@ -4,7 +4,7 @@ const {
   addAssignment,
   removeAssignment,
 } = require("../controllers/Assignments");
-const addAssign = router.post("/api/teacher/assignments/new", addAssignment);
+const addAssign = router.put("/api/teacher/assignments/new", addAssignment);
 const removeAssign = router.delete(
   "/api/teacher/assignments/delete",
   removeAssignment

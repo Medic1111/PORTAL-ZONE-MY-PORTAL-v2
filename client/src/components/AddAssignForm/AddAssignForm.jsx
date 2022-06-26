@@ -24,13 +24,14 @@ const AddAssignForm = () => {
     if (assign.length > 0) {
       dispatch(isLoadingActions.setIsLoading(true));
       await axios
-        .post("/api/teacher/assignments/new", {
-          assign,
-          currentClass,
+        .put("/api/teacher/assignments/new", {
+          data: {
+            assign,
+            currentClass,
+          },
         })
         .then((serverRes) => {
           dispatch(isLoadingActions.setIsLoading(false));
-          dispatch(currentClassActions.setCurrentClass(serverRes.data));
           dispatch(wrapperActions.setInitial());
         })
         .catch((err) => {

@@ -21,15 +21,19 @@ d-(register only): email
 
 [DONE]
 
-# ADDING NEW ASSIGNMENT: AddAssignmentForm
-
-- Change to patch or put
-- Check response obj
-
 # AssignmentItem: Change to delete request
 
 - Change to delete
 - Address possible server Error
 - Send only class id to server instead of whole class obj
+
+[DONE]
+
+# ADDING NEW ASSIGNMENT: AddAssignmentForm
+
+- Change to patch or put!!
+- Check response obj
+
+NO NEED TO REASSIGN CURRENT CLASS! No need for obj response
 
 [DONE]
