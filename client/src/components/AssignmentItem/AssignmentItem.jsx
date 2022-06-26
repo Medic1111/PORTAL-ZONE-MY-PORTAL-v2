@@ -9,6 +9,8 @@ const AssignmentItem = ({ item }) => {
   const dispatch = useDispatch();
   const currentClass = useSelector((state) => state.CurrentClass.class);
   const dark = useSelector((state) => state.DarkMode.isDarkMode);
+  const role = useSelector((state) => state.CurrentUser.user.role);
+  console.log(role);
 
   const deleteAssignmentHandler = async () => {
     dispatch(isLoadingActions.setIsLoading(true));
@@ -28,13 +30,15 @@ const AssignmentItem = ({ item }) => {
   return (
     <li className={dark ? `${classes.darkInput}` : `${classes.lightInput}`}>
       <p className={classes.listItemP}>{item}</p>
-      <span
-        name={item}
-        onClick={deleteAssignmentHandler}
-        className={classes.span}
-      >
-        ✖️
-      </span>
+      {role === "Mentor" && (
+        <span
+          name={item}
+          onClick={deleteAssignmentHandler}
+          className={classes.span}
+        >
+          ✖️
+        </span>
+      )}
     </li>
   );
 };
