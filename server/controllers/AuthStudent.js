@@ -7,12 +7,23 @@ const loginStudent = (req, res) => {
   const { email, password } = req.body;
 
   Student.find({ email: email }, (err, doc) => {
+    let updateDoc = [
+      {
+        _id: doc[0]._id,
+        fName: doc[0].fName,
+        lName: doc[0].lName,
+        role: doc[0].role,
+        classes: doc[0].classes,
+        subscribed: doc[0].subscribed,
+      },
+    ];
+
     err && res.status(500).json({ message: "Server Error" });
     if (doc.length > 0) {
       bcrypt.compare(password, doc[0].password, (error, match) => {
         error && res.status(500).json({ message: "Server Error" });
         match
-          ? res.status(200).json(doc)
+          ? res.status(200).json(updateDoc)
           : res.status(401).json({ message: "Not authorized" });
       });
     } else {
@@ -45,7 +56,15 @@ const registerStudent = async (req, res) => {
       await newStudentInfo.save((err, docs) =>
         err
           ? res.status(500).json({ message: "Could not register student" })
-          : res.status(200).json(docs)
+          : res.status(200).json({
+              _id: docs._id,
+              fName: docs.fName,
+              lName: docs.lName,
+              role: docs.role,
+              classes: docs.classes,
+              subscribed: docs.subscribed,
+              email,
+            })
       );
     }
   });

@@ -10,7 +10,6 @@ const AssignmentItem = ({ item }) => {
   const currentClass = useSelector((state) => state.CurrentClass.class);
   const dark = useSelector((state) => state.DarkMode.isDarkMode);
   const role = useSelector((state) => state.CurrentUser.user.role);
-  console.log(role);
 
   const deleteAssignmentHandler = async () => {
     dispatch(isLoadingActions.setIsLoading(true));
