@@ -52,7 +52,6 @@ const UserMainAside = ({ socket }) => {
           dispatch(isLoadingActions.setIsLoading(false));
           setClassName("");
           dispatch(currentUserActions.addNewClass(serverRes.data));
-          console.log(serverRes.data);
         })
         .catch((err) => {
           dispatch(errorActions.setIsError(true));

@@ -46,7 +46,6 @@ const Chat = ({ socket, user }) => {
 
   useEffect(() => {
     socket.on("receiving_msg", (data) => {
-      console.log(data);
       dispatch(currentClassActions.updateMessages(data));
     });
   }, [socket, dispatch]);

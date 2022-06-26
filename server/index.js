@@ -28,7 +28,6 @@ const {
 const { dropClass, deleteClass } = require("./routes/DropClass");
 const { addAssign, removeAssign } = require("./routes/Assignments");
 const getSpecClasRoute = require("./routes/GetSpecClass");
-// const { Class } = require("./models/models");
 
 const app = express();
 
