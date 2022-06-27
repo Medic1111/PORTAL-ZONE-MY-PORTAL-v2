@@ -41,24 +41,18 @@ const enrollInClass = (req, res) => {
         lName: user.lName,
         _id: user._id,
       });
-      let updatedDoc = doc[0];
 
-      Class.findOneAndUpdate(
-        { secretKey: secretKey },
-        updatedDoc,
-        { new: true, returnOriginal: false },
-        (err, success) => {
-          err
-            ? res.status(500).json({ message: "Server side err occured" })
-            : res.status(200).json({
-                assignments: doc[0].assignments,
-                className: doc[0].className,
-                messages: doc[0].messages,
-                whoTeach: doc[0].whoTeach,
-                _id: doc[0]._id,
-              });
-        }
-      );
+      doc[0].save((err, docs) => {
+        err
+          ? res.status(500).json({ message: "Server side err occured" })
+          : res.status(200).json({
+              assignments: doc[0].assignments,
+              className: doc[0].className,
+              messages: doc[0].messages,
+              whoTeach: doc[0].whoTeach,
+              _id: doc[0]._id,
+            });
+      });
     } else {
       res.status(404).json({ message: "No class found with that key" });
     }
