@@ -18,6 +18,11 @@ const MainSecFirstComp = ({ socket }) => {
       .get(`/api/classes/${currentClass._id}`)
       .then((serverRes) => {
         dispatch(currentClassActions.setCurrentClass(serverRes.data));
+        // IF EMPTY, HAVE SERVER SEND BACK ID PARAM
+        // USE ID PARAM TO REMOVE CLASS REDUCER
+        // FOUND IN CURRENT USER
+        // SAME APPLIES FOR DROP OUT OF CLASS
+        // AND CHOOSING THIS CLASS IN CLASS LIST
       })
       .catch((err) => console.log(err));
 
