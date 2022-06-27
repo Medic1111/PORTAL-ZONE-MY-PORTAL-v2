@@ -25,7 +25,7 @@ const MainUser = ({ socket }) => {
       .catch((err) => console.log(err));
   };
 
-  useEffect(fetchAllClasses, [dispatch]);
+  useEffect(fetchAllClasses, [dispatch, url]);
 
   return !isLoading ? <Main socket={socket} /> : <Loading />;
 };

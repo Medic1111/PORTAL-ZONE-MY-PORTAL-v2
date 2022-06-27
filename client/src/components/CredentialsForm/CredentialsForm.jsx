@@ -8,12 +8,10 @@ const CredentialsForm = () => {
   const register = useSelector((state) => state.IsRegistering.isRegistering);
   const isTeacher = useSelector((state) => state.IsTeacher.isTeacher);
 
-  {
-    if (loading) {
-      return <Loading />;
-    } else {
-      return register ? <Register isTeacher={isTeacher} /> : <Login />;
-    }
+  if (loading) {
+    return <Loading />;
+  } else {
+    return register ? <Register isTeacher={isTeacher} /> : <Login />;
   }
 };
 
