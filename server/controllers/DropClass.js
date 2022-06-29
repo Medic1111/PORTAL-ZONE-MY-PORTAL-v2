@@ -6,13 +6,19 @@ const dropClassHandler = (req, res) => {
     if (err) {
       res.status(500).json({ message: "Server Error occured, try again" });
     } else {
-      let update = await doc[0].roster.filter((obj) => obj._id !== userId);
-      doc[0].roster = update;
-      doc[0].save((err, doc) => {
-        err
-          ? res.status(500).json({ message: "Server Error occured, try again" })
-          : res.status(200).json({ message: "Dropped out" });
-      });
+      if (doc.length > 0) {
+        let update = await doc[0].roster.filter((obj) => obj._id !== userId);
+        doc[0].roster = update;
+        doc[0].save((err, doc) => {
+          err
+            ? res
+                .status(500)
+                .json({ message: "Server Error occured, try again" })
+            : res.status(200).json({ message: "Dropped out" });
+        });
+      } else {
+        res.status(404).json({ msg: "Class no longer exists" });
+      }
     }
   });
 };

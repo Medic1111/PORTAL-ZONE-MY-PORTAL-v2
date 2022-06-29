@@ -6,6 +6,8 @@ import React from "react";
 import { wrapperActions } from "../../../features/wrapper";
 import axios from "axios";
 import { currentClassActions } from "../../../features/currentClass";
+import { currentUserActions } from "../../../features/currentUser";
+import { isLoadingActions } from "../../../features/loading";
 import { errorActions } from "../../../features/error";
 const MainSecFirstComp = ({ socket }) => {
   const dispatch = useDispatch();
@@ -13,16 +15,33 @@ const MainSecFirstComp = ({ socket }) => {
   const role = useSelector((state) => state.WhatRole.role);
   const dark = useSelector((state) => state.DarkMode.isDarkMode);
 
+  if (!currentClass) {
+    dispatch(isLoadingActions.setIsLoading(true));
+    dispatch(errorActions.setIsError(true));
+    dispatch(
+      errorActions.setMsg("Class no longer exists, we are updating your list")
+    );
+    dispatch(wrapperActions.setInitial());
+    dispatch(currentClassActions.setCurrentClass({ className: "" }));
+
+    // REFETCH CLASSES FROM MAINUSER, or FILTER CURRENT USER CLASSES
+  }
+
   const enterChatHandler = async () => {
+    dispatch(isLoadingActions.setIsLoading(true));
     await axios
       .get(`/api/classes/${currentClass._id}`)
       .then((serverRes) => {
-        dispatch(currentClassActions.setCurrentClass(serverRes.data));
-        // IF EMPTY, HAVE SERVER SEND BACK ID PARAM
-        // USE ID PARAM TO REMOVE CLASS REDUCER
-        // FOUND IN CURRENT USER
-        // SAME APPLIES FOR DROP OUT OF CLASS
-        // AND CHOOSING THIS CLASS IN CLASS LIST
+        if (serverRes.data) {
+          dispatch(currentClassActions.setCurrentClass(serverRes.data));
+          dispatch(isLoadingActions.setIsLoading(false));
+        } else if (!serverRes.data) {
+          dispatch(errorActions.setIsError(true));
+          dispatch(errorActions.setMsg("Class is no longer available"));
+          dispatch(currentUserActions.removeClass(currentClass));
+          dispatch(wrapperActions.setInitial());
+          dispatch(currentClassActions.setCurrentClass({ className: "" }));
+        }
       })
       .catch((err) => console.log(err));
 

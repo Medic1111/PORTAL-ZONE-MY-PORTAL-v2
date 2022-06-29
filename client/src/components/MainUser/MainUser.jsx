@@ -5,6 +5,7 @@ import React from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import Loading from "../Utilities/Loading/Loading";
+import currentClass from "../../features/currentClass";
 
 const MainUser = ({ socket }) => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const MainUser = ({ socket }) => {
       .catch((err) => console.log(err));
   };
 
-  useEffect(fetchAllClasses, [dispatch, url]);
+  useEffect(fetchAllClasses, [dispatch, url, currentClass]);
 
   return !isLoading ? <Main socket={socket} /> : <Loading />;
 };

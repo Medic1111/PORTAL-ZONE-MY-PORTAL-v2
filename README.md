@@ -1,5 +1,3 @@
-[next-to-address]: bug on student clicking a class that was deleted
-
 # PORTAL-ZONE
 
 [PROJECT]:

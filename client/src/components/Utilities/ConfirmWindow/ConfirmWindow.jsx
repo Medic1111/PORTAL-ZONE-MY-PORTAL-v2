@@ -14,6 +14,7 @@ const ConfirmWindow = () => {
   const user = useSelector((state) => state.CurrentUser.user);
   const currentClass = useSelector((state) => state.CurrentClass.class);
   const dark = useSelector((state) => state.DarkMode.isDarkMode);
+  console.log(currentClass);
 
   let url;
   user.role === "Mentor"
@@ -27,6 +28,8 @@ const ConfirmWindow = () => {
   };
 
   const dropHandler = async () => {
+    console.log(currentClass);
+
     dispatch(isLoadingActions.setIsLoading(true));
     await axios
       .put(url, { classId: currentClass._id, userId: user._id })
@@ -35,8 +38,14 @@ const ConfirmWindow = () => {
         dispatch(isLoadingActions.setIsLoading(false));
       })
       .catch((err) => {
-        dispatch(errorActions.setIsError(true));
-        dispatch(errorActions.setMsg("Server error, please try again"));
+        if (err.response.status === 404) {
+          dispatch(errorActions.setIsError(true));
+          dispatch(errorActions.setMsg("Class no longer exists"));
+          dispatchBunch();
+        } else {
+          dispatch(errorActions.setIsError(true));
+          dispatch(errorActions.setMsg("Server error, please try again"));
+        }
       });
   };
 
