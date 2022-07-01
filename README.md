@@ -1,48 +1,58 @@
 # PORTAL-ZONE
 
-[PROJECT]:
+### PROJECT:
 
-- Academic platform where a signed in mentor can create a class, for which a secret key is generate. A student with access to that key may enroll in a particular class. From there, a mentor-student relationship begins.
+Academic platform where a signed in mentor can create a class, for which a secret key is generate. A student with access to that key may enroll in a particular class. From there, a mentor-student relationship begins.
 
-- The mentor can have multiple classes, check the roster for each, assign task, and communicate real-time via the class integrated chat-room
+The mentor can have multiple classes, check the roster for each, assign task, and communicate real-time via the class integrated chat-room
 
-- The student has reading access to the assignments, and may also participate in the chat
+The student has reading access to the assignments, and may also participate in the chat
 
-[INSTRUCTIONS]:
+### INSTRUCTIONS:
 
-[1]: Download the repo and run: node server/index.js
+1. Download the repo and run: `node server/index.js`
+   - Alternatively, if you have nodemon installed in your machine, run: nodemon server/index.js
+2. Run: `cd client`
+3. Run: `npm start`
 
-- Alternatively, if you have nodemon installed in your machine, run: nodemon server/index.js
+### TEST CREDENTIALS:
 
-[2]: Run: cd client
+1. Teacher:
 
-[3]: Run npm start
+   - PREFILLED LOGIN FORM, Just click login.
 
-[TEST_CREDENTIALS]:
+2. Student:
+   - email: student@student.com
+   - password: student
+   - role: learning
 
-[1]: Teacher
+### TECH:
 
-PREFILLED LOGIN FORM, Just click login.
+1. FRONTEND:
 
-[2]: Student
+   - React
 
-email: student@student.com
-password: student
-role: learning
+2. BACKEND:
 
-[TECH]:
+   - Node.js
+   - Express
 
-_FRONTEND_: React
+3. DATABASE:
 
-_BACKEND_: Node.js, Express
+   - MongoDB
 
-_DATABASE_: MongoDB
+4. APIs:
 
-_APIs_: Socket.IO
+   - Socket.IO
 
-_EXTRAS_: mongoose, MongoDB Atlas, Axios, bcrypt, inspirational-quotes npm
+5. EXTRAS:
+   - mongoose
+   - MongoDB Atlas
+   - Axios
+   - bcrypt
+   - inspirational-quotes npm
 
-[FEATURES]:
+### FEATURES:
 
 - Dark/Light mode
 - CRUD
@@ -51,14 +61,14 @@ _EXTRAS_: mongoose, MongoDB Atlas, Axios, bcrypt, inspirational-quotes npm
 - Random quote generation
 - Registration with hashed and salted password
 
-[STATUS]:
+> STATUS:
 
-- Development. Currently MVP
+> Development: Currently MVP
 
-[COMING_UP]:
+### COMINGUP:
 
-- Subscription, with integration of Stripe API for payment
+- [ ] Subscription, with integration of Stripe API for payment
 
-[COMPROMISES]:
+### COMPROMISES:
 
-- The current focus is to ensure all features are working properly, allowing little room to focus on design, particularly mobile
+> The current focus is to ensure all features are working properly, allowing little room to focus on design, particularly mobile
