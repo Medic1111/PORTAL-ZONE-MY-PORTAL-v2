@@ -8,6 +8,10 @@ The mentor can have multiple classes, check the roster for each, assign task, an
 
 The student has reading access to the assignments, and may also participate in the chat
 
+![Intro Page to Portal-Zone](./client//public//zone.png)
+
+![Chatroom of Portal-Zone](./client//public//zone2.png)
+
 ### INSTRUCTIONS:
 
 1. Download the repo and run: `node server/index.js`
