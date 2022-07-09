@@ -14,10 +14,11 @@ The student has reading access to the assignments, and may also participate in t
 
 ### INSTRUCTIONS:
 
-1. Download the repo and run: `node server/index.js`
+1. Download the repo and run: `npm install`
+   then `node server/index.js`
    - Alternatively, if you have nodemon installed in your machine, run: nodemon server/index.js
 2. Run: `cd client`
-3. Run: `npm start`
+3. Run: `npm install` then `npm start`
 
 ### TEST CREDENTIALS:
 
