@@ -1,0 +1,86 @@
+
+@baseUrl = http://localhost:3009
+@random = {{$randomInt 0 1000}}
+@newUser = { "fName": "TestingInPlace{{random}}", "lName": "Still testing", "email": "testinginplace@{{$randomInt 0 1000}}.com", "password": "189akofe" }
+
+# STUDENT AUTH
+
+# STUDENT: REGISTER with proper data
+
+POST {{baseUrl}}/api/register/student HTTP/1.1
+Content-Type: application/json
+
+{{newUser}}
+
+###
+
+# STUDENT REGISTER with missing or no data
+
+POST {{baseUrl}}/api/register/student HTTP/1.1
+Content-Type: application/json
+
+{
+   "fName": "", "lName": "", "password": ""
+}
+
+###
+# STUDENT LOGIN with proper data
+GET {{baseUrl}}/api/login/student?email=student%40student.com&password=student
+Content-Type: application/json
+
+###
+
+# STUDENT LOGIN no registered
+
+GET {{baseUrl}}/api/login/student?email=student%40stunt.com&password=student
+Content-Type: application/json
+
+###
+
+# STUDENT LOGIN WRONG PASS
+GET {{baseUrl}}/api/login/student?email=student%40student.com&password=stukent
+Content-Type: application/json
+
+###
+
+
+# TEACHER AUTH
+
+# TEACHER: REGISTER with proper data
+
+POST {{baseUrl}}/api/register/teacher HTTP/1.1
+Content-Type: application/json
+
+{{newUser}}
+
+###
+
+# TEACHER REGISTER with missing or no data
+
+POST {{baseUrl}}/api/register/teacher HTTP/1.1
+Content-Type: application/json
+
+{
+   "fName": "", "lName": "", "password": ""
+}
+
+###
+
+# TEACHER LOGIN with proper data
+GET {{baseUrl}}/api/login/teacher?email=teacher%40teacher.com&password=teacher
+Content-Type: application/json
+
+###
+
+# TEACHER LOGIN no registered
+
+GET {{baseUrl}}/api/login/teacher?email=teacher%40tcher.com&password=teacher
+Content-Type: application/json
+
+###
+
+# TEACHER LOGIN WRONG PASS
+GET {{baseUrl}}/api/login/teacher?email=teacher%40teacher.com&password=teakoser
+Content-Type: application/json
+
+###
