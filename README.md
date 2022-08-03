@@ -1,5 +1,7 @@
 # PORTAL-ZONE
 
+[Live here](https://portal-zone.herokuapp.com/)
+
 ### PROJECT:
 
 Academic platform where a signed in mentor can create a class, for which a secret key is generate. A student with access to that key may enroll in a particular class. From there, a mentor-student relationship begins.
