@@ -1,6 +1,6 @@
 # PORTAL-ZONE
 
-[Live here](https://portal-zone.herokuapp.com/)
+[Live here](https://portal-zone-v2.onrender.com/)
 
 ### PROJECT:
 
