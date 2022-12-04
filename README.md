@@ -1,6 +1,6 @@
 # PORTAL-ZONE
 
-[Live here](https://portal-zone-v2.onrender.com/)
+[Live here](https://portal-zone.onrender.com/)
 
 ### PROJECT:
 
